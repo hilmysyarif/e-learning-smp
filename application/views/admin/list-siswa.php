@@ -5,16 +5,18 @@
 		<button><i class="glyphicon glyphicon-search"></i>Cari</button>
 	</div>
 	<ul class="list-guru">
+		<?php foreach ($siswa as $row) { ?>
 		<li>
 			<div class="single-guru">
-				<a href="<?php echo site_url("admin/detail_siswa"); ?>">
-					<img src="<?php echo base_url('resource/img/photo/11.11.5304.jpg'); ?>">
-					<p><span class="jdl-gr">NIK<b class="pull-right">:</b></span><span class="desc-gr"> 11.11.5304</span></p>
-					<p><span class="jdl-gr">Nama<b class="pull-right">:</b></span><span class="desc-gr"> Ahmad Hasan Al Arif Billah, S.Kom</span></p>
-					<p><span class="jdl-gr">Jenis Kelamin<b class="pull-right">:</b></span><span class="desc-gr"> arifmatika@gmail.com</span></p>
+				<a href="<?php echo site_url("admin/detail_siswa/".$row['nis']); ?>">
+					<img src="<?php echo base_url('resource/img/photo/'.$row['foto']); ?>">
+					<p><span class="jdl-gr">NIK<b class="pull-right">:</b></span><span class="desc-gr"> <?php echo $row['nis']; ?></span></p>
+					<p><span class="jdl-gr">Nama<b class="pull-right">:</b></span><span class="desc-gr"> <?php echo $row['nama']; ?></span></p>
+					<p><span class="jdl-gr">Jenis Kelamin<b class="pull-right">:</b></span><span class="desc-gr"> <?php echo $row['jenis_kelamin']; ?></span></p>
 				</a>
 			</div>
 		</li>
+		<?php } ?>
 	</ul>
 	
 	<ul class="pagination">

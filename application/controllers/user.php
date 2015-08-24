@@ -27,6 +27,12 @@ class User extends Base {
 
     public function index() {
         $data['title']='Selamat Datang.';
+        $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session();
+
+        //contoh
+        $tgl_upload = $this->m_admin->ambil_data_wali_tgl_upload_terbaru();
+        $data['no_ktp'] = $this->m_admin->ambil_data_wali_no_ktp_terbaru($tgl_upload);
+
         $this->load->view('base/header', $data);
         $this->body_user('user/berita', $data);
         $this->load->view('base/footer');

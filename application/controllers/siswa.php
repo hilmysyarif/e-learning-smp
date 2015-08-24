@@ -27,6 +27,7 @@ class Siswa extends Base {
 
     public function biodata() {
         $data['title']= 'Biodata.';
+        $data['siswa']=$this->m_siswa->tampil_data_siswa_by_id();
         $this->load->view('base/header', $data);
         $this->login_siswa('siswa/biodata', $data);
         $this->load->view('base/footer');
@@ -34,6 +35,7 @@ class Siswa extends Base {
 
     public function nilai_ujian() {
         $data['title']= 'Nilai Ujian.';
+        $data['siswa']=$this->m_siswa->tampil_data_siswa_by_id();
         $this->load->view('base/header', $data);
         $this->login_siswa('siswa/nilai-ujian', $data);
         $this->load->view('base/footer');
@@ -41,15 +43,12 @@ class Siswa extends Base {
 
     public function jadwal() {
         $data['title']= 'Jadwal.';
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $data['siswa']=$this->m_siswa->tampil_data_siswa_by_id();
         $this->load->view('base/header', $data);
         $this->login_siswa('siswa/jadwal', $data);
-        $this->load->view('base/footer');
-    }
-
-    public function jadwal_2() {
-        $data['title']= 'Jadwal.';
-        $this->load->view('base/header', $data);
-        $this->login_siswa('siswa/jadwal-2', $data);
         $this->load->view('base/footer');
     }
 

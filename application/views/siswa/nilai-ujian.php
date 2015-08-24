@@ -2,8 +2,8 @@
 <div class="postingan">
 	<div class="single-hsl-nilai">
 		<!-- <h1>Salinan Nilai Mata Pelajaran</h1> -->
-		<p><span class="jdl-biodata">Nomer Induk Siswa</span><span>: </span><span>11.11.5304</span></p>
-		<p><span class="jdl-biodata">Nama</span><span>: </span><span>Arif</span></p>
+		<p><span class="jdl-biodata">Nomer Induk Siswa</span><span>: </span><span><?php echo $siswa['nis']; ?></span></p>
+		<p><span class="jdl-biodata">Nama</span><span>: </span><span><?php echo $siswa['nama']; ?></span></p>
 		<p><span class="jdl-biodata">Kelas</span><span>: </span><span>Arif</span></p>
 		<br>
 		<div class="form-tampil-nilai">

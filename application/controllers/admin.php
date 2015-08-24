@@ -20,9 +20,6 @@ class Admin extends Base {
 	 */
     public function __construct() {
         parent::__construct();
-        $this->load->helper(array('url'));
-        $this->load->library(array());
-        $this->load->model(array());
     }
 
     public function index() {
@@ -81,35 +78,60 @@ class Admin extends Base {
     }
 
     public function detail_guru() {
-    	$data['title']='Guru.';
-    	$this->load->view('base/header', $data);
+        $data['title']='Guru.';
+        $this->load->view('base/header', $data);
         $this->body_admin('admin/detail-guru', $data);
         $this->load->view('base/footer');
     }
 
     public function siswa() {
-    	$data['title']='Siswa.';
-    	$this->load->view('base/header', $data);
+        $data['title']='Siswa.';
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $this->load->view('base/header', $data);
         $this->body_admin('admin/siswa', $data);
         $this->load->view('base/footer');
     }
 
     public function list_siswa() {
-    	$data['title']='Siswa.';
-    	$this->load->view('base/header', $data);
+        $data['title']='Siswa.';
+        $data['siswa']=$this->m_siswa->tampil_data_siswa();
+        $this->load->view('base/header', $data);
         $this->body_admin('admin/list-siswa', $data);
         $this->load->view('base/footer');
     }
 
     public function detail_siswa() {
+        $id = $this->uri->segment(3);
         $data['title']='Guru.';
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $data['siswa']=$this->m_siswa->tampil_data_siswa_by_id($id);
         $this->load->view('base/header', $data);
         $this->body_admin('admin/detail-siswa', $data);
         $this->load->view('base/footer');
     }
 
+    public function ubah_siswa() {
+        $id = $this->uri->segment(3);
+        $data['title']='Guru.';
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $data['siswa']=$this->m_siswa->tampil_data_siswa_by_id($id);
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-siswa', $data);
+        $this->load->view('base/footer');
+    }
+
     public function list_jadwal() {
         $data['title']='Jadwal.';
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        // $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id('0355','8884','0981');
         $this->load->view('base/header', $data);
         $this->body_admin('admin/list-jadwal', $data);
         $this->load->view('base/footer');
@@ -117,6 +139,14 @@ class Admin extends Base {
 
     public function jadwal() {
         $data['title']='Jadwal.';
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $data['hari'] = $this->m_admin->tampil_data_hari();
+        $data['jam'] = $this->m_admin->tampil_data_jam();
+        $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+        $data['ruang'] = $this->m_admin->tampil_data_ruang();
+        $data['guru'] = $this->m_admin->tampil_data_guru();
         $this->load->view('base/header', $data);
         $this->body_admin('admin/jadwal', $data);
         $this->load->view('base/footer');
@@ -145,15 +175,87 @@ class Admin extends Base {
 
     public function pengaturan_data() {
         $data['title']='Pengaturan.';
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['hari'] = $this->m_admin->tampil_data_hari();
+        $data['jam'] = $this->m_admin->tampil_data_jam();
+        $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+        $data['ruang'] = $this->m_admin->tampil_data_ruang();
         $this->load->view('base/header', $data);
         $this->body_admin('admin/pengaturan-data', $data);
         $this->load->view('base/footer');
     }
 
-    public function ubah_data() {
-        $data['title']='Pengaturan.';
+    public function ubah_tahun_ajaran() {
+        // $id_tahun_ajaran = $_GET('id');
+        $data['title']='Ubah Tahun Ajaran.';
+        // $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran_by_id($id_tahun_ajaran);
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
         $this->load->view('base/header', $data);
-        $this->body_admin('admin/ubah-data', $data);
+        $this->body_admin('admin/ubah-tahun-ajaran', $data);
+        $this->load->view('base/footer');
+    }
+
+    public function ubah_semester() {
+        // $id_tahun_ajaran = $_GET('id');
+        $data['title']='Ubah Semester.';
+
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-semester', $data);
+        $this->load->view('base/footer');
+    }
+
+    public function ubah_kelas() {
+        // $id_tahun_ajaran = $_GET('id');
+        $data['title']='Ubah Kelas.';
+
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-kelas', $data);
+        $this->load->view('base/footer');
+    }
+
+    public function ubah_hari() {
+        // $id_tahun_ajaran = $_GET('id');
+        $data['title']='Ubah Hari.';
+
+        $data['hari'] = $this->m_admin->tampil_data_hari();
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-hari', $data);
+        $this->load->view('base/footer');
+    }
+
+    public function ubah_jam() {
+        // $id_tahun_ajaran = $_GET('id');
+        $data['title']='Ubah Jam.';
+
+        $data['jam'] = $this->m_admin->tampil_data_jam();
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-jam', $data);
+        $this->load->view('base/footer');
+    }
+
+
+    public function ubah_pelajaran() {
+        // $id_tahun_ajaran = $_GET('id');
+        $data['title']='Ubah Pelajaran.';
+
+        $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-pelajaran', $data);
+        $this->load->view('base/footer');
+    }
+
+
+    public function ubah_ruang() {
+        // $id_tahun_ajaran = $_GET('id');
+        $data['title']='Ubah Ruang.';
+
+        $data['ruang'] = $this->m_admin->tampil_data_ruang();
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-ruang', $data);
         $this->load->view('base/footer');
     }
 
