@@ -71,14 +71,17 @@ class Admin extends Base {
     }
 
     public function list_guru() {
-    	$data['title']='Guru.';
-    	$this->load->view('base/header', $data);
+        $data['title']='Guru.';
+        $data['guru']=$this->m_guru->tampil_data_guru();
+        $this->load->view('base/header', $data);
         $this->body_admin('admin/list-guru', $data);
         $this->load->view('base/footer');
     }
 
     public function detail_guru() {
+        $id = $this->uri->segment(3);
         $data['title']='Guru.';
+        $data['guru']=$this->m_guru->tampil_data_guru_by_id($id);
         $this->load->view('base/header', $data);
         $this->body_admin('admin/detail-guru', $data);
         $this->load->view('base/footer');

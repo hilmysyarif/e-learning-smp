@@ -27,6 +27,9 @@ Class M_admin extends CI_Model {
     function tambah_data_siswa($data) {
         $this->db->insert('siswa', $data);
     }
+    function tambah_data_guru($data) {
+        $this->db->insert('guru', $data);
+    }
     function tambah_data_tahun_ajaran($data) {
         $this->db->insert('tahun_ajaran', $data);
     }

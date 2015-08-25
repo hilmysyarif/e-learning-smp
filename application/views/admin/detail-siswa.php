@@ -1,9 +1,19 @@
 <h3 class="header-isi">Biodata</h3>
 <div class="postingan">
-	<?php echo form_open('p_admin/ubah_data_siswa?id='.$siswa['nis']); ?>
+	<?php echo form_open_multipart('p_admin/ubah_data_siswa?id='.$siswa['nis']); ?>
 	<div class="single-biodata">
 		<img src="<?php echo base_url('resource/img/photo/'.$siswa['foto']) ?>">
-		<p style="border-top: 1px dotted #e3e3e3;"><span class="jdl-biodata">Tahun Masuk</span><span>: </span><input name="tahun_masuk" type="text" value="<?php echo $siswa['tahun_masuk']; ?>"></p>
+		<p style="border-top: 1px dotted #e3e3e3;"><span class="jdl-biodata">Tahun Masuk</span><span>: </span>
+			<select name="tahun_masuk">
+				<option value="<?php echo $siswa['tahun_masuk']; ?>"> <?php echo $siswa['tahun_masuk']; ?></option>
+				<?php foreach ($tahun_ajaran as $row) { ?>
+				<option value="<?php echo $row['tahun_ajaran']; ?>"> <?php echo $row['tahun_ajaran']; ?></option>
+				<?php }//end foreach ?>
+			</select>
+		</p>
+		<!-- <p><span class="jdl-biodata">Ubah Foto</span><span>: </span>
+			<input name="foto" type="file" value="<?php echo $siswa['foto']; ?>">
+		</p> -->
 		<p><span class="jdl-biodata">Kelas</span><span>: </span>
 			<select name="kelas">
 				<option value="<?php echo $siswa['id_kelas']; ?>"> <?php echo $siswa['kelas']; ?></option>

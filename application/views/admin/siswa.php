@@ -1,21 +1,21 @@
 <h3 class="header-isi">Siswa</h3>
 <div class="postingan">
-	<?php echo form_open('p_admin/tambah_data_siswa'); ?>
+	<?php echo form_open_multipart('p_admin/tambah_data_siswa'); ?>
 	<div class="form-pengaturan">
 		<h3>Masukkan Data Siswa</h3>
 		<div>
 			<label>Upload Foto</label>
-			<input name="foto" value="<?php if(!empty($foto)){echo $foto;} ?>" type="file" placeholder="Pilih Foto">
+			<input name="foto" type="file">
 		</div>
 		<div>
 			<label>Tahun Masuk</label>
 			<select name="tahun_masuk">
 				<?php if(!empty($tahun_ajaran)){ ?>
 				<?php foreach ($tahun_ajaran as $row) { ?>
-				<option value="<?php echo $row['id_tahun_ajaran']; ?>"> <?php echo $row['tahun_ajaran']; ?></option>
+				<option value="<?php echo $row['tahun_ajaran']; ?>"> <?php echo $row['tahun_ajaran']; ?></option>
 				<?php }//end foreach ?>
 				<?php }else{ ?>
-				<option value="<?php echo $row['id_tahun_ajaran']; ?>"> <?php echo $tahun; ?></option>
+				<option value="<?php echo $row['tahun_ajaran']; ?>"> <?php echo $tahun; ?></option>
 				<?php } ?>
 			</select>
 		</div>

@@ -36,7 +36,8 @@
 		<?php echo form_close(); ?>
 	</div>
 
-<?php print_r($jadwal);?>
+<!-- <?php print_r($jadwal);?> -->
+	<?php if(!empty($jadwal)){ ?>
 	<div class="isi-postingan">
 		<h2 style="text-align: left;"><span>Jadwal Pelajaran </span> | <span> Kelas <?php echo $jadwal['kelas']; echo $jadwal['semester']; echo $jadwal['tahun_ajaran']; ?></span><a href="<?php echo site_url('admin/ubah_jadwal'); ?>"><i class="glyphicon glyphicon-edit pull-right"></i></a></h2>
 		<table class="table table-bordered table-striped">
@@ -135,3 +136,6 @@
 		</tbody>
 	</table> -->
 </div>
+<?php }else{ ?>
+	<?php echo "Pilih jadwal pelajaran terlebih dahulu"; ?>
+<?php } ?>
