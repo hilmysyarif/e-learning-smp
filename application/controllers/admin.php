@@ -29,6 +29,15 @@ class Admin extends Base {
         $this->load->view('base/footer');
     }
 
+    public function ubah_berita() {
+        $id=$this->uri->segment(3);
+        $data['berita']=$this->m_user->tampil_data_berita_by_id($id);
+        $data['title']='Selamat Datang.';
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-berita', $data);
+        $this->load->view('base/footer');
+    }
+
     public function login() {
         $data['title']='Login';
         $this->load->view('base/header', $data);
@@ -38,7 +47,16 @@ class Admin extends Base {
     public function informasi_penting() {
     	$data['title']='Informasi Penting.';
     	$this->load->view('base/header', $data);
-        $this->body_admin('admin/informasi-penting', $data);
+        $this->body_admin('admin/informasi', $data);
+        $this->load->view('base/footer');
+    }
+
+    public function ubah_informasi() {
+        $id=$this->uri->segment(3);
+        $data['informasi']=$this->m_user->tampil_data_informasi_by_id($id);
+        $data['title']='Selamat Datang.';
+        $this->load->view('base/header', $data);
+        $this->body_admin('admin/ubah-informasi', $data);
         $this->load->view('base/footer');
     }
 
@@ -134,7 +152,6 @@ class Admin extends Base {
         $data['kelas'] = $this->m_admin->tampil_data_kelas();
         $data['semester'] = $this->m_admin->tampil_data_semester();
         $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
-        // $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id('0355','8884','0981');
         $this->load->view('base/header', $data);
         $this->body_admin('admin/list-jadwal', $data);
         $this->load->view('base/footer');

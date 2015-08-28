@@ -33,20 +33,27 @@ class User extends Base {
         $tgl_upload = $this->m_admin->ambil_data_wali_tgl_upload_terbaru();
         $data['no_ktp'] = $this->m_admin->ambil_data_wali_no_ktp_terbaru($tgl_upload);
 
+        $data['informasi']=$this->m_user->tampil_data_informasi();
+        $data['berita']=$this->m_user->tampil_data_berita();
         $this->load->view('base/header', $data);
         $this->body_user('user/berita', $data);
         $this->load->view('base/footer');
     }
 
     public function detail_berita() {
+        $id = $this->uri->segment(3);
         $data['title']='Detail Berita.';
+        $data['berita']=$this->m_user->tampil_data_berita_by_id($id);
         $this->load->view('base/header', $data);
         $this->body_user('user/detail-berita', $data);
         $this->load->view('base/footer');
     }
 
     public function detail_info_penting() {
+        $id=$this->uri->segment(3);
         $data['title']='Detail Informasi Penting.';
+        $data['informasi']=$this->m_user->tampil_data_informasi();
+        $data['detail_informasi']=$this->m_user->tampil_data_informasi_by_id($id);
         $this->load->view('base/header', $data);
         $this->body_user('user/detail-info-penting', $data);
         $this->load->view('base/footer');

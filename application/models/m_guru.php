@@ -7,6 +7,10 @@ Class M_guru extends CI_Model {
         $this->load->database();
     }
 
+    function tambah_data_pengumuman($data) {
+        $this->db->insert('pengumuman', $data);
+    }
+
     function tampil_data_guru() {
         $this->db->order_by('tgl_upload', 'DESC');
         $query = $this->db->get('guru');

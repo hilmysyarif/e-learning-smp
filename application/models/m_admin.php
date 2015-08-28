@@ -24,6 +24,9 @@ Class M_admin extends CI_Model {
         $result = $query->row_array();
         return $result['tgl_upload'];
     }
+    function tambah_data_berita($data) {
+        $this->db->insert('berita', $data);
+    }
     function tambah_data_siswa($data) {
         $this->db->insert('siswa', $data);
     }
@@ -126,25 +129,6 @@ function tampil_data_guru() {
         return array();
     }
 }
-// function tampil_data_jadwal_by_id($kelas,$semester,$tahun_ajaran) {
-//         //kelas.kelas -> kelas pertama = nama tabel, kelas kedua = nama kolom, 'kelas' = alias.
-//     $id = array( 'id_kelas' => $kelas, 'id_semester' => $semester, 'id_tahun_ajaran' => $tahun_ajaran);
-//     $sql = 
-//     "SELECT jadwal.id_jadwal AS 'id_jadwal', kelas.kelas AS 'kelas', semester.semester AS 'semester', tahun_ajaran.tahun_ajaran AS 'tahun_ajaran', hari.hari AS 'hari'
-//     FROM jadwal
-//     INNER JOIN kelas ON kelas.id_kelas=jadwal.id_kelas
-//     INNER JOIN semester ON semester.id_semester=jadwal.id_semester
-//     INNER JOIN tahun_ajaran ON tahun_ajaran.id_tahun_ajaran=jadwal.id_tahun_ajaran
-//     INNER JOIN hari ON hari.id_hari=jadwal.id_hari
-//     WHERE jadwal.id_kelas=? AND jadwal.id_semester=? AND jadwal.id_tahun_ajaran=?
-//     ";
-//     $query = $this->db->query($sql,$id);
-//     if($query->num_rows()>0) {
-//         return $query->row_array();
-//     }else{
-//         return array();
-//     }
-// }
 function get_latest_detail_jadwal()
 {
     $this->db->order_by('id_detail_jadwal','DESC');
@@ -169,21 +153,15 @@ function tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran) {
     $this->db->join('guru','guru.nik=detail_jadwal.nik');
     
     $query = $this->db->get();
-    return $query->result_array();
+    
+    if($query->num_rows>0){
+        return $query->result_array();
+    }else{
+        return array();
+    }
 }
-    // function tampil_data_detail_jadwal_by_id() {
-    //     $sql =  
-    //            "SELECT detail_jadwal.id_detail_jadwal AS 'id_detail_jadwal', detail_jadwal.id_jadwal AS 'id_jadwal', jam.jam AS 'jam', pelajaran.pelajaran AS 'pelajaran', ruang.ruang AS 'ruang', guru.nama AS 'guru'
-    //             FROM detail_jadwal
-    //             INNER JOIN jam ON jam.id_jam=detail_jadwal.id_jam
-    //             INNER JOIN pelajaran ON pelajaran.id_pelajaran=detail_jadwal.id_pelajaran
-    //             INNER JOIN ruang ON ruang.id_ruang=detail_jadwal.id_ruang
-    //             INNER JOIN guru ON guru.nik=detail_jadwal.nik
-    //             WHERE 
-    //             "
-    // }
 function ubah_data_tahun_ajaran($data) {
-        // $this->db->where('id_tahun_ajaran', $data);
+    // $this->db->where('id_tahun_ajaran', $data);
     $this->db->update('tahun_ajaran', $data);
 }
 function hapus_data_tahun_ajaran($id) {

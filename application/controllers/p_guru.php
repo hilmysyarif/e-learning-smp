@@ -22,13 +22,25 @@ class P_guru extends Base {
     parent::__construct();
   }
 
+  public function tambah_data_pengumuman() {
+  	$isi=$this->input->post('isi');
+  	$data = array(
+  		'isi' => $isi
+  		);
+  	$this->m_guru->tambah_data_pengumuman($data);
+  	echo '<script>';
+	echo "alert('Data Berhasil Disimpan');";
+	echo "window.location='" . $this->agent->referrer() . "'";
+	echo '</script>';
+  }
+
   public function keluar_guru() {
       $this->session->unset_userdata('login_guru');
-      echo '<script>';
-      echo "alert('Berhasil Keluar');";
-      // echo "window.location='" . $this->agent->referrer() . "'";
-      echo "window.location='../user'";
-      echo '</script>';
+	  echo '<script>';
+	  echo "alert('Berhasil Keluar');";
+	  // echo "window.location='" . $this->agent->referrer() . "'";
+	  echo "window.location='../user'";
+	  echo '</script>';
   }
 
 }//end-class

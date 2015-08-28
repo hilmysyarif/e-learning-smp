@@ -47,15 +47,17 @@
 		</div>
 	</div>
 	<div class="form-pengaturan">
+		<?php echo form_open('p_guru/tambah_data_pengumuman'); ?>
 		<h3>Tulis Pengumuman</h3>
 		<div>
 			<label>Isi Pengumuman</label>
-			<textarea class="" placeholder="Tulis disini..."></textarea>
+			<textarea name="isi" class="" placeholder="Tulis disini..."></textarea>
 		</div>
 		<div>
 			<label></label>
-			<input type="submit" value="Simpan">
+			<input name="simpan" type="submit" value="Simpan">
 		</div>
+		<?php echo form_close(); ?>
 	</div>
 	<div class="form-pengaturan">
 		<h3>Upload Nilai Ujian</h3>

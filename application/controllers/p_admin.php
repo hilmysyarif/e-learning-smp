@@ -22,6 +22,60 @@ class P_admin extends Base {
         parent::__construct();
     }
 
+    public function tambah_data_informasi() {
+        $simpan=$this->input->post('simpan');
+        $judul=$this->input->post('judul');
+        $isi=$this->input->post('isi');
+        $now=date('y-m-d h-i-s');
+
+        $data = array(
+            'judul' => $judul,
+            'isi' => $isi,
+            'tgl_upload' => $now
+            );
+        $this->m_user->tambah_data_informasi($data);
+        $sukses = 'Data Berhasil Disimpan';
+        echo '<script>';
+        echo "alert('".$sukses."');";
+        echo "window.location='" . site_url('admin') . "'";
+        echo '</script>';
+    }
+
+    public function tambah_data_berita() {
+        $now=date('y-m-d- h-i-s');
+        $gambar=$_FILES['gambar'];
+        $nama_gambar = str_replace(' ', '_', $gambar['name']);
+        $judul = $this->input->post('judul');
+        $isi = $this->input->post('isi');
+
+        $data = array(
+            'judul' => $judul,
+            'isi' => $isi,
+            'gambar' => $nama_gambar,
+            'tgl_upload' => $now,
+            'tgl_edit' => $now,
+            );
+
+        //validasi gambar
+        $config['upload_path'] = './resource/img/images/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        // $config['max_size'] = '5024';
+        // $config['max_width']  = '1024';
+        // $config['max_height']  = '768';
+        $config['overwrite'] = true;
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+        $this->m_admin->tambah_data_berita($data);
+        // setelah data tersimpan foto di upload ke folder
+        $this->upload->do_upload('gambar');
+        $sukses = 'Data Berhasil Disimpan';
+        echo '<script>';
+        echo "alert('".$sukses."');";
+        echo "window.location='" . site_url('admin') . "'";
+        echo '</script>';
+    }
+
     public function tambah_data_guru() {
         $string = '!@()8&^^%$#AsfsRTdWGaGghKOplkencKHBQKLSKNMKXCd&$*^032145876901234523567895323789012627898746090302983SKZBCJ7648595389090';
         $panjstr = 6;//jumlah karakter yang akan muncul
@@ -439,43 +493,59 @@ public function tambah_data_jadwal() {
      $sukses             = 'Data Berhasil Disimpan';
      $gagal              = 'Data Gagal Disimpan';
 
-     if($tambah) {
-            $this->db->select_max('id_jadwal'); //ambil data id_jadwal yang baru dimasukan/id_max
-            $queryjadwal = $this->db->get('jadwal'); //ambil data di tabel jadwal
-            $queryjadwal = $queryjadwal->row_array();
-            $id_jadwal_terbaru = $queryjadwal['id_jadwal']; //mendapatkan id_jadwal
-            for ($i=1; $i<=7; $i++) {
-                $id_jam         = $this->input->post('jam_'.$i);
-                $id_pelajaran   = $this->input->post('pelajaran_'.$i);
-                $id_ruang       = $this->input->post('ruang_'.$i);
-                $nik            = $this->input->post('guru_'.$i);
-                if(!$id_jam)$id_jam=NULL;
-                if(!$id_pelajaran)$id_pelajaran=NULL;
-                if(!$id_ruang)$id_ruang=NULL;
-                if(!$nik)$nik=NULL;
-                if(!empty($id_jam) && !empty($id_pelajaran) && !empty($id_ruang) && !empty($nik)){
+     // if($tambah) {
+     //        $this->db->select_max('id_jadwal'); //ambil data id_jadwal yang baru dimasukan/id_max
+     //        $queryjadwal = $this->db->get('jadwal'); //ambil data di tabel jadwal
+     //        $queryjadwal = $queryjadwal->row_array();
+     //        $id_jadwal_terbaru = $queryjadwal['id_jadwal']; //mendapatkan id_jadwal
+     //        for ($i=1; $i<=7; $i++) {
+     //            $id_jam         = $this->input->post('jam_'.$i);
+     //            $id_pelajaran   = $this->input->post('pelajaran_'.$i);
+     //            $id_ruang       = $this->input->post('ruang_'.$i);
+     //            $nik            = $this->input->post('guru_'.$i);
+     //            if(!$id_jam)$id_jam=NULL;
+     //            if(!$id_pelajaran)$id_pelajaran=NULL;
+     //            if(!$id_ruang)$id_ruang=NULL;
+     //            if(!$nik)$nik=NULL;
+     //            if(!empty($id_jam) && !empty($id_pelajaran) && !empty($id_ruang) && !empty($nik)){
 
-                    $data = array(
-                        // 'id_detail_jadwal'  => $id,
-                        'id_jam'            => $id_jam,
-                        'id_pelajaran'      => $id_pelajaran,
-                        'id_ruang'          => $id_ruang,
-                        'nik'               => $nik
-                        );
-                    $this->db->insert('detail_jadwal', $data); //insert $data ke tabel detail_jadwal
-                    //get latest id detail jadwal                   
-                    $id_detail_jadwal = $this->m_admin->get_latest_detail_jadwal();
-                    $data = array();//reset array data
-                    $data = array(
-                        'id_kelas'          => $this->input->post('kelas'),
-                        'id_semester'       => $this->input->post('semester'),
-                        'id_tahun_ajaran'   => $this->input->post('tahun_ajaran'),
-                        'id_hari'           => $this->input->post('hari')
-                        );
-                    $data['id_detail_jadwal'] = $id_detail_jadwal;
-                    $this->m_admin->tambah_data_jadwal($data);//tambah data jadwal
-                }//end if
-            }//end for
+     //                $data = array(
+     //                    // 'id_detail_jadwal'  => $id,
+     //                    'id_jam'            => $id_jam,
+     //                    'id_pelajaran'      => $id_pelajaran,
+     //                    'id_ruang'          => $id_ruang,
+     //                    'nik'               => $nik
+     //                    );
+     //                $this->db->insert('detail_jadwal', $data); //insert $data ke tabel detail_jadwal
+     //                //get latest id detail jadwal                   
+     //                $id_detail_jadwal = $this->m_admin->get_latest_detail_jadwal();
+     //                $data = array();//reset array data
+     //                $data = array(
+     //                    'id_kelas'          => $this->input->post('kelas'),
+     //                    'id_semester'       => $this->input->post('semester'),
+     //                    'id_tahun_ajaran'   => $this->input->post('tahun_ajaran'),
+     //                    'id_hari'           => $this->input->post('hari')
+     //                    );
+     //                $data['id_detail_jadwal'] = $id_detail_jadwal;
+     //                $this->m_admin->tambah_data_jadwal($data);//tambah data jadwal
+     //            }//end if
+     //        }//end for
+
+        if($tambah=="Tambah") {
+
+            $kelas = $this->input->post('kelas');
+            $semester = $this->input->post('semester');
+            $tahun_ajaran = $this->input->post('tahun_ajaran');
+            $hari = $this->input->post('hari');
+            
+            for ($i=1; $i<=7; $i++) {
+                $jam = $this->input->post('jam_'.$i);
+                $pelajaran = $this->input->post('pelajaran_'.$i);
+                $ruang = $this->input->post('ruang_'.$i);
+                $guru = $this->input->post('guru_'.$i);
+            }
+
+            
 
             echo '<script>';
             echo "alert('".$sukses."');";
@@ -486,10 +556,79 @@ public function tambah_data_jadwal() {
             echo "alert('".$gagal."');";
             echo '</script>';
             $data['title']='Pengaturan.';
+            $data['kelas'] = $this->m_admin->tampil_data_kelas();
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+            $data['hari'] = $this->m_admin->tampil_data_hari();
+            $data['jam'] = $this->m_admin->tampil_data_jam();
+            $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+            $data['ruang'] = $this->m_admin->tampil_data_ruang();
+            $data['guru'] = $this->m_admin->tampil_data_guru();
             $this->load->view('base/header', $data);
             $this->body_admin('admin/jadwal', $data);
             $this->load->view('base/footer');
         }
+    }
+
+    public function ubah_data_berita() {
+        $id=$this->uri->segment(3);
+        $simpan=$this->input->post('simpan');
+        $gambar=$_FILES['gambar'];
+        $nama_gambar=str_replace(' ', '_', $gambar['name']);
+        $judul=$this->input->post('judul');
+        $isi=$this->input->post('isi');
+        $now=date('y-m-d h-i-s');
+
+        $data = array(
+            'judul' => $judul,
+            'isi' => $isi,
+            'tgl_edit' => $now,
+            'gambar' => $nama_gambar
+            );
+
+        //validasi gambar
+        $config['upload_path'] = './resource/img/images/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        // $config['max_size'] = '5024';
+        // $config['max_width']  = '1024';
+        // $config['max_height']  = '768';
+        $config['overwrite'] = true;
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+        $this->db->where('id', $id);
+        $this->db->update('berita', $data);
+
+        // setelah data tersimpan foto di upload ke folder
+        $this->upload->do_upload('gambar');
+        $sukses = 'Data Berhasil Diubah';
+        echo '<script>';
+        echo "alert('".$sukses."');";
+        echo "window.location='" . site_url('admin') . "'";
+        echo '</script>';
+    }
+
+    public function ubah_data_informasi() {
+        $id=$this->uri->segment(3);
+        $simpan=$this->input->post('simpan');
+        $judul=$this->input->post('judul');
+        $isi=$this->input->post('isi');
+        $now=date('y-m-d h-i-s');
+
+        $data = array(
+            'judul' => $judul,
+            'isi' => $isi,
+            'tgl_edit' => $now
+            );
+
+        $this->db->where('id', $id);
+        $this->db->update('informasi', $data);
+
+        $sukses = 'Data Berhasil Diubah';
+        echo '<script>';
+        echo "alert('".$sukses."');";
+        echo "window.location='" . site_url('admin') . "'";
+        echo '</script>';
     }
 
     public function ubah_data_tahun_ajaran() {
@@ -797,6 +936,24 @@ public function tambah_data_jadwal() {
         }
     }
 
+    public function hapus_berita() {
+        $id=$this->uri->segment(3);
+        $this->m_user->hapus_data_berita_by_id($id);
+        echo '<script>';
+        echo "alert('Berhasil Hapus Berita');";
+        echo "window.location='" . site_url('user') . "';";
+        echo '</script>';
+    }
+
+    public function hapus_informasi() {
+        $id=$this->uri->segment(3);
+        $this->m_user->hapus_data_informasi_by_id($id);
+        echo '<script>';
+        echo "alert('Berhasil Hapus Informasi');";
+        echo "window.location='" . site_url('user') . "';";
+        echo '</script>';
+    }
+
     public function hapus_data_tahun_ajaran() {
         $id = $this->input->get('id');
         $this->m_admin->hapus_data_tahun_ajaran($id);
@@ -873,7 +1030,6 @@ public function tambah_data_jadwal() {
         $tampilkan = $this->input->post('tampilkan');
         
         if($tampilkan == 'Tampilkan') {
-            // $data['jadwal'] = $this->m_admin->tampil_data_jadwal_by_id($kelas,$semester,$tahun_ajaran);
             $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
 
             $this->load->view('base/header', $data);

@@ -1,9 +1,9 @@
 <h3 class="header-isi">Detail Informasi Penting</h3>
 <div class="postingan">
 	<div class="single-detail-berita">
-		<h1>Kunjungan Siswa SMA 5 sogyakarta.</h1>
-		<span class="date"><i class="glyphicon glyphicon-time"></i> Tanggal 23 Desember 2015</span>
-		<p>	Kunjungan Siswa SMA 5 sogyakarta. as;dlijfa;ksdjf;lka sd;fklja ;sdklfj ;alkdsjf ;laksjd ;flkaj sdl;kfj ;akdsfj;laksdjf;l askdlfj ;alksd jf;lkaj ds;flkjasl;dfkj a;dskljf ;laksdjf ;lakjsdfl; lajkds f;klas df;lkadsj f</p>
-		<a href="<?php echo site_url(''); ?>"><i class="glyphicon glyphicon-edit"> Ubah</i></a> | <a href="<?php echo site_url(''); ?>"><i class="glyphicon glyphicon-trash"> Hapus</i></a>
+		<h1><?php echo $detail_informasi['judul']; ?></h1>
+		<span class="date"><i class="glyphicon glyphicon-time"></i> <?php echo $detail_informasi['tgl_upload']; ?></span>
+		<p>	<?php echo $detail_informasi['isi']; ?></p>
+		<a href="<?php echo site_url('admin/ubah_informasi/'.$detail_informasi['id']); ?>"><i class="glyphicon glyphicon-edit" style="margin-right:5px;"></i>Ubah</a> | <a href="<?php echo site_url('p_admin/hapus_informasi/'.$detail_informasi['id']); ?>"><i class="glyphicon glyphicon-trash" style="margin-right:5px;"></i>Hapus</a>
 	</div>
 </div>

@@ -514,6 +514,8 @@ p {
 	margin: 0;
 	font-size: 13px;
 	text-transform: capitalize;
+
+	width: 303px;
 }
 .informasi a {
 	float: left;
