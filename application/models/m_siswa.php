@@ -49,9 +49,8 @@ Class M_siswa extends CI_Model {
         }
     }
 
-    function tampil_data_siswa_by_session() {
-        $id = $this->session->userdata['login_siswa']['nis'];
-        $this->db->where('nis', $id);
+    function tampil_data_siswa_by_session($id_siswa) {
+        $this->db->where('nis', $id_siswa);
         $this->db->select('siswa.nis AS "nis", siswa.nama AS "nama", siswa.jenis_kelamin AS "jenis_kelamin", siswa.tempat_lahir AS "tempat_lahir", siswa.tgl_lahir AS "tgl_lahir", siswa.alamat AS "alamat", siswa.foto AS "foto", wali.no_ktp AS "no_ktp", wali.nama AS "nama_wali", wali.pekerjaan AS "pekerjaan", wali.email AS "email", wali.tlp AS "tlp", wali.hp AS "hp"');
         $this->db->from('siswa');
         $this->db->join('wali', 'wali.no_ktp=siswa.no_ktp');
@@ -66,6 +65,35 @@ Class M_siswa extends CI_Model {
         }
     }
 
+    function tampil_data_nilai_siswa_by_id($id_siswa, $semester, $tahun_ajaran) {
+        $this->db->where('nilai.nis', $id_siswa);
+        $this->db->where('nilai.id_semester', $semester);
+        $this->db->where('nilai.id_tahun_ajaran', $tahun_ajaran);
+        $this->db->select('nilai.nilai, pelajaran.pelajaran');
+        $this->db->from('nilai');
+        $this->db->join('pelajaran', 'pelajaran.id_pelajaran=nilai.id_pelajaran');
+
+        $query = $this->db->get();
+
+        if($query->num_rows > 0){
+            return $query->result_array();
+        }else{
+            return array();
+            // return false;
+        }
+    }
+
+    function hitung_data_nilai_siswa_by_id($id_siswa, $semester, $tahun_ajaran) {
+        $this->db->where('nilai.nis', $id_siswa);
+        $this->db->where('nilai.id_semester', $semester);
+        $this->db->where('nilai.id_tahun_ajaran', $tahun_ajaran);
+        $this->db->select('nilai.nilai, pelajaran.pelajaran');
+        $this->db->from('nilai');
+        $this->db->join('pelajaran', 'pelajaran.id_pelajaran=nilai.id_pelajaran');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
     function hapus_data_siswa($id) {
         $this->db->where('nis', $id);
         $this->db->delete('siswa');
@@ -75,7 +103,8 @@ Class M_siswa extends CI_Model {
         $this->db->select('*');
         $this->db->from('siswa');
         $this->db->where('nis', $id);
-        $this->db->where('password', MD5($password));
+        // $this->db->where('password', MD5($password));
+        $this->db->where('password', $password);
 
         $query = $this->db->get();
 

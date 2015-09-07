@@ -930,13 +930,13 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 .form-pengaturan input[type="file"] {
 	display: inline;
 }
-.form-pengaturan input[type="text"], .form-pengaturan input[type="file"], .login-admin input[type="text"]  {
+.form-pengaturan input[type="text"], .form-pengaturan input[type="email"], .form-pengaturan input[type="file"], .login-admin input[type="text"]  {
 	padding: 10px;
 	background-color: #ffffff;
 	border: solid 1px #e3e3e3;
 	width: 300px;
 }
-.form-pengaturan input[type="text"]:focus, .form-pengaturan input[type="file"]:focus, .login-admin input[type="text"]:focus {
+.form-pengaturan input[type="text"]:focus,.form-pengaturan input[type="email"]:focus, .form-pengaturan input[type="file"]:focus, .login-admin input[type="text"]:focus {
 	border-color: #ce0000;
 }
 .form-pengaturan input[type="submit"], .btn-save, .login-admin input[type="submit"] {

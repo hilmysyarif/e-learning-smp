@@ -25,74 +25,181 @@ class Guru extends Base {
         $this->load->model(array());
     }
 
-    public function biodata() {
+    public function index() {
     	$data['title']='Selamat Datang.';
-    	$this->load->view('base/header', $data);
-        $this->login_guru('guru/biodata', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+        	$this->load->view('base/header', $data);
+            $this->login_guru('guru/biodata', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function materi_pelajaran() {
     	$data['title']='Mata Pelajaran.';
-    	$this->load->view('base/header', $data);
-        $this->login_guru('guru/materi_pelajaran', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        	$this->load->view('base/header', $data);
+            $this->login_guru('guru/materi-pelajaran', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/materi-pelajaran', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function pengumuman() {
     	$data['title']='pengumuman.';
-    	$this->load->view('base/header', $data);
-        $this->login_guru('guru/pengumuman', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+        	$this->load->view('base/header', $data);
+            $this->login_guru('guru/pengumuman', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function nilai_ujian() {
         $data['title']='Nilai Ujian.';
-        $this->load->view('base/header', $data);
-        $this->login_guru('guru/nilai-ujian', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/nilai-ujian', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function upload() {
         $data['title']='Upload.';
-        $this->load->view('base/header', $data);
-        $this->login_guru('guru/upload', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+            $data['kelas'] = $this->m_admin->tampil_data_kelas();
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/upload', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function pengaturan() {
         $data['title']='Pengaturan.';
-        $this->load->view('base/header', $data);
-        $this->login_guru('guru/pengaturan', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/pengaturan', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function detail_materi() {
         $data['title']='Detail Materi Pelajaran.';
-        $this->load->view('base/header', $data);
-        $this->login_guru('guru/detail-materi-pelajaran', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id = $this->uri->segment(3);
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id_guru);
+
+            $data['detail_materi']=$this->m_guru->tampil_data_detail_materi_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/detail-materi-pelajaran', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function ubah_materi() {
         $data['title']='Ubah Materi Pelajaran.';
-        $this->load->view('base/header', $data);
-        $this->login_guru('guru/ubah-materi-pelajaran', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id=$this->uri->segment(3);
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id_guru);
+            
+            $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+            $data['kelas'] = $this->m_admin->tampil_data_kelas();
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+
+            $data['detail_materi']=$this->m_guru->tampil_data_detail_materi_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/ubah-materi-pelajaran', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function detail_nilai() {
         $data['title']='Detail Nilai Ujian.';
-        $this->load->view('base/header', $data);
-        $this->login_guru('guru/detail-nilai-ujian', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id = $this->uri->segment(3);
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id_guru);
+
+            $data['detail_nilai']=$this->m_guru->tampil_data_detail_nilai_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/detail-nilai-ujian', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function ubah_nilai() {
         $data['title']='Ubah Nilai Ujian.';
-        $this->load->view('base/header', $data);
-        $this->login_guru('guru/ubah-nilai-ujian', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_guru')){
+            $id=$this->uri->segment(3);
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id_guru);
+            
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+
+            $data['detail_nilai']=$this->m_guru->tampil_data_detail_nilai_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/ubah-nilai-ujian', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
     }
 
     public function keluar() {

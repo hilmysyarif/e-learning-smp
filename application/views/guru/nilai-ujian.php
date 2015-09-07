@@ -1,23 +1,34 @@
 <h3 class="header-isi">Nilai Ujian</h3>
 <div class="postingan">
 	<div class="form-tampil-nilai">
+		<?php echo form_open('p_guru/tampil_data_nilai?id='.$guru['nik']); ?>
 		<span>Nilai Ujian</span>
-		<select>
+		<select name="semester">
 			<option>Pilih Semester</option>
-			<option>Ganjil</option>
-			<option>Genap</option>
+			<?php if(!empty($semester)) { ?>
+			<?php foreach ($semester as $row) { ?>
+			<option value="<?php echo $row['id_semester']; ?>"><?php echo $row['semester']; ?></option>
+			<?php }//end foreach ?>
+			<?php }else{ ?>
+			<option selected="1"><?php echo 'Data Kosong'; ?></option>
+			<?php } ?>
 		</select>
-		<select>
+		<select name="tahun_ajaran">
 			<option>Pilih Tahun Ajaran</option>
-			<option>2015/2016</option>
-			<option>2016/2017</option>
-			<option>2017/2018</option>
+			<?php if(!empty($tahun_ajaran)) { ?>
+			<?php foreach ($tahun_ajaran as $row) { ?>
+			<option value="<?php echo $row['id_tahun_ajaran']; ?>"><?php echo $row['tahun_ajaran']; ?></option>
+			<?php }//end foreach ?>
+			<?php }else{ ?>
+			<option selected="1"><?php echo 'Data Kosong'; ?></option>
+			<?php } ?>
 		</select>
-		<input type="submit" value="Tampilkan">
+		<input name="tampilkan" type="submit" value="Tampilkan">
+		<?php echo form_close(); ?>
 	</div>
-
+	<?php if(!empty($data_nilai)){ ?>
 	<div class="isi-postingan">
-		<h2><span>Semester Genap </span> | <span> Tahun Ajaran 2015/2016</span></h2>
+		<h2><span>Semester <?php echo $nama_semester; ?> </span> | <span> Tahun Ajaran <?php echo $nama_tahun_ajaran; ?></span></h2>
 		<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -27,12 +38,17 @@
 			</tr>
 		</thead>
 		<tbody>
+			<?php foreach ($data_nilai as $row) { ?>
 			<tr>
-				<td><span class="kolom-tgl">07-05-2015 (03:17:00)</span></td>
-				<td><span class="kolom-mtr">Perancangan Aplikasi dengan Metode Dunia Lain</span></td>
-				<td><span class="kolom-mtr"><a href="<?php echo site_url('guru/detail_nilai'); ?>"> Perancangan Aplikasi dengan Metode Dunia Lain.pdf</a></span></td>
+				<td><span class="kolom-tgl"><?php echo $row['tgl_upload']; ?></span></td>
+				<td><span class="kolom-mtr"><?php echo $row['judul']; ?></span></td>
+				<td><span class="kolom-mtr"><a href="<?php echo site_url('guru/detail_nilai/'.$row['id_data_nilai']); ?>"> <?php echo $row['file']; ?></a></span></td>
 			</tr>
+			<?php } ?>
 		</tbody>
 	</table>
 	</div>
+	<?php }else{ ?>
+	<?php echo 'Data Kosong'; ?>
+	<?php }?>
 </div>

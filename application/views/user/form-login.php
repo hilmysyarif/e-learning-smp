@@ -4,6 +4,8 @@
 	<?php echo $this->load->view('siswa/form-login-siswa'); ?>
 <?php }elseif ($this->session->userdata('login_guru')) { ?>
 	<?php echo $this->load->view('guru/form-login-guru'); ?>
+<?php }elseif ($this->session->userdata('login_admin')) { ?>
+	<?php echo $this->load->view('admin/form-login-admin'); ?>
 <?php }else{ ?>
 <div class="form-masuk">
 	<div class="header-form-masuk">

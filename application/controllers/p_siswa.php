@@ -22,6 +22,29 @@ class P_siswa extends Base {
     parent::__construct();
   }
 
+  public function tampil_data_nilai_siswa() {
+    if($this->session->userdata('login_siswa')){
+      $id_siswa = $this->session->userdata['login_siswa']['nis'];
+      $semester = $this->input->post('semester');
+      $tahun_ajaran = $this->input->post('tahun_ajaran');
+      $tampilkan = $this->input->post('tampilkan');
+      $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+
+      if($tampilkan == "Tampilkan") {
+          $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+          $data['semester']=$this->m_admin->tampil_data_semester();
+          $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran();
+          $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+          $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+          $data['total_nilai']=$this->m_siswa->hitung_data_nilai_siswa_by_id($id_siswa, $semester, $tahun_ajaran);
+          $data['nilai']=$this->m_siswa->tampil_data_nilai_siswa_by_id($id_siswa, $semester, $tahun_ajaran);
+          $this->load->view('base/header', $data);
+          $this->login_siswa('siswa/nilai-ujian', $data);
+          $this->load->view('base/footer');
+      }
+    }
+  }
+
   public function masuk_siswa() {
 
     $this->form_validation->set_rules('id', 'ID', 'trim|required|xss_clean');
@@ -56,14 +79,16 @@ class P_siswa extends Base {
         $masuk_siswa  = $this->m_siswa->masuk_siswa($id, $password);
         $masuk_guru   = $this->m_guru->masuk_guru($id, $password);
         $masuk_wali   = $this->m_wali->masuk_wali($id, $password);
+        $masuk_admin  = $this->m_admin->masuk_admin($id, $password);
 
         if ($masuk_siswa && $menu='siswa') {
           $sess_array = array();
           foreach ($masuk_siswa as $row) {
               $sess_array = array(
                   'nis' => $row->nis,
-                  'nama' => $row->nama,
-                  'foto' => $row->foto
+                  'id_kelas' => $row->id_kelas,
+                  'id_semester' => $row->id_semester,
+                  'id_tahun_ajaran' => $row->id_tahun_ajaran
                   );
               $this->session->set_userdata('login_siswa', $sess_array);
           }
@@ -89,6 +114,16 @@ class P_siswa extends Base {
                   'email' => $row->email
                   );
               $this->session->set_userdata('login_wali', $sess_array);
+          }
+          return TRUE;
+        } elseif ($masuk_admin) {
+          $sess_array = array();
+          foreach ($masuk_admin as $row) {
+              $sess_array = array(
+                  'email' => $row->email,
+                  'nama' => $row->nama
+                  );
+              $this->session->set_userdata('login_admin', $sess_array);
           }
           return TRUE;
         } else {

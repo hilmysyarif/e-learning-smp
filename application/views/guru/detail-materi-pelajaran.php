@@ -6,27 +6,27 @@
 			<tbody>
 				<tr>
 					<th><span class="jdl-detail">Tanggal Upload</span></th>
-					<td><span class="desc-detail">07-05-2015 (03:17:00)</span></td>
+					<td><span class="desc-detail"><?php echo $detail_materi['tgl_upload']; ?></span></td>
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Di Upload Oleh</span></th>
-					<td><span class="desc-detail">Ahmad Hasan Al Arif Billah, S. Kom</span></td>
+					<td><span class="desc-detail"><?php echo $detail_materi['nama_guru']; ?></span></td>
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Judul Materi</span></th>
-					<td><span class="desc-detail">Bahasa Indonesia</span></td>
+					<td><span class="desc-detail"><?php echo $detail_materi['judul']; ?></span></td>
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Pelajaran</span></th>
-					<td><span class="desc-detail">Bahasa Indonesia</span></td>
+					<td><span class="desc-detail"><?php echo $detail_materi['pelajaran'] ?></span></td>
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Link Download</span></th>
-					<td><span class="desc-detail"><a href="#">Mengupas Tuntas Kulit Kelapa.pdf</a></span></td>
+					<td><span class="desc-detail"><a href="#"><?php echo $detail_materi['file']; ?></a></span></td>
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Aksi</span></th>
-					<td><span class="desc-detail"><a href="<?php echo site_url('guru/ubah_materi'); ?>">Ubah</a> | <a href="#">Hapus</a></span></td>
+					<td><span class="desc-detail"><a href="<?php echo site_url('guru/ubah_materi/'.$detail_materi['id_materi_pelajaran']); ?>">Ubah</a> | <a href="<?php echo site_url('p_guru/hapus_data_detail_materi?id='.$detail_materi['id_materi_pelajaran']); ?>">Hapus</a></span></td>
 				</tr>
 			</tbody>
 		</table>

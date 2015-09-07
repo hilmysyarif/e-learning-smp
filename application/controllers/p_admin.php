@@ -478,75 +478,54 @@ public function tambah_data_ruang() {
     }
 }
 
-public function tambah_data_jadwal() {
-    $text = '03214587690123452356s78953237890126278987460903029837648595389090';
+    public function tambah_data_jadwal() {
+        $text = '03214587690123452356s78953237890126278987460903029837648595389090';
         $panj = 4;//jumlah karakter yang akan muncul
         $txtl = strlen($text)-1;
         $result = '';
         for($i=1; $i<=$panj; $i++){
-         $result .= $text[rand(0, $txtl)];
-     }
+            $result .= $text[rand(0, $txtl)];
+        }
 
-     $id                 = $result;
+        $id                 = $result;
+        $tambah             = $this->input->post('tambah');
+        $sukses             = 'Data Berhasil Disimpan';
+        $gagal              = 'Data Gagal Disimpan';
 
-     $tambah             = $this->input->post('tambah');
-     $sukses             = 'Data Berhasil Disimpan';
-     $gagal              = 'Data Gagal Disimpan';
-
-     // if($tambah) {
-     //        $this->db->select_max('id_jadwal'); //ambil data id_jadwal yang baru dimasukan/id_max
-     //        $queryjadwal = $this->db->get('jadwal'); //ambil data di tabel jadwal
-     //        $queryjadwal = $queryjadwal->row_array();
-     //        $id_jadwal_terbaru = $queryjadwal['id_jadwal']; //mendapatkan id_jadwal
-     //        for ($i=1; $i<=7; $i++) {
-     //            $id_jam         = $this->input->post('jam_'.$i);
-     //            $id_pelajaran   = $this->input->post('pelajaran_'.$i);
-     //            $id_ruang       = $this->input->post('ruang_'.$i);
-     //            $nik            = $this->input->post('guru_'.$i);
-     //            if(!$id_jam)$id_jam=NULL;
-     //            if(!$id_pelajaran)$id_pelajaran=NULL;
-     //            if(!$id_ruang)$id_ruang=NULL;
-     //            if(!$nik)$nik=NULL;
-     //            if(!empty($id_jam) && !empty($id_pelajaran) && !empty($id_ruang) && !empty($nik)){
-
-     //                $data = array(
-     //                    // 'id_detail_jadwal'  => $id,
-     //                    'id_jam'            => $id_jam,
-     //                    'id_pelajaran'      => $id_pelajaran,
-     //                    'id_ruang'          => $id_ruang,
-     //                    'nik'               => $nik
-     //                    );
-     //                $this->db->insert('detail_jadwal', $data); //insert $data ke tabel detail_jadwal
-     //                //get latest id detail jadwal                   
-     //                $id_detail_jadwal = $this->m_admin->get_latest_detail_jadwal();
-     //                $data = array();//reset array data
-     //                $data = array(
-     //                    'id_kelas'          => $this->input->post('kelas'),
-     //                    'id_semester'       => $this->input->post('semester'),
-     //                    'id_tahun_ajaran'   => $this->input->post('tahun_ajaran'),
-     //                    'id_hari'           => $this->input->post('hari')
-     //                    );
-     //                $data['id_detail_jadwal'] = $id_detail_jadwal;
-     //                $this->m_admin->tambah_data_jadwal($data);//tambah data jadwal
-     //            }//end if
-     //        }//end for
-
-        if($tambah=="Tambah") {
+        if($tambah=="Simpan") {
 
             $kelas = $this->input->post('kelas');
             $semester = $this->input->post('semester');
             $tahun_ajaran = $this->input->post('tahun_ajaran');
             $hari = $this->input->post('hari');
             
+            $data = array(
+                'id_kelas'          => $this->input->post('kelas'),
+                'id_semester'       => $this->input->post('semester'),
+                'id_tahun_ajaran'   => $this->input->post('tahun_ajaran'),
+                'id_hari'           => $this->input->post('hari')
+                );
+            $this->m_admin->tambah_data_jadwal($data);//tambah data jadwal
+            $id_jadwal = $this->m_admin->ambil_data_jadwal_id_jadwal_terbaru();
+
             for ($i=1; $i<=7; $i++) {
                 $jam = $this->input->post('jam_'.$i);
                 $pelajaran = $this->input->post('pelajaran_'.$i);
                 $ruang = $this->input->post('ruang_'.$i);
                 $guru = $this->input->post('guru_'.$i);
-            }
 
-            
+                if(!empty($jam) && !empty($pelajaran) && !empty($ruang) && !empty($guru)) {
 
+                    $data2 = array(
+                        'id_jadwal'     => $id_jadwal,
+                        'id_jam'        => $jam,
+                        'id_pelajaran'  => $pelajaran,
+                        'id_ruang'      => $ruang,
+                        'nik'           => $guru
+                        );
+                    $this->db->insert('detail_jadwal', $data2); //insert $data ke tabel detail_jadwal
+                }
+            }//end for
             echo '<script>';
             echo "alert('".$sukses."');";
             echo "window.location='" . site_url('admin/jadwal') . "'";
@@ -567,6 +546,82 @@ public function tambah_data_jadwal() {
             $this->load->view('base/header', $data);
             $this->body_admin('admin/jadwal', $data);
             $this->load->view('base/footer');
+        }
+    }
+
+    public function tambah_data_nilai_siswa() {
+        $kelas = $this->input->post('kelas');
+        $semester = $this->input->post('semester');
+        $tahun_ajaran = $this->input->post('tahun_ajaran');
+        $pelajaran = $this->input->post('pelajaran');
+        $total_data = $this->input->post('total_data');
+        $simpan = $this->input->post('simpan');
+        $now = date('y-m-d h-i-s');
+
+        $sukses             = 'Data Berhasil Disimpan';
+        $gagal              = 'Data Gagal Disimpan';
+
+        if($simpan == "Simpan") {
+            for ($i=1; $i<=$total_data; $i++) {
+                $nis = $this->input->post('nis_'.$i);
+                $nilai = $this->input->post('nilai_'.$i);
+
+                $data = array(
+                    'nilai' => $nilai,
+                    'nis' => $nis,
+                    'id_pelajaran' => $pelajaran,
+                    'id_kelas' => $kelas,
+                    'id_semester' => $semester,
+                    'id_tahun_ajaran' => $tahun_ajaran,
+                    'tgl_upload' => $now
+                );
+                $this->db->insert('nilai', $data);
+            }//end for
+            echo '<script>';
+            echo "alert('".$sukses."');";
+            echo "window.location='" . site_url('admin/nilai') . "'";
+            echo '</script>';
+        }
+    }
+
+    public function ubah_data_nilai_siswa() {
+        $kelas = $this->input->post('kelas');
+        $semester = $this->input->post('semester');
+        $tahun_ajaran = $this->input->post('tahun_ajaran');
+        $pelajaran = $this->input->post('pelajaran');
+        $total_data = $this->input->post('total_data');
+        $simpan = $this->input->post('simpan');
+        $now = date('y-m-d h-i-s');
+
+        $sukses             = 'Data Berhasil Disimpan';
+        $gagal              = 'Data Gagal Disimpan';
+
+        if($simpan == "Simpan") {
+            for ($i=1; $i<=$total_data; $i++) {
+                $nis = $this->input->post('nis_'.$i);
+                $nilai = $this->input->post('nilai_'.$i);
+
+                $data = array(
+                    'nilai' => $nilai,
+                    'nis' => $nis,
+                    'id_pelajaran' => $pelajaran,
+                    'id_kelas' => $kelas,
+                    'id_semester' => $semester,
+                    'id_tahun_ajaran' => $tahun_ajaran,
+                    'tgl_upload' => $now
+                );
+                $this->db->where('nis', $nis);
+                $this->db->update('nilai', $data);
+            }//end for
+            echo '<script>';
+            echo "alert('".$sukses."');";
+            echo "window.location='" . site_url('admin/list_nilai') . "'";
+            echo '</script>';
+        }else{
+            echo '<script>';
+            echo "alert('".$gagal."');";
+            echo "window.location='" . site_url('admin/list_nilai') . "'";
+            echo '</script>';
         }
     }
 
@@ -936,6 +991,55 @@ public function tambah_data_jadwal() {
         }
     }
 
+    public function ubah_email_admin() {
+        $email = $this->input->post('email');
+        $simpan = $this->input->post('simpan');
+        $data = array('email' => $email );
+        if($simpan == "Simpan") {
+            $this->db->update('admin', $data);
+            echo '<script>';
+            echo "alert('Email Berhasil Diubah.');";
+            echo "window.location='" . $this->agent->referrer() . "';";
+            echo '</script>';
+        }else{
+            echo '<script>';
+            echo "alert('Email Gagal Diubah.');";
+            echo "window.location='" . $this->agent->referrer() . "';";
+            echo '</script>';
+        }
+    }
+
+    public function ubah_password_admin() {
+    $id=$this->input->get('id');
+    $password_lama = $this->input->post('password_lama');
+    $password_baru = $this->input->post('password_baru');
+
+    $this->form_validation->set_rules('password_lama', 'Password', 'trim|required|xss_clean');
+    $this->form_validation->set_rules('password_baru', 'Password', 'trim|required|xss_clean');
+    $this->form_validation->set_rules('password_konfirmasi', 'Password Konfirmasi', 'trim|required|matches[password_baru]|xss_clean');
+    $run = $this->form_validation->run();
+    $true = $run == TRUE;
+
+    $data = array('password' => $password_baru);
+    //ambil data password guru
+    $password = $this->m_admin->cek_password_admin_by_id($id);
+    
+    if($password_lama == $password && $true){
+            //ubah data siswa
+            $this->db->where('email', $id);
+            $this->db->update('admin', $data);
+            echo '<script>';
+            echo "alert('Password Berhasil Diubah.');";
+            echo "window.location='" . $this->agent->referrer() . "';";
+            echo '</script>';
+        }else{
+            echo '<script>';
+            echo "alert('Password Gagal Diubah.');";
+            echo "window.location='" . $this->agent->referrer() . "';";
+            echo '</script>';
+    }
+  }
+
     public function hapus_berita() {
         $id=$this->uri->segment(3);
         $this->m_user->hapus_data_berita_by_id($id);
@@ -1018,24 +1122,90 @@ public function tambah_data_jadwal() {
     }
 
     public function tampil_data_jadwal() {
-
+        $kelas          = $this->input->post('kelas');
+        $semester       = $this->input->post('semester');
+        $tahun_ajaran   = $this->input->post('tahun_ajaran');
+        
         $data['kelas'] = $this->m_admin->tampil_data_kelas();
         $data['semester'] = $this->m_admin->tampil_data_semester();
         $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
 
-        $kelas          = $this->input->post('kelas');
-        $semester       = $this->input->post('semester');
-        $tahun_ajaran   = $this->input->post('tahun_ajaran');
 
         $tampilkan = $this->input->post('tampilkan');
         
         if($tampilkan == 'Tampilkan') {
             $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
-
+            
+            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+            
             $this->load->view('base/header', $data);
             $this->body_admin('admin/list-jadwal', $data);
             $this->load->view('base/footer');
         }
+    }
+
+    public function tampil_data_siswa() {
+        $kelas          = $this->input->post('kelas');
+        $semester       = $this->input->post('semester');
+        $tahun_ajaran   = $this->input->post('tahun_ajaran');
+        $tampilkan = $this->input->post('tampilkan');
+
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+        
+        $data['total_data'] = $this->m_admin->hitung_data_siswa_by_id($kelas,$semester,$tahun_ajaran);
+
+        if($tampilkan == 'Tampilkan') {
+            $data['siswa'] = $this->m_admin->tampil_data_siswa_by_id($kelas,$semester,$tahun_ajaran);
+            
+            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+            
+            $this->load->view('base/header', $data);
+            $this->body_admin('admin/nilai', $data);
+            $this->load->view('base/footer');
+        }
+    }
+
+    public function tampil_data_nilai_siswa() {
+        $pelajaran      = $this->input->post('pelajaran');
+        $kelas          = $this->input->post('kelas');
+        $semester       = $this->input->post('semester');
+        $tahun_ajaran   = $this->input->post('tahun_ajaran');        
+        $tampilkan = $this->input->post('tampilkan');
+
+        $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+
+        $data['total_data'] = $this->m_admin->hitung_data_siswa_by_id($kelas,$semester,$tahun_ajaran);
+
+        if($tampilkan == "Tampilkan") {
+            $data['nama_pelajaran'] = $this->m_admin->tampil_data_pelajaran_by_id($pelajaran);
+            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+
+            $data['siswa'] = $this->m_admin->tampil_data_nilai_siswa_by_id($pelajaran, $kelas, $semester, $tahun_ajaran);
+            $this->load->view('base/header', $data);
+            $this->body_admin('admin/list-nilai', $data);
+            $this->load->view('base/footer');
+        }
+    }
+
+    public function keluar_admin() {
+        $this->session->unset_userdata('login_admin');
+        echo '<script>';
+        echo "alert('Berhasil Keluar');";
+        // echo "window.location='" . $this->agent->referrer() . "'";
+        echo "window.location='../user'";
+        echo '</script>';
     }
 
 }//end-class

@@ -11,9 +11,9 @@
 	<div class="">
 
 		<div class="dt-usr">
-			<img src="<?php echo base_url('resource/img/photo/11.11.5304.jpg'); ?>">
+			<img src="<?php echo base_url('resource/img/photo/'.$siswa['foto']); ?>">
 			<p><span><?php echo $siswa['nis']; ?></span></p>
-			<p><span><a href="<?php echo site_url('siswa/biodata'); ?>"><i class="glyphicon glyphicon-user"></i> Biodata</a></span></p>
+			<p><span><a href="<?php echo site_url('siswa'); ?>"><i class="glyphicon glyphicon-user"></i> Biodata</a></span></p>
 			<p><span><a href="<?php echo site_url('siswa/hasil_nilai'); ?>"><i class="glyphicon glyphicon-list-alt"></i> Hasil Nilai</a></span></p>
 			<?php if($this->session->userdata('login_siswa')){ ?>
 			<p><span><a href="<?php echo site_url('p_siswa/keluar_siswa'); ?>"><i class="glyphicon glyphicon-log-out"></i> Keluar</a></span></p>

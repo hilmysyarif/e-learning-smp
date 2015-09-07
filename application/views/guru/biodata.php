@@ -1,12 +1,14 @@
 <h3 class="header-isi">Biodata</h3>
 <div class="postingan">
 	<div class="single-biodata">
-		<!-- <img src="<?php echo base_url('resource/img/photo/11.11.5304.jpg') ?>"> -->
-		<p style="border-top: 1px dotted #e3e3e3;"><span class="jdl-biodata">Nomer Induk Guru</span><span>: </span><span>11.11.5304</span></p>
-		<p><span class="jdl-biodata">Nama</span><span>: </span><span>Ahmad Hasan Al Arif Billah</span></p>
-		<p><span class="jdl-biodata">Email</span><span>: </span><span>arifmatika@gmail.com</span></p>
-		<p><span class="jdl-biodata">Alamat</span><span>: </span><span>Jl. jalan</span></p>
-		<p><span class="jdl-biodata">Nomer Telepon</span><span>: </span><span>0867876</span></p>
-		<p><span class="jdl-biodata">Nomer Handphone</span><span>: </span><span>0867876</span></p>
+		<!-- <img src="<?php echo base_url('resource/img/photo/'.$guru['foto']) ?>"> -->
+		<p><span class="jdl-biodata" style="padding:0;">Nomer Induk Guru</span><span>: </span><span><?php echo $guru['nik']; ?></span></p>
+		<p><span class="jdl-biodata" style="padding:0;">Nama</span><span>: </span><span><?php echo $guru['nama']; ?></span></p>
+		<p><span class="jdl-biodata" style="padding:0;">Nama</span><span>: </span><span><?php echo $guru['jenis_kelamin']; ?></span></p>
+		<p><span class="jdl-biodata" style="padding:0;">Tempat Tanggal lahir</span><span>: </span><span><?php echo $guru['tempat_lahir'].', '.$guru['tgl_lahir']; ?></span></p>
+		<p><span class="jdl-biodata" style="padding:0;">Alamat</span><span>: </span><span><?php echo $guru['alamat']; ?></span></p>
+		<p><span class="jdl-biodata" style="padding:0;">Email</span><span>: </span><span><?php echo $guru['email']; ?></span></p>
+		<p><span class="jdl-biodata" style="padding:0;">Nomer Telepon</span><span>: </span><span><?php echo $guru['tlp']; ?></span></p>
+		<p><span class="jdl-biodata" style="padding:0;">Nomer Handphone</span><span>: </span><span><?php echo $guru['hp']; ?></span></p>
 	</div>
 </div>

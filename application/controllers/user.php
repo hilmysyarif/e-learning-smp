@@ -27,17 +27,32 @@ class User extends Base {
 
     public function index() {
         $data['title']='Selamat Datang.';
-        $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session();
 
-        //contoh
-        $tgl_upload = $this->m_admin->ambil_data_wali_tgl_upload_terbaru();
-        $data['no_ktp'] = $this->m_admin->ambil_data_wali_no_ktp_terbaru($tgl_upload);
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
 
-        $data['informasi']=$this->m_user->tampil_data_informasi();
-        $data['berita']=$this->m_user->tampil_data_berita();
-        $this->load->view('base/header', $data);
-        $this->body_user('user/berita', $data);
-        $this->load->view('base/footer');
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $data['berita']=$this->m_user->tampil_data_berita();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/berita', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $data['berita']=$this->m_user->tampil_data_berita();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/berita', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['berita']=$this->m_user->tampil_data_berita();
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/berita', $data);
+            $this->load->view('base/footer');
+        }
     }
 
     public function detail_berita() {
@@ -61,33 +76,169 @@ class User extends Base {
 
     public function psb() {
         $data['title']='Penerimaan Siswa Baru.';
-        $this->load->view('base/header', $data);
-        $this->body_user('user/psb', $data);
-        $this->load->view('base/footer');   
+        
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/psb', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/psb', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/psb', $data);
+            $this->load->view('base/footer');     
+        }
     }
 
     public function guru() {
         $data['title']= 'Guru.';
-        $this->load->view('base/header', $data);
-    	$this->body_user('user/guru', $data);
-    	$this->load->view('base/footer');
+
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $data['semua_guru']=$this->m_guru->tampil_data_guru();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/guru', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $data['semua_guru']=$this->m_guru->tampil_data_guru();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/guru', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['semua_guru']=$this->m_guru->tampil_data_guru();
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/guru', $data);
+            $this->load->view('base/footer');
+        }
+    }
+
+    public function detail_guru() {
+        $id = $this->uri->segment(3);
+        $data['title']='Detail Guru';
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/detail-guru', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/detail-guru', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/detail-guru', $data);
+            $this->load->view('base/footer');
+        }
+    }
+
+    public function pengumuman() {
+        $id = $this->uri->segment(3);
+        $data['title']='Detail Guru';
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/user-pengumuman', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/user-pengumuman', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
+            $this->load->view('base/header', $data);
+            $this->login_guru('guru/user-pengumuman', $data);
+            $this->load->view('base/footer');
+        }   
     }
 
     public function e_learning() {
         $data['title']= 'E-Learning.';
-        $this->load->view('base/header', $data);
-        $this->body_user('user/e-learning', $data);
-        $this->load->view('base/footer');
+
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/e-learning', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/e-learning', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/e-learning', $data);
+            $this->load->view('base/footer');
+        }
     }
 
     public function detail_data() {
         $data['title']= 'Detail Data E-Learning.';
-        $this->load->view('base/header', $data);
-        $this->body_user('user/detail-data', $data);
-        $this->load->view('base/footer');
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/detail-data', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/detail-data', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/detail-data', $data);
+            $this->load->view('base/footer');
+        }
     }
 
-    public function Fasilitas() {
+    public function fasilitas() {
         $data['title']= 'Fasilitas.';
         $this->load->view('base/header', $data);
         $this->body_user('user/fasilitas', $data);
@@ -96,16 +247,56 @@ class User extends Base {
 
     public function kontak() {
         $data['title']= 'Kontak.';
-        $this->load->view('base/header', $data);
-        $this->body_user('user/kontak', $data);
-        $this->load->view('base/footer');
+        
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/kontak', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/kontak', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/kontak', $data);
+            $this->load->view('base/footer');
+        }
     }
 
     public function tentang_kami() {
         $data['title']= 'Tentang Kami.';
-        $this->load->view('base/header', $data);
-        $this->body_user('user/tentang-kami', $data);
-        $this->load->view('base/footer');
+
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/tentang-kami', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/tentang-kami', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['informasi']=$this->m_user->tampil_data_informasi();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/tentang-kami', $data);
+            $this->load->view('base/footer');
+        }
     }
 
     public function download() {
