@@ -75,4 +75,20 @@ class Siswa extends Base {
         }
     }
 
+    public function ubah_biodata() {
+        $data['title']= 'Ubah Biodata.';
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['detail_siswa']=$this->m_siswa->tampil_data_siswa_by_id($id_siswa);
+            $this->load->view('base/header', $data);
+            $this->login_siswa('siswa/ubah-biodata', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
+    }
+
+
 }//end class

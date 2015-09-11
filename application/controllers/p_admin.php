@@ -995,7 +995,7 @@ public function tambah_data_ruang() {
         $email = $this->input->post('email');
         $simpan = $this->input->post('simpan');
         $data = array('email' => $email );
-        if($simpan == "Simpan") {
+        if(!empty($email)) {
             $this->db->update('admin', $data);
             echo '<script>';
             echo "alert('Email Berhasil Diubah.');";
@@ -1039,6 +1039,18 @@ public function tambah_data_ruang() {
             echo '</script>';
     }
   }
+
+    public function hapus_jadwal() {
+        $kelas         = $this->input->get('kelas');
+        $semester      = $this->input->get('semester');
+        $tahun_ajaran  = $this->input->get('tahun_ajaran');
+
+        $this->m_admin->hapus_data_jadwal_by_id($kelas, $semester, $tahun_ajaran);
+        echo '<script>';
+        echo "alert('Jadwal Berhasil Dihapus.');";
+        echo "window.location='" . site_url('admin/list_jadwal') . "';";
+        echo '</script>';
+    }
 
     public function hapus_berita() {
         $id=$this->uri->segment(3);
@@ -1134,6 +1146,7 @@ public function tambah_data_ruang() {
         $tampilkan = $this->input->post('tampilkan');
         
         if($tampilkan == 'Tampilkan') {
+            // $data['id_jadwal'] = $this->m_admin->tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran);
             $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
             
             $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);

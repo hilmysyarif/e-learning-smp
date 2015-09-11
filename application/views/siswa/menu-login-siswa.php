@@ -4,4 +4,5 @@
 	<li><a href="<?php echo site_url('siswa'); ?>"><i class="glyphicon glyphicon-user"></i> Biodata</a></li>
 	<li><a href="<?php echo site_url('siswa/jadwal'); ?>"><i class="glyphicon glyphicon-list"></i> Jadwal Pelajaran</a></li>
 	<li><a href="<?php echo site_url('siswa/nilai_ujian'); ?>"><i class="glyphicon glyphicon-list-alt"></i> Nilai Ujian</a></li>
+	<li><a href="<?php echo site_url('siswa/ubah_biodata'); ?>"><i class="glyphicon glyphicon-edit"></i> Ubah Biodata</a></li>
 </ul>

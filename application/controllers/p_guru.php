@@ -22,6 +22,28 @@ class P_guru extends Base {
     parent::__construct();
   }
 
+  public function download(){
+    if($this->session->userdata('login_siswa')){
+      $id = $this->uri->segment(3);
+      $data=$this->m_guru->tampil_data_detail_materi_by_id($id);
+      $nama_file = $data['file'];
+      
+      $isi = file_get_contents(base_url('resource/doc/'));
+      $nama = $nama_file;
+      force_download($nama,$isi);
+    }elseif($this->session->userdata('login_guru')){
+      $id = $this->uri->segment(3);
+      $data=$this->m_guru->tampil_data_detail_materi_by_id($id);
+      $nama_file = $data['file'];
+      
+      $isi = file_get_contents(base_url('resource/doc/'));
+      $nama = $nama_file;
+      force_download($nama,$isi);
+    }else{
+      redirect('user');
+    }
+  }
+
   public function tambah_data_materi() {
   	$id = $this->input->get('id');
     $judul = $this->input->post('judul');

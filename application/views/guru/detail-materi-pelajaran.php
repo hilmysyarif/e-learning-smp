@@ -22,7 +22,7 @@
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Link Download</span></th>
-					<td><span class="desc-detail"><a href="#"><?php echo $detail_materi['file']; ?></a></span></td>
+					<td><span class="desc-detail"><a href="<?php echo site_url('p_guru/download/'.$detail_materi['id_materi_pelajaran']); ?>"><?php echo $detail_materi['file']; ?></a></span></td>
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Aksi</span></th>

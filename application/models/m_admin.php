@@ -157,7 +157,23 @@ function tampil_data_guru() {
         return array();
     }
 }
+function tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran){
+    $this->db->where('jadwal.id_kelas',$kelas);
+    $this->db->where('jadwal.id_semester',$semester);
+    $this->db->where('jadwal.id_tahun_ajaran',$tahun_ajaran);
+
+    $this->db->select('id_jadwal');
+    $this->db->from('jadwal');
+    $query = $this->db->get();
+    
+    if($query->num_rows>0){
+        return $query->row_array();
+    }else{
+        return array();
+    }
+}
 function tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran) {
+    $this->db->order_by("detail_jadwal.id_detail_jadwal", "asc"); 
     $this->db->where('jadwal.id_kelas',$kelas);
     $this->db->where('jadwal.id_semester',$semester);
     $this->db->where('jadwal.id_tahun_ajaran',$tahun_ajaran);
@@ -311,6 +327,12 @@ function hapus_data_pelajaran($id) {
 function hapus_data_ruang($id) {
     $this->db->where('id_ruang', $id);
     $this->db->delete('ruang');
+}
+function hapus_data_jadwal_by_id($kelas, $semester, $tahun_ajaran) {
+    $this->db->where('id_kelas', $kelas);
+    $this->db->where('id_semester', $semester);
+    $this->db->where('id_tahun_ajaran', $tahun_ajaran);
+    $this->db->delete('jadwal');
 }
 
 

@@ -22,6 +22,14 @@ Class M_siswa extends CI_Model {
         return $result['tgl_edit'];
     }
 
+    function ambil_data_siswa_foto_by_id($id) {
+        $this->db->where('nis', $id);
+        $this->db->select('siswa.foto');
+        $query = $this->db->get('siswa');
+        $result = $query->row_array();
+        return $result['foto'];
+    }
+
     function tampil_data_siswa() {
         $this->db->order_by('nis', 'DESC');
         $query = $this->db->get('siswa');
@@ -87,11 +95,23 @@ Class M_siswa extends CI_Model {
         $this->db->where('nilai.nis', $id_siswa);
         $this->db->where('nilai.id_semester', $semester);
         $this->db->where('nilai.id_tahun_ajaran', $tahun_ajaran);
-        $this->db->select('nilai.nilai, pelajaran.pelajaran');
+        $this->db->select('nilai.nilai');
         $this->db->from('nilai');
         $this->db->join('pelajaran', 'pelajaran.id_pelajaran=nilai.id_pelajaran');
         $query = $this->db->get();
         return $query->num_rows();
+    }
+
+    function jumlah_data_nilai_siswa_by_id($id_siswa, $semester, $tahun_ajaran) {
+        $this->db->where('nilai.nis', $id_siswa);
+        $this->db->where('nilai.id_semester', $semester);
+        $this->db->where('nilai.id_tahun_ajaran', $tahun_ajaran);
+        $this->db->select_avg('nilai.nilai');
+        $this->db->from('nilai');
+        $this->db->join('pelajaran', 'pelajaran.id_pelajaran=nilai.id_pelajaran');
+        $query = $this->db->get();
+        // return $query->num_rows();
+        return $query->row_array();
     }
 
     function hapus_data_siswa($id) {

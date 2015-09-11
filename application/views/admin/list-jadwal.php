@@ -37,7 +37,7 @@
 	</div>
 	<?php if(!empty($jadwal)){ ?>
 	<div class="isi-postingan">
-		<h2 style="text-align: left;"><span>Jadwal Pelajaran Kelas <?php echo $nama_kelas['kelas']; ?> | Semester <?php echo $nama_semester['semester']; ?> | Tahun Ajaran <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span><a href="<?php echo site_url('admin/ubah_jadwal'); ?>"><i class="glyphicon glyphicon-edit pull-right"></i></a></h2>
+		<h2 style="text-align: left;"><span>Jadwal Pelajaran Kelas <?php echo $nama_kelas['kelas']; ?> | Semester <?php echo $nama_semester['semester']; ?> | Tahun Ajaran <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span><a href="<?php echo site_url('p_admin/hapus_jadwal?kelas='.$nama_kelas['id_kelas'].'&semester='.$nama_semester['id_semester'].'&tahun_ajaran='.$nama_tahun_ajaran['id_tahun_ajaran']); ?>"><i class="glyphicon glyphicon-trash pull-right"></i></a></h2>
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
