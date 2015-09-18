@@ -21,9 +21,12 @@ Class M_user extends CI_Model {
 	    }
     }
 
-    function tampil_data_berita() {
+    function tampil_data_berita($limit, $offset) {
+        if(empty($offset)){
+          $offset=0;
+        }
     	$this->db->order_by("tgl_upload", "desc"); 
-	    $query = $this->db->get('berita');
+	    $query = $this->db->get('berita', $limit, $offset);
 	    if($query->num_rows>0){
 	    	return $query->result_array();
 	    }else{

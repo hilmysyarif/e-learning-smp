@@ -1,7 +1,14 @@
 <h3 class="header-isi">Materi Pelajaran</h3>
 <div class="postingan">
 	<div class="form-tampil-nilai">
+		<?php 
+		$uri = $this->uri->segment(3);
+		?>
+		<?php if(empty($uri)){ ?>
 		<?php echo form_open('p_guru/tampil_data_materi?id='.$guru['nik']); ?>
+		<?php }else{ ?>
+		<?php echo form_open('p_guru/tampil_data_materi?id='.$detail_guru['nik']); ?>
+		<?php } ?>
 		<span>Materi Pelajaran</span>
 		<select name="semester">
 			<option>Pilih Semester</option>
@@ -62,7 +69,7 @@
 				<tr>
 					<td><span class="kolom-tgl"><?php echo $materi['tgl_upload'];?></span></td>
 					<td><span class="kolom-mtr"><?php echo $materi['judul']; ?></span></td>
-					<td><span class="kolom-mtr"><a href="<?php echo site_url('guru/detail_materi/'.$materi['id_materi_pelajaran']); ?>"> <?php echo $materi['file']; ?></a></span></td>
+					<td><span class="kolom-mtr"><a href="<?php echo site_url('guru/detail_materi?id='.$materi['id_materi_pelajaran'].'&id_guru='.$detail_guru['nik']); ?>"> <?php echo $materi['file']; ?></a></span></td>
 				</tr>
 	<?php
 				}

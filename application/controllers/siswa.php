@@ -20,9 +20,6 @@ class Siswa extends Base {
 	 */
     public function __construct() {
         parent::__construct();
-        $this->load->helper(array('url'));
-        $this->load->library(array());
-        $this->load->model(array());
     }
 
     public function index() {
@@ -30,7 +27,13 @@ class Siswa extends Base {
         if($this->session->userdata('login_siswa')){
             $id_siswa = $this->session->userdata['login_siswa']['nis'];
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
-
+            $this->load->view('base/header', $data);
+            $this->login_siswa('siswa/biodata', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_wali')){
+            $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
+            $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/biodata', $data);
             $this->load->view('base/footer');
@@ -49,6 +52,15 @@ class Siswa extends Base {
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/nilai-ujian', $data);
             $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_wali')){
+            $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
+            $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            $data['semester']=$this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran();
+            $this->load->view('base/header', $data);
+            $this->login_siswa('siswa/nilai-ujian', $data);
+            $this->load->view('base/footer');
         }else{
             redirect('user');
         }
@@ -61,6 +73,21 @@ class Siswa extends Base {
             $kelas = $this->session->userdata['login_siswa']['id_kelas'];
             $semester = $this->session->userdata['login_siswa']['id_semester'];
             $tahun_ajaran = $this->session->userdata['login_siswa']['id_tahun_ajaran'];
+            
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            $data['jadwal']=$this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+            $this->load->view('base/header', $data);
+            $this->login_siswa('siswa/jadwal', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_wali')){
+            $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
+            $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
+            $kelas = $this->m_wali->tampil_data_kelas_by_no_ktp($no_ktp);
+            $semester = $this->m_wali->tampil_data_semester_by_no_ktp($no_ktp);
+            $tahun_ajaran = $this->m_wali->tampil_data_tahun_ajaran_by_no_ktp($no_ktp);
             
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             $data['jadwal']=$this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
@@ -90,5 +117,20 @@ class Siswa extends Base {
         }
     }
 
+    public function ubah_biodata_wali() {
+        $data['title']= 'Ubah Biodata.';
+        if($this->session->userdata('login_wali')){
+            $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
+            $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            $data['detail_siswa']=$this->m_siswa->tampil_data_siswa_by_id($id_siswa);
+            $this->load->view('base/header', $data);
+            $this->login_siswa('siswa/ubah-biodata-wali', $data);
+            $this->load->view('base/footer');
+        }else{
+            redirect('user');
+        }
+    }
 
 }//end class

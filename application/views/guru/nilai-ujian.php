@@ -1,7 +1,14 @@
 <h3 class="header-isi">Nilai Ujian</h3>
 <div class="postingan">
 	<div class="form-tampil-nilai">
+		<?php 
+		$uri = $this->uri->segment(3);
+		?>
+		<?php if(empty($uri)){ ?>
 		<?php echo form_open('p_guru/tampil_data_nilai?id='.$guru['nik']); ?>
+		<?php }else{ ?>
+		<?php echo form_open('p_guru/tampil_data_nilai?id='.$detail_guru['nik']); ?>
+		<?php } ?>
 		<span>Nilai Ujian</span>
 		<select name="semester">
 			<option>Pilih Semester</option>
@@ -28,7 +35,7 @@
 	</div>
 	<?php if(!empty($data_nilai)){ ?>
 	<div class="isi-postingan">
-		<h2><span>Semester <?php echo $nama_semester; ?> </span> | <span> Tahun Ajaran <?php echo $nama_tahun_ajaran; ?></span></h2>
+		<h2><span>Semester <?php echo $nama_semester['semester']; ?> </span> | <span> Tahun Ajaran <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span></h2>
 		<table class="table table-bordered table-striped">
 		<thead>
 			<tr>
@@ -42,7 +49,8 @@
 			<tr>
 				<td><span class="kolom-tgl"><?php echo $row['tgl_upload']; ?></span></td>
 				<td><span class="kolom-mtr"><?php echo $row['judul']; ?></span></td>
-				<td><span class="kolom-mtr"><a href="<?php echo site_url('guru/detail_nilai/'.$row['id_data_nilai']); ?>"> <?php echo $row['file']; ?></a></span></td>
+				<td><span class="kolom-mtr"><a href="<?php echo site_url('guru/detail_nilai?id='.$row['id_data_nilai'].'&id_guru='.$detail_guru['nik']); ?>"> <?php echo $row['file']; ?></a></span></td>
+				<!-- <td><span class="kolom-mtr"><a href="<?php echo site_url('guru/detail_nilai?id='.$row['id_data_nilai']); ?>"> <?php echo $row['file']; ?></a></span></td> -->
 			</tr>
 			<?php } ?>
 		</tbody>

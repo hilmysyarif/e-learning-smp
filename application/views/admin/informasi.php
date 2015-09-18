@@ -8,10 +8,10 @@
 		</div>
 		<div>
 			<label>Isi Informasi</label>
-			<textarea name="isi" placeholder="Isi Informasi"></textarea>
+			<textarea class="ckeditor" name="isi" placeholder="Isi Informasi"></textarea>
 		</div>
 		<div>
-			<label></label>
+			<!-- <label></label> -->
 			<input name="simpan" type="submit" value="Simpan">
 		</div>
 	</div>

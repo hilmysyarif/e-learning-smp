@@ -120,7 +120,8 @@ class P_admin extends Base {
             'email' => $email,
             'tlp' => $telepon,
             'hp' => $handphone,
-            'password' => $password,
+            // 'password' => $password,
+            'password' => $nik,
             'foto' => $nama_foto,
             'tgl_upload' => $now
             );
@@ -166,7 +167,8 @@ class P_admin extends Base {
      $data = array(
         'no_ktp'    => $this->input->post('no_ktp'),
         // 'password'  => md5($password),
-        'password'  => $password,
+        // 'password'  => $password,
+        'password'  => $this->input->post('no_ktp'),
         'nama'      => $this->input->post('nama_wali'),
         'pekerjaan' => $this->input->post('pekerjaan'),
         'email'     => $this->input->post('email'),
@@ -194,7 +196,8 @@ class P_admin extends Base {
         $data = array(
             'nis'             => $nis,
             // 'password'        => md5($password),
-            'password'        => $password,
+            // 'password'        => $password,
+            'password'        => $nis,
             'nama'            => $this->input->post('nama'),
             'jenis_kelamin'   => $this->input->post('jenis_kelamin'),
             'tempat_lahir'    => $this->input->post('tempat_lahir'),
@@ -221,7 +224,7 @@ class P_admin extends Base {
         $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
 
         $data['nis']            = $this->input->post('nis');
-        $data['password']       = $this->input->post('password');
+        // $data['password']       = $this->input->post('password');
         $data['nama']           = $this->input->post('nama');
         $data['jenis_kelamin']  = $this->input->post('jenis_kelamin');
         $data['tempat_lahir']   = $this->input->post('tempat_lahir');
@@ -580,6 +583,58 @@ public function tambah_data_ruang() {
             echo '<script>';
             echo "alert('".$sukses."');";
             echo "window.location='" . site_url('admin/nilai') . "'";
+            echo '</script>';
+        }
+    }
+    
+    public function ubah_data_kontak() {
+        $id=$this->input->get('id');
+        $isi = $this->input->post('isi');
+        $simpan = $this->input->post('simpan');
+        $now = date('y-m-d h-i-s');
+        $sukses             = 'Data Berhasil Diubah';
+        $gagal              = 'Data Gagal Diubah';
+        if(isset($simpan)){
+            $data = array(
+                'isi' => $isi,
+                'tgl_upload' => $now
+                );
+            $this->db->where('id', $id);
+            $this->db->update('halaman_statis', $data);
+            echo '<script>';
+            echo "alert('".$sukses."');";
+            echo "window.location='" . $this->agent->referrer() . "'";
+            echo '</script>';
+        }else{
+            echo '<script>';
+            echo "alert('".$gagal."');";
+            echo "window.location='" . $this->agent->referrer() . "'";
+            echo '</script>';
+        }
+    }
+
+    public function ubah_data_tentang_kami() {
+        $id=$this->input->get('id');
+        $isi = $this->input->post('isi');
+        $simpan = $this->input->post('simpan');
+        $now = date('y-m-d h-i-s');
+        $sukses             = 'Data Berhasil Diubah';
+        $gagal              = 'Data Gagal Diubah';
+        if(isset($simpan)){
+            $data = array(
+                'isi' => $isi,
+                'tgl_upload' => $now
+                );
+            $this->db->where('id', $id);
+            $this->db->update('halaman_statis', $data);
+            echo '<script>';
+            echo "alert('".$sukses."');";
+            echo "window.location='" . $this->agent->referrer() . "'";
+            echo '</script>';
+        }else{
+            echo '<script>';
+            echo "alert('".$gagal."');";
+            echo "window.location='" . $this->agent->referrer() . "'";
             echo '</script>';
         }
     }
@@ -1214,6 +1269,7 @@ public function tambah_data_ruang() {
 
     public function keluar_admin() {
         $this->session->unset_userdata('login_admin');
+        $this->session->unset_userdata('sess_kcfinder');
         echo '<script>';
         echo "alert('Berhasil Keluar');";
         // echo "window.location='" . $this->agent->referrer() . "'";

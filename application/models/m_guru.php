@@ -11,8 +11,64 @@ Class M_guru extends CI_Model {
         $this->db->insert('materi_pelajaran', $data);
     }
 
+    function tambah_data_elearning($data) {
+        $this->db->insert('materi_umum', $data);
+    }
+
     function tambah_data_nilai($data) {
         $this->db->insert('data_nilai', $data);
+    }
+
+    function tampil_data_elearning($limit, $offset) {
+        if(empty($offset)){
+          $offset=0;
+        }
+        $this->db->order_by("tgl_upload", "desc");
+        $query = $this->db->get('materi_umum', $limit, $offset);
+        if($query->num_rows>0) {
+            return $query->result_array();
+        }else{
+            return array();
+        }
+    }
+
+    function tampil_data_elearning_by_id($id) {
+        $this->db->where('id_materi_umum', $id);
+        $this->db->select('materi_umum.id_materi_umum, materi_umum.tgl_upload, materi_umum.judul, materi_umum.file ,guru.nama, pelajaran.id_pelajaran, pelajaran.pelajaran');
+        $this->db->from('materi_umum');
+        $this->db->join('guru', 'guru.nik=materi_umum.nik');
+        $this->db->join('pelajaran', 'pelajaran.id_pelajaran=materi_umum.id_pelajaran');
+
+        $query = $this->db->get();
+        if($query->num_rows()>0) {
+            return $query->row_array();
+        }else{
+            return array();
+        }
+    }
+
+    function tampil_data_nilai_nik_by_id($id) {
+        $this->db->where('id_data_nilai', $id);
+        $this->db->select('data_nilai.nik');
+        $query = $this->db->get('data_nilai');
+        $result = $query->row_array();
+        return $result['nik'];
+    }
+
+    function tampil_data_elearning_nik_by_id($id) {
+        $this->db->where('id_materi_umum', $id);
+        $this->db->select('materi_umum.nik');
+        $query = $this->db->get('materi_umum');
+        $result = $query->row_array();
+        return $result['nik'];
+    }
+
+    function tampil_data_materi_nik_by_id($id) {
+        $this->db->where('id_materi_pelajaran', $id);
+        $this->db->select('materi_pelajaran.nik');
+        $query = $this->db->get('materi_pelajaran');
+        $result = $query->row_array();
+        return $result['nik'];
     }
 
     function tampil_data_materi_by_id($nik,$semester,$tahun_ajaran) {
@@ -81,6 +137,14 @@ Class M_guru extends CI_Model {
         return $query->row_array();
     }
 
+    function tampil_data_file_data_nilai_by_id($id) {
+        $this->db->where('id_data_nilai', $id);
+        $this->db->select('file');
+        $query = $this->db->get('data_nilai');
+        $result = $query->row_array();
+        return $result['file'];
+    }
+
     function tampil_data_detail_materi($nik) {
         $this->db->where('id_kelas', $kelas);
         $this->db->where('id_pelajaran', $pelajaran);
@@ -131,6 +195,15 @@ Class M_guru extends CI_Model {
             // return array();
             return false;
         }
+    }
+
+    function tampil_nik_guru_by_id($id) {
+        $this->db->where('nik', $id);
+        $this->db->select('nik');
+        $query = $this->db->get('guru');
+        
+        $result = $query->row_array();
+        return $result['nik'];
     }
 
     function cek_password_guru_by_id($id) {

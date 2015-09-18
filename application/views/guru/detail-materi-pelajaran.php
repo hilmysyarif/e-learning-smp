@@ -22,12 +22,15 @@
 				</tr>
 				<tr>
 					<th><span class="jdl-detail">Link Download</span></th>
-					<td><span class="desc-detail"><a href="<?php echo site_url('p_guru/download/'.$detail_materi['id_materi_pelajaran']); ?>"><?php echo $detail_materi['file']; ?></a></span></td>
+					<td><span class="desc-detail"><a href="<?php echo site_url('p_guru/download_materi_pelajaran?id='.$detail_materi['id_materi_pelajaran']); ?>"><?php echo $detail_materi['file']; ?></a></span></td>
 				</tr>
+				<?php if($nik==$get_nik && $this->session->userdata('login_guru')){ ?>
 				<tr>
 					<th><span class="jdl-detail">Aksi</span></th>
 					<td><span class="desc-detail"><a href="<?php echo site_url('guru/ubah_materi/'.$detail_materi['id_materi_pelajaran']); ?>">Ubah</a> | <a href="<?php echo site_url('p_guru/hapus_data_detail_materi?id='.$detail_materi['id_materi_pelajaran']); ?>">Hapus</a></span></td>
 				</tr>
+				<?php }else{ ?>
+				<?php } ?>
 			</tbody>
 		</table>
 	</div>

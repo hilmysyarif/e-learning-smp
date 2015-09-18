@@ -23,12 +23,15 @@ class P_wali extends Base {
   }
 
   public function keluar_wali() {
+  	if($this->session->userdata('login_wali')){
       $this->session->unset_userdata('login_wali');
       echo '<script>';
       echo "alert('Berhasil Keluar');";
-      // echo "window.location='" . $this->agent->referrer() . "'";
-      echo "window.location='../user'";
+      echo "window.location='" . site_url('user') . "'";
       echo '</script>';
+    }else{
+      redirect('user');
+    }
   }
 
 }//end-class

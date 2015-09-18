@@ -11,4 +11,3 @@
     <!-- Bootstrap -->
     <link href="<?php echo base_url('resource/css/bootstrap.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('resource/css/style.css'); ?>" rel="stylesheet">
-    <script src="<?php echo base_url('resource/js/jquery-1.11.1.js'); ?>"></script>

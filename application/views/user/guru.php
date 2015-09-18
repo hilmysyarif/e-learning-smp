@@ -4,7 +4,7 @@
 		<?php foreach ($semua_guru as $row) { ?>
 		<li>
 			<div class="single-guru">
-				<a href="<?php echo site_url('user/detail_guru/'.$row['nik']); ?>">
+				<a href="<?php echo site_url('guru/detail_guru/'.$row['nik']); ?>">
 					<img src="<?php echo base_url('resource/img/photo/'.$row['foto']); ?>">
 					<p><span class="jdl-gr">NIK<b class="pull-right">:</b></span><span class="desc-gr"> <?php echo $row['nik']; ?></span></p>
 					<p><span class="jdl-gr">Nama<b class="pull-right">:</b></span><span class="desc-gr"> <?php echo $row['nama']; ?></span></p>

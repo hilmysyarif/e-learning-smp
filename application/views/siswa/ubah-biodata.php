@@ -1,7 +1,7 @@
-<h3 class="header-isi">Ubah Biodata</h3>
+<h3 class="header-isi">Biodata Siswa</h3>
 <div class="postingan">
 	<div class="form-pengaturan">
-		<?php echo form_open_multipart('p_siswa/ubah_foto_biodata?id='.$detail_siswa['nis']); ?>
+		<?php echo form_open_multipart('p_siswa/ubah_foto_biodata'); ?>
 		<h3>Ubah Foto Biodata</h3>
 		<div>
 			<label>Ubah Foto</label>
@@ -15,7 +15,7 @@
 	</div>
 	
 	<div class="form-pengaturan">
-		<?php echo form_open_multipart('p_siswa/ubah_data_siswa?id='.$detail_siswa['nis']); ?>
+		<?php echo form_open('p_siswa/ubah_data_siswa'); ?>
 		<h3>Ubah Data Biodata</h3>
 		<div>
 			<label>Nama</label>

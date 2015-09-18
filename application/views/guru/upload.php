@@ -79,6 +79,37 @@
 		</div>
 		<?php echo form_close(); ?>
 	</div>
+
+	<div class="form-pengaturan">
+		<?php echo form_open_multipart('p_guru/tambah_data_elearning?id='.$guru['nik']); ?>
+		<h3>Upload Materi E-Learning</h3>
+		<div>
+			<label>Judul Materi</label>
+			<input name="judul" type="text" placeholder="Judul Materi">
+		</div>
+		<div>
+			<label>Pilih Pelajaran</label>
+			<select name="pelajaran">
+				<?php if(!empty($pelajaran)){ ?>
+				<?php foreach ($pelajaran as $row) { ?>
+				<option value="<?php echo $row['id_pelajaran']; ?>"> <?php echo $row['pelajaran']; ?></option>
+				<?php }//end foreach ?>
+				<?php }else{ ?>
+				<option value="<?php echo $row['id_pelajaran']; ?>"> <?php echo $pelajaran; ?></option>
+				<?php } ?>
+			</select>
+		</div>
+		<div>
+			<label>Pilih File</label>
+			<input name="file" type="file" placeholder="Pilih Foto">
+		</div>
+		<div>
+			<label></label>
+			<input name="simpan" type="submit" value="Upload">
+		</div>
+		<?php echo form_close(); ?>
+	</div>
+
 	<div class="form-pengaturan">
 		<?php echo form_open_multipart('p_guru/tambah_data_nilai?id='.$guru['nik']); ?>
 		<h3>Upload Nilai Ujian</h3>

@@ -85,6 +85,15 @@ Class M_admin extends CI_Model {
         $result = $query->row_array();
         return $result['password'];
     }
+    function tampil_data_halaman_statis($id){
+        $this->db->where('id', $id);
+        $query = $this->db->get('halaman_statis');
+        if($query->num_rows()>0){
+            return $query->row_array();
+        }else{
+            return array();
+        }
+    }
     function tampil_data_tahun_ajaran() {
     	$this->db->order_by("tahun_ajaran", "desc"); 
     	$query = $this->db->get('tahun_ajaran');

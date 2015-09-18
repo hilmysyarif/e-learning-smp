@@ -5,15 +5,18 @@
 		<button><i class="glyphicon glyphicon-search"></i>Cari</button>
 	</div>
 	<ul class="list-data">
+		<?php foreach ($elearning as $row) { ?>
 		<li>
 			<div class="single-data">
-				<span><i class="glyphicon glyphicon-time"></i> 07-05-2015 (03:17:00)</span>
-				<p>Mata Pelajaran Matematika</p>
-				<a href="<?php echo site_url('user/detail_data'); ?>"><button class="btn-download"><i class="glyphicon glyphicon-cloud-download"></i> Download</button></a>
+				<span><i class="glyphicon glyphicon-time"></i> <?php echo $row['tgl_upload']; ?></span>
+				<p><?php echo $row['judul']; ?></p>
+				<a href="<?php echo site_url('user/detail_data?id='.$row['id_materi_umum'].'&gk='.$row['nik']); ?>"><button class="btn-download"><i class="glyphicon glyphicon-cloud-download"></i> Download</button></a>
 			</div>
 		</li>
+		<?php } ?>
 	</ul>
-	<ul class="pagination">
+	<?php echo $pagination; ?>
+	<!-- <ul class="pagination">
 		<li><a href="#">&laquo;</a></li>
 		<li><a href="#">1</a></li>
 		<li><a href="#">2</a></li>
@@ -21,5 +24,5 @@
 		<li><a href="#">4</a></li>
 		<li><a href="#">5</a></li>
 		<li><a href="#">&raquo;</a></li>
-	</ul>
+	</ul> -->
 </div>

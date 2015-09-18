@@ -45,7 +45,7 @@ class Admin extends Base {
             redirect('user');
         }
     }
-
+    
     public function login() {
         $data['title']='Login';
         $this->load->view('base/header', $data);
@@ -89,8 +89,10 @@ class Admin extends Base {
 
     public function kontak() {
         if($this->session->userdata('login_admin')){
-        	$data['title']='Kontak.';
-        	$this->load->view('base/header', $data);
+            $id=2;
+            $data['title']='Kontak.';
+            $data['kontak']= $this->m_admin->tampil_data_halaman_statis($id);
+            $this->load->view('base/header', $data);
             $this->body_admin('admin/kontak', $data);
             $this->load->view('base/footer');
         }else{
@@ -100,7 +102,9 @@ class Admin extends Base {
 
     public function tentang_kami() {
         if($this->session->userdata('login_admin')){
-        	$data['title']='Tentang Kami.';
+            $id=1;
+            $data['title']='Tentang Kami.';
+            $data['tentang_kami']= $this->m_admin->tampil_data_halaman_statis($id);
         	$this->load->view('base/header', $data);
             $this->body_admin('admin/tentang-kami', $data);
             $this->load->view('base/footer');
