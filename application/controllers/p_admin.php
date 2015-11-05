@@ -262,20 +262,10 @@ class P_admin extends Base {
 
 public function tambah_data_tahun_ajaran() {
     if($this->session->userdata('login_admin')) {
-        $text = '0321458769012345235678953237890126278987460903029837648595389090';
-            $panj = 4;//jumlah karakter yang akan muncul
-            $txtl = strlen($text)-1;
-            $result = '';
-            for($i=1; $i<=$panj; $i++){
-             $result .= $text[rand(0, $txtl)];
-         }
-
-         $id_tahun_ajaran    = $result;
          $tambah             = $this->input->post('tambah');
          $sukses             = 'Data Berhasil Disimpan';
          $gagal              = 'Data Gagal Disimpan';
          $data = array(
-            'id_tahun_ajaran'   => $id_tahun_ajaran,
             'tahun_ajaran'      => $this->input->post('tahun_ajaran'),
             );
          if(isset($tambah)) {
@@ -300,20 +290,10 @@ public function tambah_data_tahun_ajaran() {
 
 public function tambah_data_semester() {
     if($this->session->userdata('login_admin')) {
-        $text = '0321458769012345235678953237890126278987460903029837648595389090';
-            $panj = 4;//jumlah karakter yang akan muncul
-            $txtl = strlen($text)-1;
-            $result = '';
-            for($i=1; $i<=$panj; $i++){
-             $result .= $text[rand(0, $txtl)];
-         }
-
-         $id_semester        = $result;
          $tambah             = $this->input->post('tambah');
          $sukses             = 'Data Berhasil Disimpan';
          $gagal              = 'Data Gagal Disimpan';
          $data = array(
-            'id_semester'   => $id_semester,
             'semester'      => $this->input->post('semester'),
             );
          if(isset($tambah)) {
@@ -338,20 +318,10 @@ public function tambah_data_semester() {
 
 public function tambah_data_kelas() {
     if($this->session->userdata('login_admin')) {
-        $text = '0321458769012345235678953237890126278987460903029837648595389090';
-            $panj = 4;//jumlah karakter yang akan muncul
-            $txtl = strlen($text)-1;
-            $result = '';
-            for($i=1; $i<=$panj; $i++){
-             $result .= $text[rand(0, $txtl)];
-         }
-
-         $id                 = $result;
          $tambah             = $this->input->post('tambah');
          $sukses             = 'Data Berhasil Disimpan';
          $gagal              = 'Data Gagal Disimpan';
          $data = array(
-            'id_kelas'   => $id,
             'kelas'      => $this->input->post('kelas'),
             );
          if(isset($tambah)) {
@@ -376,20 +346,11 @@ public function tambah_data_kelas() {
 
 public function tambah_data_hari() {
     if($this->session->userdata('login_admin')) {
-        $text = '03214587690123452356s78953237890126278987460903029837648595389090';
-            $panj = 4;//jumlah karakter yang akan muncul
-            $txtl = strlen($text)-1;
-            $result = '';
-            for($i=1; $i<=$panj; $i++){
-             $result .= $text[rand(0, $txtl)];
-         }
          $now                = date('y-m-d h-i-s');
-         $id                 = $result;
          $tambah             = $this->input->post('tambah');
          $sukses             = 'Data Berhasil Disimpan';
          $gagal              = 'Data Gagal Disimpan';
          $data = array(
-            'id_hari'   => $id,
             'hari'      => $this->input->post('hari'),
             'tgl_upload'=> $now
             );
@@ -415,20 +376,10 @@ public function tambah_data_hari() {
 
 public function tambah_data_jam() {
     if($this->session->userdata('login_admin')) {
-        $text = '03214587690123452356s78953237890126278987460903029837648595389090';
-            $panj = 4;//jumlah karakter yang akan muncul
-            $txtl = strlen($text)-1;
-            $result = '';
-            for($i=1; $i<=$panj; $i++){
-             $result .= $text[rand(0, $txtl)];
-         }
-
-         $id                 = $result;
          $tambah             = $this->input->post('tambah');
          $sukses             = 'Data Berhasil Disimpan';
          $gagal              = 'Data Gagal Disimpan';
          $data = array(
-            'id_jam'   => $id,
             'jam'      => $this->input->post('jam'),
             );
          if(isset($tambah)) {
@@ -453,20 +404,10 @@ public function tambah_data_jam() {
 
 public function tambah_data_pelajaran() {
     if($this->session->userdata('login_admin')) {
-        $text = '03214587690123452356s78953237890126278987460903029837648595389090';
-            $panj = 4;//jumlah karakter yang akan muncul
-            $txtl = strlen($text)-1;
-            $result = '';
-            for($i=1; $i<=$panj; $i++){
-             $result .= $text[rand(0, $txtl)];
-         }
-
-         $id                 = $result;
          $tambah             = $this->input->post('tambah');
          $sukses             = 'Data Berhasil Disimpan';
          $gagal              = 'Data Gagal Disimpan';
          $data = array(
-            'id_pelajaran'   => $id,
             'pelajaran'      => $this->input->post('pelajaran'),
             );
          if(isset($tambah)) {
@@ -491,20 +432,10 @@ public function tambah_data_pelajaran() {
 
 public function tambah_data_ruang() {
     if($this->session->userdata('login_admin')) {
-        $text = '03214587690123452356s78953237890126278987460903029837648595389090';
-            $panj = 4;//jumlah karakter yang akan muncul
-            $txtl = strlen($text)-1;
-            $result = '';
-            for($i=1; $i<=$panj; $i++){
-             $result .= $text[rand(0, $txtl)];
-         }
-
-         $id                 = $result;
          $tambah             = $this->input->post('tambah');
          $sukses             = 'Data Berhasil Disimpan';
          $gagal              = 'Data Gagal Disimpan';
          $data = array(
-            'id_ruang'   => $id,
             'ruang'      => $this->input->post('ruang'),
             );
          if(isset($tambah)) {

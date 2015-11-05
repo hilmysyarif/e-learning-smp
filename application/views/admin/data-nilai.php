@@ -85,7 +85,7 @@
 			<?php echo form_close(); ?>
 		</div>
 		<?php }else{ ?>
-		<?php echo 'Data Kosong'; ?>
+			<?php $this->load->view('user/data-kosong'); ?>
 		<?php } ?>
 	  </div>
 

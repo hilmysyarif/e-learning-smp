@@ -76,7 +76,7 @@
 			</table>
 		</div>
 	<?php }else{ ?>
-		<?php echo "Pilih jadwal pelajaran terlebih dahulu"; ?>
+		<?php $this->load->view('user/data-kosong'); ?>
 	<?php } ?>
 	  </div>
 

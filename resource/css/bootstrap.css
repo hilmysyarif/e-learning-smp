@@ -3911,9 +3911,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1.42857143;
   border: 1px solid transparent;
   border-radius: 4px 4px 0 0;
+  color: #707070;
 }
 .nav-tabs > li > a:hover {
-  border-color: #eee #eee #ddd;
+  color: #ffffff;
+  background-color: #6666cc;
+  border-color: #6666cc #6666cc transparent #6666cc;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
