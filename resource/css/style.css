@@ -240,36 +240,81 @@ p {
 	box-shadow: 3px 0px 0px 0px #c3c3c3 inset;
 }
 .nav-box li .nav-box-active, .nav-box li .nav-box-active:hover {
-	box-shadow: 3px 0px 0px 0px #ce0000 inset;
+	box-shadow: 3px 0px 0px 0px #6666CC inset;
 	background-color: #e3e3e3;
 }
 /**/
 .nav-long {
 	float: left;
-	margin: 0;
+	position: relative;
+	margin: 0 113px;
 	padding: 0;
-	width: 100%;
+	width: 1124.16px;
 	list-style: none;
+	z-index: 2;
+	background-color: #ffffff;
+	border-top: solid 4px #6666CC;
+}
+.nav-long li {
+	float: left;
+	position: relative;
 	background-color: #ffffff;
 }
+.nav-long li:hover {
+	background-color: #6666CC;
+}
 .nav-long li a {
-	float: left;
-	padding: 15px 25px;
+	margin-top: -4px;
+	display: block;
+	padding: 20px 25px;
 	cursor: pointer;
 	text-decoration: none;
 	color: #707070;
-	background-color: #ffffff;
-	text-shadow: 0 1px 0 #f3f3f3;
+	/*text-shadow: 0 1px 0 #f3f3f3;*/
 	font-weight: bold;
-	font-size: 17px;
+	font-size: 13px;
+	text-transform: uppercase;
+}
+.nav-long li a:active {
+	color: #ffffff;
 }
 .nav-long li a:hover {
-	background-color: #e3e3e3;
-	box-shadow: 0px -3px 0px 1px #c3c3c3 inset;
+	color: #ffffff;
+	background-color: #6666CC;
+	box-shadow: 0px 4px 0px 0px #6666CC inset;
 }
 .nav-long li .nav-long-active, .nav-long li .nav-long-active:hover {
 	background-color: #e3e3e3;
-	box-shadow: 0px -3px 0px 1px #CE0000 inset;
+	box-shadow: 0px 4px 0px 0px #6666CC inset;
+}
+.nav-long ul {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.nav-long ul li {
+	float: none;
+	width: 200px;
+	background-color: #f9f9f9;
+}
+.nav-long ul li a {
+	margin: 0;
+	position: relative;
+	display: block;
+}
+.nav-long ul li a:hover {
+	box-shadow: none;
+}
+.nav-long li:hover > ul {
+    display: block;
+}
+.nav-long ul ul {
+	left: 100%;
+	top: 0;
 }
 /**/
 /*.pagination {
@@ -313,10 +358,61 @@ p {
 	padding: 5px 10px;
 }
 .menu-header img {
-	/*margin-left: 87px;*/
-	margin-left: -25px;
-	width: 100px;
-	height: 50px;
+	float: left;
+    height: 50px;
+    margin: 20px 20px 20px -25px;
+	width: 50px;
+}
+.menu-header h1 {
+	float: left;
+	color: #6666CC;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 15px 0 0;
+    text-transform: uppercase;
+}
+.logo-sekolah {
+	float: left;
+	width: 500px;
+}
+.alamat-sekolah {
+	float: left;
+}
+.alamat-sekolah span {
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	color: #707070;
+}
+.menu-profile {
+	float: right;
+	margin-top: 20px;
+	margin-right: -25px;
+	width: 300px;
+	/*background-color: green;*/
+}
+.menu-profile img {
+	float: right;
+	margin: 0;
+	margin-right: 10px;
+	vertical-align: middle;
+	border-radius: 50px;
+}
+.menu-profile-span {
+	float: right;
+}
+.menu-profile-span span {
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.menu-profile-span span a {
+	text-decoration: none;
+	color: #707070;
+}
+.menu-profile-span span a:hover {
+	color: #6666CC;
 }
 .form-masuk-siswa {
 	float: right;
@@ -331,20 +427,20 @@ p {
 	border: solid 1px #e3e3e3;
 }
 .input-form:focus {
-	border-color: #CE0000;
+	border-color: #6666CC;
 }
 .btn-masuk {
 	font-weight: bold;
 	color: #ffffff;
 	padding: 3px 10px;
-	background-color: #ce0000;
-	border: solid 1px #ce0000;
+	background-color: #6666CC;
+	border: solid 1px #6666CC;
 	text-shadow: 0 1px 0 #707070;
 }
 .btn-masuk:hover {
 	color: #707070;
 	background-color: #e3e3e3;
-	border-color: #ce0000;
+	border-color: #6666CC;
 	text-shadow: 0 1px 0 #f3f3f3;
 }
 .btn-masuk span {
@@ -358,29 +454,94 @@ p {
 	width: 1124.16px;
 	height: 250px;
 }
+.item img {
+	/*width: 100%;*/
+	width: 1124.16px;
+	height: 250px;
+}
 .form-masuk {
-	padding: 0px 10px 20px;
+	padding: 0px 10px 10px;
 	width: 300px;
 	background-color: #ffffff;
-	/*opacity: 0.7;*/
+	opacity: 0.77;
 	top: 10px;
 	right: 30px;
 	position: absolute;
-	border: solid 2px #ce0000;
+	border: solid 2px #6666CC;
+	border-radius: 10px;
+}
+.form-masuk:hover {
+	animation: fadein 1s;
+    -moz-animation: fadein 1s; /* Firefox */
+    -webkit-animation: fadein 1s; /* Safari and Chrome */
+    -o-animation: fadein 1s; /* Opera */
+	opacity: 1.00;
+}
+@keyframes fadein {
+    from {
+        opacity:0.77;
+    }
+    to {
+        opacity:1.00;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0.77;
+    }
+    to {
+        opacity:1.00;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0.77;
+    }
+    to {
+        opacity:1.00;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0.77;
+    }
+    to {
+        opacity: 1.00;
+    }
 }
 .form-masuk h3 {
 	margin: 0 0 20px;
 	padding: 10px;
 	font-size: 15px;
 	font-weight: bold;
-	border-bottom: solid 2px #CE0000;
+	border-bottom: solid 2px #6666CC;
 }
 .header-form-masuk {
 	float: left;
 	margin-bottom: 15px;
-	padding: 15px 0px 10px;
-	border-bottom: solid 2px #ce0000;
+	padding: 15px 0px 5px;
+	border-bottom: solid 2px #707070;
 	width: 100%;
+}
+.header-form {
+	background-color: #6666CC;
+    border-radius: 8px 8px 0 0;
+    color: #fff;
+    float: left;
+    margin: -15px -10px 0;
+    padding: 10px;
+    width: 296px;
+}
+.header-form-login {
+	background-color: #6666CC;
+    border-radius: 8px 8px 0 0;
+    float: left;
+    margin: -15px -10px 13px;
+    padding: 13px 10px;
+    width: 296px;
+
+     /*text-shadow: 0 1px 0 #f3f3f3;*/
+    color: #ffffff;
 }
 .header-form-masuk span, .header-form-masuk select {
 	font-weight: bold;
@@ -389,6 +550,10 @@ p {
 .header-form-masuk select {
 	width: 145px;
 	cursor: pointer;
+	background-color: #fff;
+    border: 1px solid #707070;
+    border-radius: 5px;
+    color: #707070;
 }
 .header-form-masuk ul {
 	font-weight: bold;
@@ -411,7 +576,7 @@ p {
 	text-decoration: none;
 }
 .menu-masuk .active a {
-	color: #ce0000;
+	color: #6666CC;
 	text-shadow: 0 1px 0 #c3c3c3;
 }
 .nm {
@@ -420,6 +585,7 @@ p {
 	width: 100%;
 	height: 20px;
 	overflow: hidden;
+	float: left;
 }
 .dt-usr img {
 	float: left;
@@ -452,20 +618,20 @@ p {
 	font-weight: bold;
 }
 .form-masuk input[type="text"]:focus, .form-masuk input[type="password"]:focus {
-	border-color: #CE0000;
+	border-color: #6666CC;
 }
 .form-masuk input[type="submit"] {
 	float: right;
 	margin-right: 2px;
 	color: #f3f3f3;
-	background-color: #ce0000;
-	border: solid 2px #ce0000;
+	background-color: #6666CC;
+	border: solid 2px #6666CC;
 	padding: 3px 10px;
 	font-weight: bold;
 }
 .form-masuk input[type="submit"]:hover {
 	color: #707070;
-	border-color: #ce0000;
+	border-color: #6666CC;
 	background-color: #ffffff;
 }
 .isi {
@@ -482,7 +648,7 @@ p {
 	background-color: #ffffff;
 }
 .isi-kiri .header-isi {
-	border-right: solid 1px #ce0000;
+	/*border-right: solid 1px #6666CC;*/
 }
 .isi-kanan {
 	float: right;
@@ -493,32 +659,88 @@ p {
 .header-isi {
 	text-align: left;
 	margin: 0;
-	padding: 10px 10px;
-	background-color: #e3e3e3;
-	color: #707070;
+	padding: 20px;
+	background-color: #6666cc;
+	color: #ffffff;
 	text-transform: uppercase;
 	font-size: 15px;
-	border-top: solid 4px #CE0000;
-	text-shadow: 0 1px 0 #f3f3f3;
+	text-shadow: 0 1px 0 #707070;
 	font-weight: bold;
 }
+.header-sidebar {
+	background-color: #6666CC;
+	text-shadow: 0 1px 0 #707070;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: bold;
+    margin: 20px 20px 0 20px;
+    padding: 10px;
+    border-radius:5px 5px 0 0;
+}
+.form-login-sidebar {
+	/*background-color: #f7f7f7;*/
+    border: 1px solid #6666CC;
+    border-radius: 0 0 5px 5px;
+    color: #707070;
+    margin: 0 20px 20px;
+    padding: 10px;
+    /*min-height: 250px;*/
+}
+.form-login-sidebar label {
+	display: block;
+}
+.form-login-sidebar input[type="text"], .form-login-sidebar input[type="password"] {
+	width: 100%;
+	padding: 5px 10px;
+}
+.form-login-sidebar img {
+	width: 130px;
+	height: 130px;
+	vertical-align: top;
+	display: inline-table;
+}
+.info-login-sidebar {
+	display: inline-table;
+	font-size: 12px;
+	margin-left: 5px;
+}
+.info-login-sidebar span {
+	display: block;
+	margin-bottom: 10px;
+}
+.info-login-sidebar span a {
+	text-decoration: none;
+}
+.fb-page {
+	margin: 10px;
+}
+.calender {
+	margin: 20px;
+}
 .informasi {
-	list-style: none;
-	margin: 1px 0 0;
-	padding: 0px;
 	float: left;
-	height: 500px;
-	overflow: scroll;
+	list-style: none;
+	margin: 0 20px;
+	width: 297px;
+	border: solid 2px #6666CC;
+	padding: 0px;
+	height: auto;
+	/*background-color: green;*/
+
 }
 .informasi p {
+	float: left;
 	margin: 0;
 	font-size: 13px;
 	text-transform: capitalize;
-
-	width: 303px;
+	width: 273px;
+	/*background-color: red;*/
 }
 .informasi a {
 	float: left;
+	/*width: 337px;*/
+	width: 293px;
+	/*margin: 0 10px;*/
 	padding: 5px 10px;
 	/*background-color: pink;*/
 	text-decoration: none;
@@ -528,14 +750,48 @@ p {
 }
 .informasi a:hover {
 	text-shadow: 0 1px 0 #f3f3f3;
+	background-color: #f3f3f3;
+}
+.header-isi-kanan {
+	float: left;
+	width: 337px;
+	margin-top: 10px;
+	padding: 10px 10px;
 	background-color: #e3e3e3;
+	color: #707070;
+	text-transform: uppercase;
+	font-size: 15px;
+	text-shadow: 0 1px 0 #f3f3f3;
+	border-top: solid 4px #6666CC;
+	font-weight: bold;
+}
+.mn-masuk {
+
+}
+.mn-masuk span, .mn-masuk select {
+	font-size: 15px;
+	color: #707070;
+	font-weight: bold;
+}
+.mn-masuk span {
+	padding: 5px 10px;
+}
+.mn-masuk select {
+	width: 185px;
+	cursor: pointer;
 }
 .postingan {
 	padding: 20px;
 	min-height: 575px;
-	/*min-height: 500px;*/
-	border-right: solid 1px #e3e3e3;
-	/*text-align: center;*/
+	/*border-right: solid 1px #e3e3e3;	*/
+}
+.postingan-berita {
+	float: left;
+	width: 787px;
+
+	padding: 20px;
+	min-height: 575px;
+	/*border-right: solid 1px #e3e3e3;*/
 }
 .list-post {
 	list-style: none;
@@ -543,12 +799,25 @@ p {
 	padding: 0;
 }
 .list-post li:first-child {
-	border-top: dashed 1px #e3e3e3;
+	/*border-top: solid 1px #e3e3e3;*/
 }
 .list-post li {
+	float: left;
+	width: 100%;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	border-bottom: dashed 1px #e3e3e3;
+	border-bottom: solid 1px #e3e3e3;
+}
+.post-single h1 {
+	color: #707070;
+	font-size: 21px;
+	font-weight: bold;
+}
+.post-single a {
+	text-decoration: none;
+}
+.post-single a h1:hover {
+	color: #6666CC;
 }
 .post-single .date {
 	font-size: 11px;
@@ -557,18 +826,69 @@ p {
 }
 .post-single img {
 	float: left;
-	margin-right: 10px;
-	width: 110px;
-	height: 110px;
+	margin-right: 15px;
+	width: 170px;
+	height: 170px;
 }
 .post-single p {
 	margin: 5px 0 0 0;
 	/*background-color: red;*/
-	height: 85px;
-	font-size: 19px;
-	overflow: hidden;
+	font-size: 15px;
 	color: #707070;
 	text-align: justify;
+}
+.post-single .more a {
+	color: #707070;
+	font-weight: bold;
+}
+.post-single .more a:hover {
+	color: #6666CC;
+}
+.list-post-2-kolom {
+	float: left;
+	width: 100%;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.list-post-2-kolom li {
+	float: left;
+	width: 33%;
+}
+.post-single-2-kolom {
+	float: left;
+	padding: 10px;
+	color: #707070;
+	margin-bottom: 30px;
+	border: 1px solid #ffffff;
+}
+.post-single-2-kolom:hover {
+	background-color: #f9f9f9;
+	border-color: #6666CC;
+}
+.post-single-2-kolom img {
+	width: 100%;
+	height: 200px;
+	margin-bottom: 20px;
+}
+.post-single-2-kolom span {
+	font-size: 11px;
+	font-weight: bold;
+}
+.post-single-2-kolom h2 {
+	font-size: 17px;
+	font-weight: bold;
+	max-height: 18px;
+	overflow: hidden;
+}
+.post-single-2-kolom p {
+	font-size: 13px;
+	/*background-color: pink;*/
+	height: 55px;
+	overflow: hidden;
+}
+.post-single-2-kolom a {
+	color: #6666CC;
 }
 .pagination {
 	margin-bottom: 0;
@@ -578,7 +898,7 @@ p {
 	float: left;
 	width: 100%;
 	background-color: #e3e3e3;
-	border-top: solid 4px #ce0000;
+	border-top: solid 4px #6666CC;
 }
 .footer p {
 	text-align: left;
@@ -639,15 +959,18 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 }
 .list-guru li {
 	float: left;
-	padding: 5px 0;
+	padding: 10px;
 	margin: 0 10px;
 	/*background-color: pink;*/
-	border-bottom: dashed 1px #e3e3e3;
+	/*border-bottom: dashed 1px #e3e3e3;*/
 	/*height: 110px;*/
 	width: 350px;
+	border: solid 1px #ffffff;
 }
 .list-guru li:hover {
-	border-bottom: dashed 1px #ce0000;
+	border-color: #6666cc;
+	background-color: #f9f9f9;
+	/*border-bottom: dashed 1px #6666CC;*/
 }
 .single-guru a {
 	color: #707070;
@@ -673,7 +996,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	padding-top: 1px;
 	margin-left: 5px;
 	/*background-color: red;*/
-	width: 185px;
+	width: 168px;
 	overflow: hidden;
 	height: 17px;
 }
@@ -683,12 +1006,15 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	list-style: none;
 }
 .list-data li:first-child {
-	border-top: dashed 1px #e3e3e3;
+	border-top: solid 1px #e3e3e3;
 }
 .list-data li {
-	padding: 10px 0;
+	padding: 10px;
 	/*background-color: pink;*/
-	border-bottom: dashed 1px #e3e3e3;
+	border-bottom: solid 1px #e3e3e3;
+}
+.list-data li:hover {
+	background-color: #f3f3f3;
 }
 .single-data span {
 	float: left;
@@ -704,26 +1030,28 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 .single-data p {
 	float: left;
 	padding-top: 5px;
-	margin: 0 22px 0 0;
+	margin: 0 20px 0 0;
 	/*background-color: red;*/
 	overflow: hidden;
 	font-weight: bold;
-	width: 460px;
+	width: 440px;
 	height: 25px;
 	color: #707070;
 	font-size: 13px;
 }
 .btn-download {
-	background-color: #0AA0FF;
+	background-color: #6666CC;
 	color: #ffffff;
 	border: solid 1px #ffffff;
 	padding: 5px 10px;
 	font-size: 13px;
 	font-weight: bold;
+	width: 102px;
 }
 .btn-download:hover {
-	background-color: #0B8DDD;
-
+	color: #6666CC;
+    border-color: #6666CC;
+    background-color: #fff;
 }
 .kt-cr {
 	/*background-color: purple;*/
@@ -740,7 +1068,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	border: solid 3px #e3e3e3;
 }
 .kt-cr input[type="text"]:focus {
-	border-color: #ce0000;
+	border-color: #6666CC;
 }
 .kt-cr button {
 	background-color: #e3e3e3;
@@ -749,12 +1077,13 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	border: solid 3px #e3e3e3;
 }
 .kt-cr button:hover {
-	text-shadow: 0 1px 0 #707070;
-	background-color: #ce0000;
-	color: #ffffff;
+	color: #6666CC;
 }
 .kt-cr button:active {
-	border-color: #ce0000;
+	color: #ffffff;
+	text-shadow: 0 1px 0 #707070;
+	background-color: #6666CC;
+	border-color: #6666CC;
 }
 .kt-cr button i {
 	margin-right: 5px;
@@ -812,7 +1141,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	border: solid 1px #e3e3e3;
 }
 .kolom-nilai-siswa input[type="text"]:focus {
-	border-color: #ce0000;
+	border-color: #6666CC;
 }
 .kolom-no {
 	text-align: center;
@@ -842,6 +1171,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	text-align: center;
 	padding: 10px;
 	border: solid 1px #e3e3e3;
+	background-color: #f9f9f9;
 }
 .form-tampil-nilai span {
 	font-weight: bold;
@@ -854,18 +1184,26 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 .form-tampil-nilai option {
 	padding: 10px 20px;
 }
-.form-tampil-nilai input[type="submit"] {
+.form-tampil-nilai input[type="submit"], .btn-login-sidebar {
 	padding: 10px 20px;
 	font-weight: bold;
-	background-color: #e3e3e3;
-	border: none;
-	color: #707070;
-	text-shadow: 0 1px 0 #f5f5f5;
-}
-.form-tampil-nilai input[type="submit"]:hover {
-	color: #f5f5f5;
-	background-color: #ce0000;
+	border: solid 1px #ffffff;
+	color: #ffffff;
+	background-color: #6666cc;
 	text-shadow: 0 1px 0 #707070;
+}
+.form-tampil-nilai input[type="submit"]:hover, .btn-login-sidebar:hover {
+	color: #6666cc;
+	background-color: #ffffff;
+	border-color: #6666cc;
+	text-shadow: 0 1px 0 #e6e6e6;
+}
+.btn-login-sidebar {
+	padding: 5px 10px;
+}
+.forget {
+	display: block;
+	margin: 10px 0;
 }
 .isi-kiri-menu {
 	float: left;
@@ -891,7 +1229,9 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	text-shadow: 0 1px 0 #f5f5f5;
 }
 .menu-login a:hover {
-	background-color: #d3d3d3;
+	background-color: #6666cc;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #707070;
 }
 .isi-kanan-konten {
 	float: left;
@@ -920,6 +1260,12 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	padding: 10px 0;
 	border-top: dotted 1px #e3e3e3;
 }
+.form-pengaturan div img {
+	float: right;
+	margin-right: 300px;
+	width: 47px;
+	height: 47px;
+}
 .form-pengaturan label {
 	/*background-color: gray;*/
 	width: 200px;
@@ -937,20 +1283,21 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	width: 300px;
 }
 .form-pengaturan input[type="text"]:focus,.form-pengaturan input[type="email"]:focus, .form-pengaturan input[type="file"]:focus, .login-admin input[type="text"]:focus {
-	border-color: #ce0000;
+	border-color: #6666CC;
 }
 .form-pengaturan input[type="submit"], .btn-save, .login-admin input[type="submit"] {
 	padding: 10px 30px;
-	border: solid 1px #c3c3c3;
-	background-color: #e3e3e3;
-	text-shadow: 0 1px 0 #f5f5f5;
-	color: #707070;
+	border: solid 1px #ffffff;
+	background-color: #6666cc;
+	text-shadow: 0 1px 0 #707070;
+	color: #ffffff;
 	font-weight: bold;
 }
 .form-pengaturan input[type="submit"]:hover, .btn-save:hover, .login-admin input[type="submit"]:hover, .form-ubah-data a:hover {
-	border-color: #ce0000;
+	border-color: #6666CC;
 	text-shadow: 0 1px 0 #f5f5f5;
-	color: #ce0000;
+	color: #6666CC;
+	background-color: #ffffff;
 }
 .form-ubah-data div {
 	display: block;
@@ -984,6 +1331,21 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 }
 .isi-postingan table span {
 	font-size: 13px;
+}
+.empty-data {
+	text-align: center;
+	width: 100%;
+	height: 400px;
+	background-color: #f9f9f9;
+	border: solid 1px #e3e3e3;
+}
+.empty-data span {
+	display: block;
+	margin-top: 140px;
+	font-size: 75px;
+	color: #6666cc;
+	font-weight: bold;
+	text-shadow: 0 1px 0 #707070;
 }
 .kolom-tgl,.kolom-mtr {
 	float: left;
@@ -1033,7 +1395,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	width: 300px;
 }
 .form-pengaturan textarea:focus {
-	border-color: #ce0000;
+	border-color: #6666CC;
 }
 .single-detail h2,.single-detail-data h2 {
 	padding: 10px 20px;
@@ -1072,6 +1434,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 }
 .single-detail-berita, .single-kontak {
 	color: #707070;
+	text-align: justify;
 }
 .single-detail-berita h1 {
 	font-size: 23px;

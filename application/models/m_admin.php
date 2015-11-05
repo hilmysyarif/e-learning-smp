@@ -85,6 +85,64 @@ Class M_admin extends CI_Model {
         $result = $query->row_array();
         return $result['password'];
     }
+    function tampil_data_slides_gambar_lama($id_slides) {
+        $this->db->where('id', $id_slides);
+        $this->db->select('gambar');
+        $query = $this->db->get('slides');
+
+        $result = $query->row_array();
+        return $result['gambar'];
+    }
+    function tampil_data_slides() {
+        $this->db->select('*');
+        $query = $this->db->get('slides');
+        if($query->num_rows>0) {
+            return $query->result_array();
+        }else{
+            return array();
+        }
+
+    }
+    function tampil_data_visi_misi($id) {
+        $this->db->where('id', $id);
+        $this->db->select('isi AS isi_visi_misi');
+        $query = $this->db->get('halaman_statis');
+        if($query->num_rows()>0) {
+            return $query->row_array();
+        }else{
+            return array();
+        }
+    }
+    function tampil_data_sejarah($id) {
+        $this->db->where('id', $id);
+        $this->db->select('isi AS isi_sejarah');
+        $query = $this->db->get('halaman_statis');
+        if($query->num_rows()>0) {
+            return $query->row_array();
+        }else{
+            return array();
+        }
+    }
+    function tampil_data_tentang_kami($id) {
+        $this->db->where('id', $id);
+        $this->db->select('isi AS isi_tentang_kami');
+        $query = $this->db->get('halaman_statis');
+        if($query->num_rows()>0) {
+            return $query->row_array();
+        }else{
+            return array();
+        }
+    }
+    function tampil_data_hubungi_kami($id) {
+        $this->db->where('id', $id);
+        $this->db->select('isi AS isi_hubungi_kami');
+        $query = $this->db->get('halaman_statis');
+        if($query->num_rows()>0) {
+            return $query->row_array();
+        }else{
+            return array();
+        }
+    }
     function tampil_data_halaman_statis($id){
         $this->db->where('id', $id);
         $query = $this->db->get('halaman_statis');
@@ -122,7 +180,7 @@ function tampil_data_kelas() {
     }
 }
 function tampil_data_hari() {
-    $this->db->order_by("hari", "asc"); 
+    $this->db->order_by("tgl_upload", "asc"); 
     $query = $this->db->get('hari');
     if($query->num_rows()>0) {
         return $query->result_array();
@@ -342,6 +400,13 @@ function hapus_data_jadwal_by_id($kelas, $semester, $tahun_ajaran) {
     $this->db->where('id_semester', $semester);
     $this->db->where('id_tahun_ajaran', $tahun_ajaran);
     $this->db->delete('jadwal');
+}
+function hapus_data_nilai_by_id($pelajaran, $kelas, $semester, $tahun_ajaran) {
+    $this->db->where('id_pelajaran', $pelajaran);
+    $this->db->where('id_kelas', $kelas);
+    $this->db->where('id_semester', $semester);
+    $this->db->where('id_tahun_ajaran', $tahun_ajaran);
+    $this->db->delete('nilai');
 }
 
 

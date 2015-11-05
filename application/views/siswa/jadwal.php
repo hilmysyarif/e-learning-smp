@@ -29,6 +29,6 @@
 		</table>
 	</div>
 	<?php }else{ ?>
-	<?php echo 'Jadwal Belum ada'; ?>
+		<?php $this->load->view('user/data-kosong'); ?>
 	<?php } ?>
 </div>

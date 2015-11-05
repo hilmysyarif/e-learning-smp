@@ -2,12 +2,10 @@
 <div class="postingan">
 	<?php echo form_open_multipart('p_admin/ubah_data_berita/'.$berita['id']); ?>
 	<div class="form-pengaturan">
-		<div>
-			<img src="<?php echo base_url('resource/img/images/'.$berita['gambar']); ?>" style="width:150px; height:150px;">
-		</div>
-		<div>
+		<div style="border-top: none; margin-top: 15px;">
 			<label>Gambar Thumbnail</label>
-			<input name="gambar" type="file">
+			<input name="gambar" value="<?php echo $berita['gambar']; ?>" type="file">
+			<img src="<?php echo base_url('resource/img/images/'.$berita['gambar']); ?>">
 		</div>
 		<div>
 			<label>Judul Berita</label>
@@ -15,10 +13,10 @@
 		</div>
 		<div>
 			<label>Isi Berita</label>
-			<textarea name="isi" placeholder="Isi Berita"><?php echo $berita['isi']; ?></textarea>
+			<textarea class="ckeditor" name="isi" placeholder="Isi Berita"><?php echo $berita['isi']; ?></textarea>
 		</div>
-		<div>
-			<label></label>
+		<div style="border-top: none;">
+			<!-- <label></label> -->
 			<input name="simpan" type="submit" value="Simpan">
 		</div>
 	</div>

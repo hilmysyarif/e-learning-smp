@@ -22,7 +22,18 @@
 				</tr>
 				<tr>
 					<th><span class="jdl-detail-data">Link Download</span></th>
-					<td><span class="desc-detail-data"><a href="#"><?php echo $detail_elearning['file']; ?></a></span></td>
+					<td>
+						<?php if($this->session->userdata('login_siswa')) { ?>
+						<span class="desc-detail-data"><a href="<?php echo site_url('p_guru/download_elearning?id='.$detail_elearning['id_materi_umum']); ?>"><?php echo $detail_elearning['file']; ?></a></span>
+						<?php }elseif ($this->session->userdata('login_wali')) { ?>
+						<span class="desc-detail-data"><a href="<?php echo site_url('p_guru/download_elearning?id='.$detail_elearning['id_materi_umum']); ?>"><?php echo $detail_elearning['file']; ?></a></span>
+						<?php }elseif ($this->session->userdata('login_guru')) { ?>
+						<span class="desc-detail-data"><a href="<?php echo site_url('p_guru/download_elearning?id='.$detail_elearning['id_materi_umum']); ?>"><?php echo $detail_elearning['file']; ?></a></span>
+						<?php }else{ ?>
+						<span class="desc-detail-data"><?php echo 'Sistem Kami Tidak Mengenali Anda, Harap Login Terlebih Dahulu.' ?></span>
+						<?php } ?>
+					</td>
+
 				</tr>
 				<?php if($nik==$get_nik && $this->session->userdata('login_guru')){ ?>
 				<tr>

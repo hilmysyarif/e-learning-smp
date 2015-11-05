@@ -27,8 +27,8 @@ class Guru extends Base {
         if($this->session->userdata('login_guru')){
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
-
-        	$this->load->view('base/header', $data);
+            $data['slides']=$this->m_admin->tampil_data_slides();
+            $this->load->view('base/header', $data);
             $this->login_guru('guru/biodata', $data);
             $this->load->view('base/footer');
         }else{
@@ -42,7 +42,8 @@ class Guru extends Base {
         if(!empty($id) && $this->session->userdata('login_guru')){
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
-
+            
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-guru', $data);
@@ -51,6 +52,7 @@ class Guru extends Base {
             $id_siswa = $this->session->userdata['login_siswa']['nis'];
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-guru', $data);
@@ -60,11 +62,13 @@ class Guru extends Base {
             $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-guru', $data);
             $this->load->view('base/footer');
         }else{
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-guru', $data);
@@ -79,7 +83,8 @@ class Guru extends Base {
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
 
-            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id_guru);
+            $data['slides']=$this->m_admin->tampil_data_slides();
+            $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
             $this->load->view('base/header', $data);
@@ -89,6 +94,7 @@ class Guru extends Base {
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
@@ -99,6 +105,7 @@ class Guru extends Base {
             $id_siswa = $this->session->userdata['login_siswa']['nis'];
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
@@ -116,6 +123,7 @@ class Guru extends Base {
         if(empty($id) && $this->session->userdata('login_guru')){
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            $data['slides']=$this->m_admin->tampil_data_slides();
 
             $this->load->view('base/header', $data);
             $this->login_guru('guru/pengumuman', $data);
@@ -124,6 +132,7 @@ class Guru extends Base {
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $this->load->view('base/header', $data);
             $this->login_guru('guru/user-pengumuman', $data);
@@ -132,6 +141,7 @@ class Guru extends Base {
             $id_siswa = $this->session->userdata['login_siswa']['nis'];
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $this->load->view('base/header', $data);
             $this->login_guru('guru/user-pengumuman', $data);
@@ -148,6 +158,7 @@ class Guru extends Base {
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
             $this->load->view('base/header', $data);
@@ -157,6 +168,7 @@ class Guru extends Base {
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
@@ -167,6 +179,7 @@ class Guru extends Base {
             $id_siswa = $this->session->userdata['login_siswa']['nis'];
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
@@ -184,6 +197,7 @@ class Guru extends Base {
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
 
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
             $data['semester'] = $this->m_admin->tampil_data_semester();
@@ -201,6 +215,7 @@ class Guru extends Base {
         if($this->session->userdata('login_guru')){
             $id_guru = $this->session->userdata['login_guru']['nik'];
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+            $data['slides']=$this->m_admin->tampil_data_slides();
 
             $this->load->view('base/header', $data);
             $this->login_guru('guru/pengaturan', $data);
@@ -223,6 +238,7 @@ class Guru extends Base {
             $data['nik']=$this->m_guru->tampil_nik_guru_by_id($id_guru);
 
             $data['detail_materi']=$this->m_guru->tampil_data_detail_materi_by_id($id);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-materi-pelajaran', $data);
             $this->load->view('base/footer');
@@ -235,6 +251,7 @@ class Guru extends Base {
             
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($guru);
             $data['detail_materi']=$this->m_guru->tampil_data_detail_materi_by_id($id);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-materi-pelajaran', $data);
             $this->load->view('base/footer');
@@ -244,10 +261,11 @@ class Guru extends Base {
 
             $data['get_nik'] = $this->input->get('id_guru');
             $data['nik']=$this->m_guru->tampil_nik_guru_by_id($guru);
-
+            
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($guru);
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($guru);
             $data['detail_materi']=$this->m_guru->tampil_data_detail_materi_by_id($id);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-materi-pelajaran', $data);
             $this->load->view('base/footer');
@@ -311,6 +329,7 @@ class Guru extends Base {
             $data['nik']=$this->m_guru->tampil_nik_guru_by_id($id_guru);
 
             $data['detail_nilai']=$this->m_guru->tampil_data_detail_nilai_by_id($id);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-nilai-ujian', $data);
             $this->load->view('base/footer');
@@ -323,6 +342,7 @@ class Guru extends Base {
             
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($guru);
             $data['detail_nilai']=$this->m_guru->tampil_data_detail_nilai_by_id($id);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-nilai-ujian', $data);
             $this->load->view('base/footer');
@@ -336,6 +356,7 @@ class Guru extends Base {
             $data['guru']=$this->m_guru->tampil_data_guru_by_session($guru);
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($guru);
             $data['detail_nilai']=$this->m_guru->tampil_data_detail_nilai_by_id($id);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_guru('guru/detail-nilai-ujian', $data);
             $this->load->view('base/footer');

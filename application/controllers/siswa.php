@@ -27,6 +27,7 @@ class Siswa extends Base {
         if($this->session->userdata('login_siswa')){
             $id_siswa = $this->session->userdata['login_siswa']['nis'];
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/biodata', $data);
             $this->load->view('base/footer');
@@ -34,6 +35,7 @@ class Siswa extends Base {
             $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
             $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/biodata', $data);
             $this->load->view('base/footer');
@@ -49,6 +51,7 @@ class Siswa extends Base {
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             $data['semester']=$this->m_admin->tampil_data_semester();
             $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran();
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/nilai-ujian', $data);
             $this->load->view('base/footer');
@@ -58,6 +61,7 @@ class Siswa extends Base {
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             $data['semester']=$this->m_admin->tampil_data_semester();
             $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran();
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/nilai-ujian', $data);
             $this->load->view('base/footer');
@@ -74,6 +78,7 @@ class Siswa extends Base {
             $semester = $this->session->userdata['login_siswa']['id_semester'];
             $tahun_ajaran = $this->session->userdata['login_siswa']['id_tahun_ajaran'];
             
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             $data['jadwal']=$this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
             $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
@@ -89,6 +94,7 @@ class Siswa extends Base {
             $semester = $this->m_wali->tampil_data_semester_by_no_ktp($no_ktp);
             $tahun_ajaran = $this->m_wali->tampil_data_tahun_ajaran_by_no_ktp($no_ktp);
             
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             $data['jadwal']=$this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
             $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
@@ -108,6 +114,7 @@ class Siswa extends Base {
             $id_siswa = $this->session->userdata['login_siswa']['nis'];
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_siswa']=$this->m_siswa->tampil_data_siswa_by_id($id_siswa);
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/ubah-biodata', $data);
@@ -124,6 +131,7 @@ class Siswa extends Base {
             $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
             $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
             
+            $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_siswa']=$this->m_siswa->tampil_data_siswa_by_id($id_siswa);
             $this->load->view('base/header', $data);
             $this->login_siswa('siswa/ubah-biodata-wali', $data);

@@ -1,4 +1,4 @@
-<h3 class="header-isi">Detail Informasi Penting</h3>
+<h3 class="header-isi">Detail Informasi Siswa</h3>
 <div class="postingan">
 	<div class="single-detail-berita">
 		<h1><?php echo $detail_informasi['judul']; ?></h1>

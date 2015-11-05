@@ -80,6 +80,6 @@
 	</div>
 	<?php } ?>
 	<?php }else{ ?>
-	<?php echo 'data kosong'; ?>
+	<?php $this->load->view('user/data-kosong'); ?>
 	<?php } ?>
 </div>

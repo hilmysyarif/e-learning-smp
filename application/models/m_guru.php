@@ -19,9 +19,13 @@ Class M_guru extends CI_Model {
         $this->db->insert('data_nilai', $data);
     }
 
-    function tampil_data_elearning($limit, $offset) {
+    function tampil_data_elearning($limit, $offset, $kata_kunci) {
         if(empty($offset)){
           $offset=0;
+        }
+        //jika ada pencarian
+        if (!empty($kata_kunci)) {
+            $this->db->like('judul', $kata_kunci);
         }
         $this->db->order_by("tgl_upload", "desc");
         $query = $this->db->get('materi_umum', $limit, $offset);
@@ -137,14 +141,6 @@ Class M_guru extends CI_Model {
         return $query->row_array();
     }
 
-    function tampil_data_file_data_nilai_by_id($id) {
-        $this->db->where('id_data_nilai', $id);
-        $this->db->select('file');
-        $query = $this->db->get('data_nilai');
-        $result = $query->row_array();
-        return $result['file'];
-    }
-
     function tampil_data_detail_materi($nik) {
         $this->db->where('id_kelas', $kelas);
         $this->db->where('id_pelajaran', $pelajaran);
@@ -159,9 +155,20 @@ Class M_guru extends CI_Model {
         }
     }
 
-    function tampil_data_guru() {
+    function tampil_data_guru($limit, $offset, $kata_kunci) {
+        if(empty($offset)){
+          $offset=0;
+        }
+        //jika ada pencarian
+        if(!empty($kata_kunci)){
+            $this->db->like('nama', $kata_kunci);
+            $this->db->or_like('nik', $kata_kunci);
+            $this->db->or_like('email', $kata_kunci);
+            $this->db->or_like('tlp', $kata_kunci);
+            $this->db->or_like('hp', $kata_kunci);
+        }
         $this->db->order_by('tgl_upload', 'DESC');
-        $query = $this->db->get('guru');
+        $query = $this->db->get('guru', $limit, $offset);
         if($query->num_rows()>0) {
             return $query->result_array();
         }else{

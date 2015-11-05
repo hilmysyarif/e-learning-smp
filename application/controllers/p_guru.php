@@ -27,18 +27,14 @@ class P_guru extends Base {
       $id = $this->input->get('id');
       $data=$this->m_guru->tampil_data_detail_materi_by_id($id);
       $nama_file = $data['file'];
-      
-      $isi = file_get_contents(base_url('resource/doc/'));
-      $nama = $nama_file;
-      force_download($nama,$isi);
+      $isi = file_get_contents(base_url('resource/doc/'.$nama_file));
+      force_download($nama_file, $isi);
     }elseif($this->session->userdata('login_guru')){
       $id = $this->input->get('id');
       $data=$this->m_guru->tampil_data_detail_materi_by_id($id);
       $nama_file = $data['file'];
-      
-      $isi = file_get_contents(base_url('resource/doc/'));
-      $nama = $nama_file;
-      force_download($nama,$isi);
+      $isi = file_get_contents(base_url('resource/doc/'.$nama_file));
+      force_download($nama_file, $isi);
     }else{
       redirect('user');
     }
@@ -47,18 +43,34 @@ class P_guru extends Base {
   public function download_nilai(){
     if($this->session->userdata('login_siswa')){
       $id = $this->input->get('id');
-      $nama_file = $this->m_guru->tampil_data_file_data_nilai_by_id($id);
-      
-      $isi = file_get_contents(base_url('resource/doc/'));
-      $nama = $nama_file;
-      force_download($nama,$isi);
+      $data = $this->m_guru->tampil_data_detail_nilai_by_id($id);
+      $nama_file = $data['file'];
+      $isi = file_get_contents(base_url('resource/doc/'.$nama_file));
+      force_download($nama_file, $isi);
     }elseif($this->session->userdata('login_guru')){
       $id = $this->input->get('id');
-      $nama_file = $this->m_guru->tampil_data_file_data_nilai_by_id($id);
-      
-      $isi = file_get_contents(base_url('resource/doc/'));
-      $nama = $nama_file;
-      force_download($nama,$isi);
+      $data = $this->m_guru->tampil_data_detail_nilai_by_id($id);
+      $nama_file = $data['file'];
+      $isi = file_get_contents(base_url('resource/doc/'.$nama_file));
+      force_download($nama_file, $isi);
+    }else{
+      redirect('user');
+    }
+  }
+
+  public function download_elearning(){
+    if($this->session->userdata('login_siswa')){
+      $id = $this->input->get('id');
+      $data = $this->m_guru->tampil_data_elearning_by_id($id);
+      $nama_file = $data['file'];
+      $isi = file_get_contents(base_url('resource/doc/'.$nama_file));
+      force_download($nama_file, $isi);
+    }elseif($this->session->userdata('login_guru')){
+      $id = $this->input->get('id');
+      $data = $this->m_guru->tampil_data_elearning_by_id($id);
+      $nama_file = $data['file'];
+      $isi = file_get_contents(base_url('resource/doc/'.$nama_file));
+      force_download($nama_file, $isi);
     }else{
       redirect('user');
     }
@@ -247,6 +259,7 @@ class P_guru extends Base {
 
       if($tampilkan == 'Tampilkan') {
           $data['materi_pelajaran'] = $this->m_guru->tampil_data_materi_by_id($nik,$semester,$tahun_ajaran);
+          $data['slides']=$this->m_admin->tampil_data_slides();
           
           $this->load->view('base/header', $data);
           $this->login_guru('guru/materi-pelajaran', $data);
@@ -259,6 +272,7 @@ class P_guru extends Base {
 
       if($tampilkan == 'Tampilkan') {
           $data['materi_pelajaran'] = $this->m_guru->tampil_data_materi_by_id($nik,$semester,$tahun_ajaran);
+          $data['slides']=$this->m_admin->tampil_data_slides();
           
           $this->load->view('base/header', $data);
           $this->login_guru('guru/materi-pelajaran', $data);
@@ -272,6 +286,7 @@ class P_guru extends Base {
 
       if($tampilkan == 'Tampilkan') {
           $data['materi_pelajaran'] = $this->m_guru->tampil_data_materi_by_id($nik,$semester,$tahun_ajaran);
+          $data['slides']=$this->m_admin->tampil_data_slides();
           
           $this->load->view('base/header', $data);
           $this->login_guru('guru/materi-pelajaran', $data);
@@ -301,6 +316,7 @@ class P_guru extends Base {
           $data['data_nilai'] = $this->m_guru->tampil_data_nilai_by_id($nik,$semester,$tahun_ajaran);
           $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
           $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+          $data['slides']=$this->m_admin->tampil_data_slides();
 
           $this->load->view('base/header', $data);
           $this->login_guru('guru/nilai-ujian', $data);
@@ -315,6 +331,7 @@ class P_guru extends Base {
           $data['data_nilai'] = $this->m_guru->tampil_data_nilai_by_id($nik,$semester,$tahun_ajaran);
           $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
           $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+          $data['slides']=$this->m_admin->tampil_data_slides();
 
           $this->load->view('base/header', $data);
           $this->login_guru('guru/nilai-ujian', $data);
@@ -330,6 +347,7 @@ class P_guru extends Base {
           $data['data_nilai'] = $this->m_guru->tampil_data_nilai_by_id($nik,$semester,$tahun_ajaran);
           $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
           $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+          $data['slides']=$this->m_admin->tampil_data_slides();
 
           $this->load->view('base/header', $data);
           $this->login_guru('guru/nilai-ujian', $data);
@@ -700,7 +718,7 @@ class P_guru extends Base {
       echo '<script>';
       echo "alert('Berhasil Keluar');";
       echo "window.location='" . site_url('user') . "';";
-  	  echo '</script>';
+      echo '</script>';
     }else{
       redirect('user');
     }

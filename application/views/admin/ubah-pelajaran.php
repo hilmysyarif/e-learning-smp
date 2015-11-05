@@ -15,6 +15,6 @@
 			<?php echo form_close(); ?>
 			<?php } //end foreach ?>
 		</div>
-		<a href="<?php echo site_url('admin/pengaturan_data'); ?>"><input type="submit" value="Kembali"></a><br /><br />
+		<a href="<?php echo site_url('admin/data_sistem'); ?>"><input type="submit" value="Kembali"></a><br /><br />
 	</div>
 </div>

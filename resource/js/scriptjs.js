@@ -3,12 +3,12 @@ $(document).ready(function(){
 		c=$(this).val();
 	    switch(c){
 	    	case "siswa": 
-	    		$("#label_masuk").text('Nomor Siswa');
+	    		$("#label_masuk").text('Nomor Induk Siswa');
 	    		$("#id_masuk").attr('name','id_siswa'); 
 	    		$("#id_masuk").attr('placeholder','NIS'); 
 	    		break;
 	    	case "guru": 
-	    		$("#label_masuk").text('Nomor Guru');
+	    		$("#label_masuk").text('Nomor Induk Karyawan');
 	    		$("#id_masuk").attr('name','id_guru'); 
 	    		$("#id_masuk").attr('placeholder','NIK');
 				break
@@ -18,9 +18,9 @@ $(document).ready(function(){
 	    		$("#id_masuk").attr('placeholder','No KTP');
 				break
 	    	case "admin": 
-	    		$("#label_masuk").text('Nomor ID');
+	    		$("#label_masuk").text('Email');
 	    		$("#id_masuk").attr('name','id_admin'); 
-	    		$("#id_masuk").attr('placeholder','No ID');
+	    		$("#id_masuk").attr('placeholder','Email');
 				break
 	    	default: 
 	    		$("#label_masuk").text('Nomor Siswa');

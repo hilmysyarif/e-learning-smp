@@ -30,9 +30,18 @@ Class M_siswa extends CI_Model {
         return $result['foto'];
     }
 
-    function tampil_data_siswa() {
+    function tampil_data_siswa($limit, $offset, $kata_kunci) {
+        if(empty($offset)){
+          $offset=0;
+        }
+        //jika ada pencarian
+        if(!empty($kata_kunci)){
+            $this->db->like('nama', $kata_kunci);
+            $this->db->or_like('nis', $kata_kunci);
+            $this->db->or_like('no_ktp', $kata_kunci);
+        }
         $this->db->order_by('nis', 'DESC');
-        $query = $this->db->get('siswa');
+        $query = $this->db->get('siswa', $limit, $offset);
         if($query->num_rows()>0) {
             return $query->result_array();
         }else{

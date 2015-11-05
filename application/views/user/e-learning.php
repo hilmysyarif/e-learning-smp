@@ -1,8 +1,10 @@
 <h3 class="header-isi">E-Learning</h3>
 <div class="postingan">
 	<div class="kt-cr">
-		<input type="text" placeholder="Cari File disini . . .">
-		<button><i class="glyphicon glyphicon-search"></i>Cari</button>
+		<?php echo form_open('user/e_learning'); ?>
+		<input name="kata_kunci" type="text" placeholder="Cari disini . . .">
+		<button name="q"><i class="glyphicon glyphicon-search"></i>Cari</button>
+		<?php echo form_close(); ?>
 	</div>
 	<ul class="list-data">
 		<?php foreach ($elearning as $row) { ?>

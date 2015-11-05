@@ -1,8 +1,10 @@
 <h3 class="header-isi">Guru</h3>
 <div class="postingan">
 	<div class="kt-cr">
-		<input type="text" placeholder="Cari File disini . . .">
-		<button><i class="glyphicon glyphicon-search"></i>Cari</button>
+		<?php echo form_open('admin/list_guru'); ?>
+		<input name="kata_kunci" type="text" placeholder="Cari disini . . .">
+		<button name="q"><i class="glyphicon glyphicon-search"></i>Cari</button>
+		<?php echo form_close(); ?>
 	</div>
 	<ul class="list-guru">
 		<?php foreach ($guru as $row) { ?>
@@ -19,14 +21,5 @@
 		</li>
 		<?php } ?>
 	</ul>
-	
-	<ul class="pagination">
-		<li><a href="#">&laquo;</a></li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">&raquo;</a></li>
-	</ul>
+	<?php echo $pagination; ?>
 </div>

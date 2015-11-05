@@ -33,6 +33,7 @@ class P_siswa extends Base {
       $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
 
       if($tampilkan == "Tampilkan") {
+          $data['slides']=$this->m_admin->tampil_data_slides();
           $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
           $data['semester']=$this->m_admin->tampil_data_semester();
           $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran();
@@ -56,6 +57,7 @@ class P_siswa extends Base {
       $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
 
       if($tampilkan == "Tampilkan") {
+          $data['slides']=$this->m_admin->tampil_data_slides();
           $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
           $data['semester']=$this->m_admin->tampil_data_semester();
           $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran();

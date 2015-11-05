@@ -7,16 +7,18 @@
 <?php }elseif ($this->session->userdata('login_admin')) { ?>
 	<?php echo $this->load->view('admin/form-login-admin'); ?>
 <?php }else{ ?>
-<div class="form-masuk">
-	<div class="header-form-masuk">
-		<?php echo form_open('p_login/masuk'); ?>
-		<span>Masuk Sebagai :</span>
-		<select name="menu" id="option-login" style="width: 135px;">
-			<option id="siswa" value="siswa">Siswa</option>
-			<option id="guru" value="guru">Guru</option>
-			<option id="wali" value="wali">Wali Murid</option>
-			<option id="admin" value="admin">Admin</option>
-		</select>
+<div class="form-masuk" style="padding-bottom:20px;">
+	<div class="header-form-masuk" style="border-bottom: none;">
+		<div class="header-form-login">
+			<?php echo form_open('p_login/masuk'); ?>
+			<span>Masuk Sebagai :</span>
+			<select name="menu" id="option-login" style="width: 135px;">
+				<option id="siswa" value="siswa">Siswa</option>
+				<option id="guru" value="guru">Guru</option>
+				<option id="wali" value="wali">Wali Murid</option>
+				<option id="admin" value="admin">Admin</option>
+			</select>
+		</div>
 	</div>
 
 	<!-- form login siswa -->
