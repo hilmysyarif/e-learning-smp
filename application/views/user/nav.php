@@ -13,7 +13,7 @@
 		</li>
 		<!-- <li><a href="<?php echo site_url('user/fasilitas'); ?>">Fasilitas</a></li> -->
 		<li>
-			<a href="<?php echo site_url('user/tentang_kami'); ?>">Tentang Kami</a>
+			<a href="#">Tentang Kami</a>
 			<ul>
 				<li><a href="<?php echo site_url('user/sejarah'); ?>">Sejarah</a></li>
 				<li><a href="<?php echo site_url('user/visi_misi'); ?>">Visi & Misi</a></li>

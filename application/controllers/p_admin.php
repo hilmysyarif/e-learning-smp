@@ -71,14 +71,21 @@ class P_admin extends Base {
             $this->load->library('upload');
             $this->upload->initialize($config);
 
-            $this->m_admin->tambah_data_berita($data);
-            // setelah data tersimpan foto di upload ke folder
-            $this->upload->do_upload('gambar');
-            $sukses = 'Data Berhasil Disimpan';
-            echo '<script>';
-            echo "alert('".$sukses."');";
-            echo "window.location='" . site_url('admin/data_halaman') . "'";
-            echo '</script>';
+            $upload = $this->upload->do_upload('gambar');
+            if($upload){
+                $this->m_admin->tambah_data_berita($data);
+                $sukses = 'Data Berhasil Disimpan';
+                echo '<script>';
+                echo "alert('".$sukses."');";
+                echo "window.location='" . site_url('admin/data_halaman') . "'";
+                echo '</script>';
+            }else{
+                $gagal = 'Data Gagal Disimpan';
+                echo '<script>';
+                echo "alert('".$gagal."');";
+                echo "window.location='" . site_url('admin/data_halaman') . "'";
+                echo '</script>';
+            }
         }else{
             redirect('user');
         }
@@ -754,10 +761,9 @@ public function tambah_data_ruang() {
             $data = array(
                 'judul' => $judul,
                 'isi' => $isi,
-                'tgl_edit' => $now,
-                'gambar' => $nama_gambar
+                'tgl_edit' => $now
                 );
-
+            $data_gambar = array('gambar' => $nama_gambar);
             //validasi gambar
             $config['upload_path'] = './resource/img/images/';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
@@ -768,11 +774,16 @@ public function tambah_data_ruang() {
             $this->load->library('upload');
             $this->upload->initialize($config);
 
-            $this->db->where('id', $id);
-            $this->db->update('berita', $data);
-
-            // setelah data tersimpan foto di upload ke folder
-            $this->upload->do_upload('gambar');
+            $upload = $this->upload->do_upload('gambar');
+            if($upload){
+                $this->db->where('id', $id);
+                $this->db->update('berita', $data);
+                $this->db->where('id', $id);
+                $this->db->update('berita', $data_gambar);
+            }else{
+                $this->db->where('id', $id);
+                $this->db->update('berita', $data);
+            }
             $sukses = 'Data Berhasil Diubah';
             echo '<script>';
             echo "alert('".$sukses."');";

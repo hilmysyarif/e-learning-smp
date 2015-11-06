@@ -1,8 +1,8 @@
-<h3 class="header-isi">Ubah Data</h3>
+<h3 class="header-isi">Data Semester</h3>
 <div class="postingan">
 	<div class="form-pengaturan">
-		<h3>Ubah Semester</h3>
-		<label>Semester</label>
+		<h3>Data Semester</h3>
+		<?php if(!empty($semester)){ ?>
 		<div class="form-ubah-data">
 			<?php foreach ($semester as $row) { ?>
 			<?php echo form_open('p_admin/ubah_data_semester?id='.$row['id_semester']); ?>
@@ -15,6 +15,9 @@
 			<?php echo form_close(); ?>
 			<?php } //end foreach ?>
 		</div>
+		<?php }else{ ?>
+		<?php $this->load->view('user/notifikasi-1'); ?>
+		<?php } ?>
 		<a href="<?php echo site_url('admin/data_sistem'); ?>"><input type="submit" value="Kembali"></a><br /><br />
 	</div>
 </div>

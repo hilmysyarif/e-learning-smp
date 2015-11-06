@@ -1,8 +1,8 @@
-<h3 class="header-isi">Ubah Data</h3>
+<h3 class="header-isi">Data Kelas</h3>
 <div class="postingan">
 	<div class="form-pengaturan">
-		<h3>Ubah Kelas</h3>
-		<label>Kelas</label>
+		<h3>Data Kelas</h3>
+		<?php if(!empty($kelas)){ ?>
 		<div class="form-ubah-data">
 			<?php foreach ($kelas as $row) { ?>
 			<?php echo form_open('p_admin/ubah_data_kelas?id='.$row['id_kelas']); ?>
@@ -15,6 +15,9 @@
 			<?php echo form_close(); ?>
 			<?php } //end foreach ?>
 		</div>
+		<?php }else{ ?>
+		<?php $this->load->view('user/notifikasi-1'); ?>
+		<?php } ?>
 		<a href="<?php echo site_url('admin/data_sistem'); ?>"><input type="submit" value="Kembali"></a><br /><br />
 	</div>
 </div>

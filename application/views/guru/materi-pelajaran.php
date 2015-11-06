@@ -80,6 +80,6 @@
 	</div>
 	<?php } ?>
 	<?php }else{ ?>
-	<?php $this->load->view('user/data-kosong'); ?>
+	<?php $this->load->view('user/notifikasi-1'); ?>
 	<?php } ?>
 </div>

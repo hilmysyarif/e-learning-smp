@@ -5,7 +5,7 @@
 	  <li class="active"><a href="#berita" data-toggle="tab">Berita</a></li>
 	  <li><a href="#informasi_siswa" data-toggle="tab">Informasi Siswa</a></li>
 	  <li><a href="#hubungi_kami" data-toggle="tab">Hubungi Kami</a></li>
-	  <li><a href="#tentang_kami" data-toggle="tab">Tentang Kami</a></li>
+	  <!-- <li><a href="#tentang_kami" data-toggle="tab">Tentang Kami</a></li> -->
 	  <li><a href="#sejarah" data-toggle="tab">Sejarah</a></li>
 	  <li><a href="#visi_misi" data-toggle="tab">Visi & Misi</a></li>
 	  <li><a href="#slides" data-toggle="tab">Slides</a></li>
@@ -71,20 +71,20 @@
 		<?php echo form_close(); ?>
 	  </div>
 	  <!-- tentang kami -->
-	  <div class="tab-pane" id="tentang_kami">
+	  <!-- <div class="tab-pane" id="tentang_kami">
 		<?php echo form_open('p_admin/ubah_data_tentang_kami?id=1'); ?>
 	  	<div class="form-pengaturan">
 			<div style="border-top: none;">
 				<label>Isi Tentang Kami</label>
 				<textarea class="ckeditor" name="isi" placeholder="Tulis disini . . ."><?php echo $tentang_kami['isi_tentang_kami']; ?></textarea>
 			</div>
-			<div style="border-top: none;">
+			<div style="border-top: none;"> -->
 				<!-- <label></label> -->
-				<input name="simpan" type="submit" value="Simpan">
+				<!-- <input name="simpan" type="submit" value="Simpan">
 			</div>
 		</div>
 		<?php echo form_close(); ?>
-	  </div>
+	  </div> -->
 	  <!-- sejarah -->
 	  <div class="tab-pane" id="sejarah">
 		<?php echo form_open('p_admin/ubah_data_sejarah?id=3'); ?>

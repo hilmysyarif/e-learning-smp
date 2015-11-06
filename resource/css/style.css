@@ -1083,13 +1083,16 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	border: solid 3px #e3e3e3;
 }
 .kt-cr button:hover {
-	color: #6666CC;
+	color: #ffffff;
+	border-color: #6666CC;
+	background-color: #6666CC;
+	text-shadow: 0 1px 0 #707070;
 }
 .kt-cr button:active {
-	color: #ffffff;
-	text-shadow: 0 1px 0 #707070;
-	background-color: #6666CC;
-	border-color: #6666CC;
+	color: #707070;
+	border-color: #e3e3e3;
+	background-color: #e3e3e3;
+	text-shadow: 0 1px 0 #f3f3f3;
 }
 .kt-cr button i {
 	margin-right: 5px;
@@ -1107,7 +1110,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	border-bottom: 1px dotted #e3e3e3;
 }
 .single-biodata p span {
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 }
 .single-biodata input[type="text"], .single-biodata select, .single-biodata input[type="file"] {
 	padding: 10px 10px;
@@ -1145,6 +1148,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	/*background-color: green;*/
 }
 .kolom-nilai-siswa input[type="text"] {
+	text-align: center;
 	padding: 2px 10px;
 	width: 100px;
 	border: solid 1px #e3e3e3;
@@ -1452,13 +1456,15 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 .single-detail-berita h1 {
 	font-size: 23px;
 	margin: 0 0 15px;
+	font-weight: bold;
 }
 .single-detail-berita span {
+	font-weight: bold;
 	font-size: 13px;
 	display: block;
 }
 .single-detail-berita img {
-	margin: 10px 0 5px;
+	margin: 10px 0 15px;
 	width: 745px;
 	height: 445px;
 }

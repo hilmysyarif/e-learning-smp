@@ -2,14 +2,14 @@
 <div class="postingan">
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs">
-	  <li class="active"><a href="#data_jadwal" data-toggle="tab">Data Jadwal</a></li>
-	  <li><a href="#masukkan_data_jadwal" data-toggle="tab">Masukkan Data Jadwal</a></li>
+	  <li <?php if(!empty($nama_kelas)){echo'class="active"';} ?>><a href="#data_jadwal" data-toggle="tab">Data Jadwal</a></li>
+	  <li class="<?php if(empty($nama_kelas)){echo'active';} ?>"><a href="#masukkan_data_jadwal" data-toggle="tab">Masukkan Data Jadwal</a></li>
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
 	  <!-- jadwal -->
-	  <div class="tab-pane active" id="data_jadwal">
+	  <div class="<?php if(!empty($nama_kelas)){echo'active';} ?> tab-pane" id="data_jadwal">
 		<?php echo form_open('p_admin/tampil_data_jadwal'); ?>
 	  	<div class="form-tampil-nilai" style="margin-top: 15px;">
 			<select name="kelas">
@@ -76,12 +76,12 @@
 			</table>
 		</div>
 	<?php }else{ ?>
-		<?php $this->load->view('user/data-kosong'); ?>
+		<?php $this->load->view('user/notifikasi-1'); ?>
 	<?php } ?>
 	  </div>
 
 	  <!-- masukkan data jadwal -->
-	  <div class="tab-pane" id="masukkan_data_jadwal">
+	  <div class="<?php if(empty($nama_kelas)){echo'active';} ?> tab-pane" id="masukkan_data_jadwal">
 		<?php echo form_open('p_admin/tambah_data_jadwal'); ?>
 	  	<div class="form-pengaturan">
 			<div style="border-top: none; margin-top: 15px;">

@@ -1,4 +1,4 @@
-<h3 class="header-isi">Nilai Ujian</h3>
+<h3 class="header-isi">Nilai Raport</h3>
 <div class="postingan">
 	<div class="single-hsl-nilai">		
 		<div class="form-tampil-nilai">
@@ -33,7 +33,7 @@
 		<p><span class="jdl-biodata">Kelas</span><span>: </span><span><?php echo $nama_kelas['kelas']; ?></span></p>
 		<br>
 		<div class="isi-postingan">
-			<h2><span>Nilai Semester <?php echo $nama_semester['semester']; ?> | Tahun Ajaran <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span></h2>
+			<h2 style="text-align:left;"><span>Nilai Semester <?php echo $nama_semester['semester']; ?> | Tahun Ajaran <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span></h2>
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
@@ -65,7 +65,7 @@
 			</table>
 		</div>
 		<?php }else{ ?>
-			<?php $this->load->view('user/data-kosong'); ?>
+			<?php $this->load->view('user/notifikasi-1'); ?>
 		<?php } ?>
 	</div>
 </div>

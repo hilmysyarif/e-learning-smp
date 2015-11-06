@@ -2,7 +2,7 @@
 <div class="postingan">
 	<div class="form-pengaturan">
 		<h3>Ubah Pelajaran</h3>
-		<label>Pelajaran</label>
+		<?php if(!empty($pelajaran)){ ?>
 		<div class="form-ubah-data">
 			<?php foreach ($pelajaran as $row) { ?>
 			<?php echo form_open('p_admin/ubah_data_pelajaran?id='.$row['id_pelajaran']); ?>
@@ -15,6 +15,9 @@
 			<?php echo form_close(); ?>
 			<?php } //end foreach ?>
 		</div>
+		<?php }else{ ?>
+		<?php $this->load->view('user/notifikasi-1'); ?>
+		<?php } ?>
 		<a href="<?php echo site_url('admin/data_sistem'); ?>"><input type="submit" value="Kembali"></a><br /><br />
 	</div>
 </div>

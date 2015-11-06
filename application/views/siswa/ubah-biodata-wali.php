@@ -4,6 +4,14 @@
 		<?php echo form_open('p_siswa/ubah_data_wali'); ?>
 		<h3>Ubah Data Biodata</h3>
 		<div>
+			<label>No KTP</label>
+			<input name="no_ktp" type="text" value="<?php echo $detail_siswa['no_ktp']; ?>" readonly="readonly">
+		</div>
+		<div>
+			<label>Password</label>
+			<input name="password_wali" type="text" value="<?php echo $detail_siswa['password_wali']; ?>">
+		</div>
+		<div>
 			<label>Nama</label>
 			<input name="nama_wali" type="text" value="<?php echo $detail_siswa['nama_wali']; ?>">
 		</div>

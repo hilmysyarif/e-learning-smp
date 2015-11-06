@@ -123,6 +123,7 @@ class P_siswa extends Base {
     if($this->session->userdata('login_wali')){
       $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
       $now = date('y-m-d h:i:s');
+      $password_wali  = $this->input->post('password_wali');
       $nama_wali  = $this->input->post('nama_wali');
       $pekerjaan  = $this->input->post('pekerjaan');
       $email      = $this->input->post('email');
@@ -132,6 +133,7 @@ class P_siswa extends Base {
       $sukses = "Data Berhasil Diubah.";
       $gagal = "Data Gagal Diubah.";
       $data = array(
+          'password' => $password_wali,
           'nama' => $nama_wali,
           'pekerjaan' => $pekerjaan,
           'email' => $email,

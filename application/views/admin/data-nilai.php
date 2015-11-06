@@ -2,14 +2,14 @@
 <div class="postingan">
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs">
-	  <li class="active"><a href="#data_nilai" data-toggle="tab">Data Nilai</a></li>
-	  <li><a href="#masukkan_data_nilai" data-toggle="tab">Masukkan Data Nilai</a></li>
+	  <li <?php if(!empty($nama_pelajaran)){echo'class="active"';} ?>><a href="#data_nilai" data-toggle="tab">Data Nilai</a></li>
+	  <li class="<?php if(empty($nama_pelajaran)){echo'active';} ?>"><a href="#masukkan_data_nilai" data-toggle="tab">Masukkan Data Nilai</a></li>
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
 	  <!-- nilai -->
-	  <div class="tab-pane active" id="data_nilai">
+	  <div class="<?php if(!empty($nama_pelajaran)){echo'active';} ?> tab-pane" id="data_nilai">
 		<?php echo form_open('p_admin/tampil_data_nilai_siswa'); ?>
 		<div class="form-tampil-nilai" style="margin-top: 15px;">
 			<select name="pelajaran" style="width:160px;">
@@ -84,13 +84,15 @@
 			</div>
 			<?php echo form_close(); ?>
 		</div>
+		<?php }elseif(empty($nilai) && !empty($nama_tahun_ajaran) || empty($nilai) && !empty($nama_semester) || empty($nilai) && !empty($nama_kelas) || empty($nilai) && !empty($nama_pelajaran)){ ?>
+			<?php $this->load->view('user/notifikasi-1'); ?>
 		<?php }else{ ?>
-			<?php $this->load->view('user/data-kosong'); ?>
+			<?php $this->load->view('user/notifikasi-3'); ?>
 		<?php } ?>
 	  </div>
 
 	  <!-- masukkan data nilai -->
-	  <div class="tab-pane" id="masukkan_data_nilai">
+	  <div class="<?php if(empty($nama_pelajaran)){echo'active';} ?> tab-pane" id="masukkan_data_nilai">
 	  	<?php echo form_open('p_admin/tampil_data_siswa'); ?>
 		<div class="form-tampil-nilai" style="margin-top: 15px;">
 			<select name="kelas">
@@ -130,8 +132,18 @@
 		<?php if(!empty($siswa)){ ?>
 		<div class="isi-postingan">
 			<?php echo form_open('p_admin/tambah_data_nilai_siswa'); ?>
-			<h2 style="text-align: left;">Kelas<span><input name="kelas" value="<?php echo $nama_kelas['id_kelas']; ?>" type="text" style="display: none;"> <?php echo $nama_kelas['kelas']; ?></span> | Semester<span><input name="semester" value="<?php echo $nama_semester['id_semester']; ?>" type="text" style="display: none;"> <?php echo $nama_semester['semester']; ?></span> | Tahun Ajaran<span><input name="tahun_ajaran" value="<?php echo $nama_tahun_ajaran['id_tahun_ajaran']; ?>" type="text" style="display: none;"> <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span></h2>
-			<table class="table table-bordered table-striped">
+			<h2 style="float:left;padding-top:15px;margin-top:0;text-align: left; width:100%;">Kelas<span><input name="kelas" value="<?php echo $nama_kelas['id_kelas']; ?>" type="text" style="display: none;"> <?php echo $nama_kelas['kelas']; ?></span> | Semester<span><input name="semester" value="<?php echo $nama_semester['id_semester']; ?>" type="text" style="display: none;"> <?php echo $nama_semester['semester']; ?></span> | Tahun Ajaran<span><input name="tahun_ajaran" value="<?php echo $nama_tahun_ajaran['id_tahun_ajaran']; ?>" type="text" style="display: none;"> <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span>
+				<select name="pelajaran" style="float:right; text-align:right; margin-top:-5px;">
+					<?php if(!empty($pelajaran)) { ?>
+					<?php foreach ($pelajaran as $row) { ?>
+					<option value="<?php echo $row['id_pelajaran']; ?>"><?php echo $row['pelajaran']; ?></option>
+					<?php }//end foreach ?>
+					<?php }else{ ?>
+					<option selected="1"><?php echo 'Data Kosong'; ?></option>
+					<?php } ?>
+				</select>
+			</h2>
+			<table class="table table-bordered table-striped" style="float:left;">
 				<thead>
 					<tr>
 						<th class="kolom-nis">Nomer Induk Siswa</th>
@@ -151,7 +163,7 @@
 			</table>
 			<div>
 				<input name="total_data" type="text" value="<?php echo $total_data; ?>" style="display: none;">
-				<select name="pelajaran">
+				<!-- <select name="pelajaran">
 					<?php if(!empty($pelajaran)) { ?>
 					<?php foreach ($pelajaran as $row) { ?>
 					<option value="<?php echo $row['id_pelajaran']; ?>"><?php echo $row['pelajaran']; ?></option>
@@ -159,13 +171,13 @@
 					<?php }else{ ?>
 					<option selected="1"><?php echo 'Data Kosong'; ?></option>
 					<?php } ?>
-				</select>
+				</select> -->
 				<input name="simpan" type="submit" value="Simpan" class="btn-save pull-right" style="padding: 10px 40px;">
 			</div>
 			<?php echo form_close(); ?>
 		</div>
 		<?php }else{ ?>
-		<?php echo 'Data Kosong'; ?>
+			<?php $this->load->view('user/notifikasi-2'); ?>
 		<?php } ?>
 	  </div>
 	  

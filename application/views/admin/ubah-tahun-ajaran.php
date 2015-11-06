@@ -1,8 +1,8 @@
-<h3 class="header-isi">Ubah Data</h3>
+<h3 class="header-isi">Data Tahun Ajaran</h3>
 <div class="postingan">
 	<div class="form-pengaturan">
-		<h3>Ubah Tahun Ajaran</h3>
-		<label>Tahun Ajaran</label>
+		<h3>Data Tahun Ajaran</h3>
+		<?php if(!empty($tahun_ajaran)){ ?>
 		<div class="form-ubah-data">	
 			<?php foreach ($tahun_ajaran as $row) { ?>
 			<?php echo form_open('p_admin/ubah_data_tahun_ajaran?id='.$row['id_tahun_ajaran']); ?>
@@ -15,6 +15,9 @@
 			<?php echo form_close(); ?>
 			<?php } //end foreach ?>
 		</div>
+		<?php }else{ ?>
+		<?php $this->load->view('user/notifikasi-1'); ?>
+		<?php } ?>
 		<a href="<?php echo site_url('admin/data_sistem'); ?>"><input type="submit" value="Kembali"></a><br /><br />
 	</div>
 </div>

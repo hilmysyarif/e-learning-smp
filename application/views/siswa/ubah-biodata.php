@@ -23,7 +23,7 @@
 		</div>
 		<div>
 			<label>Password</label>
-			<input name="password" type="text" value="<?php echo $detail_siswa['password']; ?>">
+			<input name="password_siswa" type="text" value="<?php echo $detail_siswa['password_siswa']; ?>">
 		</div>
 		<div>
 			<label>Nama</label>

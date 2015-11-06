@@ -1,8 +1,8 @@
-<h3 class="header-isi">Ubah Data</h3>
+<h3 class="header-isi">Data Jam</h3>
 <div class="postingan">
 	<div class="form-pengaturan">
-		<h3>Ubah jam</h3>
-		<label>jam</label>
+		<h3>Data jam</h3>
+		<?php if(!empty($jam)){ ?>
 		<div class="form-ubah-data">
 			<?php foreach ($jam as $row) { ?>
 			<?php echo form_open('p_admin/ubah_data_jam?id='.$row['id_jam']); ?>
@@ -15,6 +15,9 @@
 			<?php echo form_close(); ?>
 			<?php } //end foreach ?>
 		</div>
+		<?php }else{ ?>
+		<?php $this->load->view('user/notifikasi-1'); ?>
+		<?php } ?>
 		<a href="<?php echo site_url('admin/data_sistem'); ?>"><input type="submit" value="Kembali"></a><br /><br />
 	</div>
 </div>

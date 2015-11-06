@@ -1,8 +1,8 @@
-<h3 class="header-isi">Ubah Data</h3>
+<h3 class="header-isi">Data Hari</h3>
 <div class="postingan">
 	<div class="form-pengaturan">
-		<h3>Ubah hari</h3>
-		<label>hari</label>
+		<h3>Data Hari</h3>
+		<?php if(!empty($hari)){ ?>
 		<div class="form-ubah-data">
 			<?php foreach ($hari as $row) { ?>
 			<?php echo form_open('p_admin/ubah_data_hari?id='.$row['id_hari']); ?>
@@ -15,6 +15,9 @@
 			<?php echo form_close(); ?>
 			<?php } //end foreach ?>
 		</div>
+		<?php }else{ ?>
+		<?php $this->load->view('user/notifikasi-1'); ?>
+		<?php } ?>
 		<a href="<?php echo site_url('admin/data_sistem'); ?>"><input type="submit" value="Kembali"></a><br /><br />
 	</div>
 </div>
