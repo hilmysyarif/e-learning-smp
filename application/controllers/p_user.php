@@ -110,6 +110,8 @@ class P_user extends Base {
 	            $this->body_user('user/jadwal-pelajaran', $data);
 	            $this->load->view('base/footer');
 	        }
+        }else{
+        	redirect('user/jadwal_pelajaran');
         }
     }
 
