@@ -47,10 +47,6 @@
 				<input name="nik" type="text" placeholder="Nomer Induk Guru">
 			</div>
 			<div>
-				<label>Password</label>
-				<input name="password" type="text" placeholder="Password">
-			</div>
-			<div>
 				<label>Nama</label>
 				<input name="nama" type="text" placeholder="Nama">
 			</div>

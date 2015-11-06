@@ -33,7 +33,7 @@
 	</div>
 	<input class="btn-login-sidebar" name="masuk" type="submit" value="Masuk">
 	<?php echo form_close(); ?>
-	<span class="txt-9 forget"><a href="#">Lupa Password ?</a></span>
+	<span class="txt-9 forget"><a href="<?php echo site_url('user/lupa_password'); ?>">Lupa Password ?</a></span>
 </div>
 <?php }//end if session ?>
 <!-- fb page -->

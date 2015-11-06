@@ -881,11 +881,17 @@ p {
 	max-height: 18px;
 	overflow: hidden;
 }
+.wrapper-post-single-2-kolom {
+	height: 100px;
+	overflow: hidden;
+}
+.more-2-kolom {
+	margin: 10px 0;
+	display: block;
+}
 .post-single-2-kolom p {
 	font-size: 13px;
 	/*background-color: pink;*/
-	height: 55px;
-	overflow: hidden;
 }
 .post-single-2-kolom a {
 	color: #6666CC;
@@ -1034,7 +1040,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	/*background-color: red;*/
 	overflow: hidden;
 	font-weight: bold;
-	width: 440px;
+	width: 430px;
 	height: 25px;
 	color: #707070;
 	font-size: 13px;
@@ -1046,7 +1052,7 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	padding: 5px 10px;
 	font-size: 13px;
 	font-weight: bold;
-	width: 102px;
+	width: 105px;
 }
 .btn-download:hover {
 	color: #6666CC;
@@ -1103,10 +1109,13 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 .single-biodata p span {
 	padding-top: 10px;
 }
-.single-biodata input[type="text"], .single-biodata select {
+.single-biodata input[type="text"], .single-biodata select, .single-biodata input[type="file"] {
 	padding: 10px 10px;
 	width: 300px;
 	border: solid 1px #e3e3e3;
+}
+.single-biodata input[type="file"] {
+	display: inline;
 }
 .jdl-biodata {
 	float: left;
@@ -1292,6 +1301,10 @@ ul.social-widget li.youtube a:hover, ul.social-widget li.youtube a:hover{ backgr
 	text-shadow: 0 1px 0 #707070;
 	color: #ffffff;
 	font-weight: bold;
+}
+.form-pengaturan input[readonly="readonly"] {
+	background-color: #f3f3f3;
+	cursor: not-allowed;
 }
 .form-pengaturan input[type="submit"]:hover, .btn-save:hover, .login-admin input[type="submit"]:hover, .form-ubah-data a:hover {
 	border-color: #6666CC;

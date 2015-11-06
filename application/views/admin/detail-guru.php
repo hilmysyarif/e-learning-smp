@@ -3,7 +3,10 @@
 	<?php echo form_open_multipart('p_admin/ubah_data_guru?id='.$guru['nik']); ?>
 	<div class="single-biodata">
 		<img src="<?php echo base_url('resource/img/photo/'.$guru['foto']) ?>">
-		<p style="border-top: 1px dotted #e3e3e3;"><span class="jdl-biodata">Nomer Induk Guru</span><span>: </span><input name="nik" type="text" value="<?php echo $guru['nik']; ?>" /></p>
+		<p style="border-top: 1px dotted #e3e3e3;"><span class="jdl-biodata">Ubah Foto</span><span>: </span>
+			<input name="foto" type="file" value="<?php echo $guru['foto']; ?>">
+		</p>
+		<p><span class="jdl-biodata">Nomer Induk Guru</span><span>: </span><input name="nik" type="text" value="<?php echo $guru['nik']; ?>" /></p>
 		<p><span class="jdl-biodata">Password</span><span>: </span><input name="password" type="text" value="<?php echo $guru['password']; ?>" /></p>
 		<p><span class="jdl-biodata">Nama</span><span>: </span><input name="nama" type="text" value="<?php echo $guru['nama']; ?>" /></p>
 		<p><span class="jdl-biodata">Jenis Kelamin</span><span>: </span>

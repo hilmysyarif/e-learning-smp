@@ -392,7 +392,6 @@ class P_guru extends Base {
           //ubah data siswa
           $this->db->where('nik', $id);
           $this->db->update('guru', $data);
-          // $this->upload->do_upload('foto');
           echo '<script>';
           echo "alert('Guru Berhasil Diubah.');";
           echo "window.location='" . $this->agent->referrer() . "';";

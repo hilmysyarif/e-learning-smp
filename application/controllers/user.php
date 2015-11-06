@@ -718,6 +718,59 @@ class User extends Base {
         }
     }
 
+    public function jadwal_pelajaran() {
+        $data['title']= 'Jadwal Pelajaran.';
+        
+        if($this->session->userdata('login_siswa')){
+            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+            
+            
+            $data['kelas'] = $this->m_admin->tampil_data_kelas();
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+
+            $data['slides']=$this->m_admin->tampil_data_slides();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/jadwal-pelajaran', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_wali')){
+            $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
+            $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
+            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+
+            $data['kelas'] = $this->m_admin->tampil_data_kelas();
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+
+            $data['slides']=$this->m_admin->tampil_data_slides();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/jadwal-pelajaran', $data);
+            $this->load->view('base/footer');
+        }elseif($this->session->userdata('login_guru')){
+            $id_guru = $this->session->userdata['login_guru']['nik'];
+            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+            $data['kelas'] = $this->m_admin->tampil_data_kelas();
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+
+            $data['slides']=$this->m_admin->tampil_data_slides();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/jadwal-pelajaran', $data);
+            $this->load->view('base/footer');
+        }else{
+            $data['kelas'] = $this->m_admin->tampil_data_kelas();
+            $data['semester'] = $this->m_admin->tampil_data_semester();
+            $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+
+            $data['slides']=$this->m_admin->tampil_data_slides();
+            $this->load->view('base/header', $data);
+            $this->body_user('user/jadwal-pelajaran', $data);
+            $this->load->view('base/footer');
+        }
+    }
+
     public function download() {
         $data['title']= 'Download.';
         $this->load->view('base/header', $data);

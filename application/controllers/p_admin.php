@@ -86,14 +86,6 @@ class P_admin extends Base {
 
     public function tambah_data_guru() {
         if($this->session->userdata('login_admin')) {
-            $string = '!@()8&^^%$#AsfsRTdWGaGghKOplkencKHBQKLSKNMKXCd&$*^032145876901234523567895323789012627898746090302983SKZBCJ7648595389090';
-            $panjstr = 6;//jumlah karakter yang akan muncul
-            $txtlt = strlen($string)-1;
-            $pass = '';
-            for($i=1; $i<=$panjstr; $i++){
-             $pass .= $string[rand(0, $txtlt)];
-            }
-
             $simpan = $this->input->post('simpan');
             $nik        = $this->input->post('nik');
             $nama        = $this->input->post('nama');
@@ -105,7 +97,6 @@ class P_admin extends Base {
             $telepon        = $this->input->post('telepon');
             $handphone        = $this->input->post('handphone');
             $now        = date('y-m-d h-i-s');
-            $password        = $pass;
             $foto = $_FILES['foto'];
             $nama_foto = str_replace(' ', '_', $foto['name']);
 
@@ -129,19 +120,25 @@ class P_admin extends Base {
                 'email' => $email,
                 'tlp' => $telepon,
                 'hp' => $handphone,
-                // 'password' => $password,
                 'password' => $nik,
                 'foto' => $nama_foto,
                 'tgl_upload' => $now
                 );
             if($simpan=="Simpan") {
-                $this->m_admin->tambah_data_guru($data);
-                // setelah data tersimpan foto di upload ke folder
-                $this->upload->do_upload('foto');
+                $upload = $this->upload->do_upload('foto');
+                if($upload){
+                    $this->m_admin->tambah_data_guru($data);
+                }
                 $sukses = 'Data Berhasil Disimpan';
                 echo '<script>';
                 echo "alert('".$sukses."');";
-                echo "window.location='" . site_url('admin/data_siswa') . "'";
+                echo "window.location='" . site_url('admin/data_guru') . "'";
+                echo '</script>';
+            }else{
+                $gagal = 'Data Gagal Disimpan';
+                echo '<script>';
+                echo "alert('".$gagal."');";
+                echo "window.location='" . site_url('admin/data_guru') . "'";
                 echo '</script>';
             }
         }else{
@@ -1007,8 +1004,8 @@ public function tambah_data_ruang() {
             $id = $this->input->get('id');
 
             $now = date('y-m-d h:i:s');
-            // $foto = $_FILES['foto'];
-            // $nama_foto = str_replace(' ', '_', $foto['name']);
+            $foto = $_FILES['foto'];
+            $nama_foto = str_replace(' ', '_', $foto['name']);
             $nik        = $this->input->post('nik');
             $nama        = $this->input->post('nama');
             $tempat_lahir        = $this->input->post('tempat_lahir');
@@ -1023,14 +1020,14 @@ public function tambah_data_ruang() {
             $hapus = $this->input->post('hapus');
 
             //validasi gambar
-            // $config['upload_path'] = './resource/img/photo/';
-            // $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            // // $config['max_size'] = '5024';
-            // // $config['max_width']  = '1024';
-            // // $config['max_height']  = '768';
-            // $config['overwrite'] = true;
-            // $this->load->library('upload');
-            // $this->upload->initialize($config);
+            $config['upload_path'] = './resource/img/photo/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            // $config['max_size'] = '5024';
+            // $config['max_width']  = '1024';
+            // $config['max_height']  = '768';
+            $config['overwrite'] = true;
+            $this->load->library('upload');
+            $this->upload->initialize($config);
 
             $data = array(
                 'nik' => $nik,
@@ -1043,15 +1040,20 @@ public function tambah_data_ruang() {
                 'password' => $password,
                 'tlp' => $telephone,
                 'hp' => $handphone,
-                // 'foto' => $nama_foto,
                 'tgl_edit' => $now
                 );
-
+            $data_foto_guru = array('foto' => $nama_foto);
             if($ubah=="Ubah"){
-                //ubah data siswa
-                $this->db->where('nik', $id);
-                $this->db->update('guru', $data);
-                // $this->upload->do_upload('foto');
+                $upload = $this->upload->do_upload('foto');
+                if($upload){
+                    $this->db->where('nik', $id);
+                    $this->db->update('guru', $data);
+                    $this->db->where('nik', $id);
+                    $this->db->update('guru', $data_foto_guru);
+                }else{
+                    $this->db->where('nik', $id);
+                    $this->db->update('guru', $data);
+                }
                 echo '<script>';
                 echo "alert('Guru Berhasil Diubah.');";
                 echo "window.location='" . $this->agent->referrer() . "';";
@@ -1073,9 +1075,10 @@ public function tambah_data_ruang() {
             $id = $this->input->get('id');
 
             $now = date('y-m-d h:i:s');
-            // $foto = $_FILES['foto'];
-            // $nama_foto = str_replace(' ', '_', $foto['name']);
+            $foto = $_FILES['foto'];
+            $nama_foto = str_replace(' ', '_', $foto['name']);
             $nis        = $this->input->post('nis');
+            $password_siswa = $this->input->post('password_siswa');
             $nama        = $this->input->post('nama');
             $tempat_lahir        = $this->input->post('tempat_lahir');
             $tgl_lahir        = $this->input->post('tgl_lahir');
@@ -1086,6 +1089,7 @@ public function tambah_data_ruang() {
             $nama_wali        = $this->input->post('nama_wali');
             $pekerjaan        = $this->input->post('pekerjaan');
             $email        = $this->input->post('email');
+            $password_wali = $this->input->post('password_wali');
             $telephone        = $this->input->post('telephone');
             $handphone        = $this->input->post('handphone');
             $kelas        = $this->input->post('kelas');
@@ -1095,17 +1099,18 @@ public function tambah_data_ruang() {
             $hapus = $this->input->post('hapus');
 
             //validasi gambar
-            // $config['upload_path'] = './resource/img/photo/';
-            // $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            // // $config['max_size'] = '5024';
-            // // $config['max_width']  = '1024';
-            // // $config['max_height']  = '768';
-            // $config['overwrite'] = true;
-            // $this->load->library('upload');
-            // $this->upload->initialize($config);
+            $config['upload_path'] = './resource/img/photo/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            // $config['max_size'] = '5024';
+            // $config['max_width']  = '1024';
+            // $config['max_height']  = '768';
+            $config['overwrite'] = true;
+            $this->load->library('upload');
+            $this->upload->initialize($config);
 
             $data_siswa = array(
                 'nis' => $nis,
+                'password'=> $password_siswa,
                 'nama'=> $nama,
                 'tempat_lahir' => $tempat_lahir,
                 'tgl_lahir' => $tgl_lahir,
@@ -1115,11 +1120,14 @@ public function tambah_data_ruang() {
                 'id_kelas' => $kelas,
                 'id_semester' => $semester,
                 'id_tahun_ajaran' => $tahun_ajaran,
-                // 'foto' => $nama_foto,
                 'tgl_edit' => $now
+                );
+            $data_foto_siswa = array(
+                'foto' => $nama_foto
                 );
             $data_wali = array(
                 'no_ktp' => $no_ktp,
+                'password' => $password_wali,
                 'nama' => $nama_wali,
                 'pekerjaan' => $pekerjaan,
                 'email' => $email,
@@ -1127,11 +1135,19 @@ public function tambah_data_ruang() {
                 'hp' => $handphone
                 );
 
+            $upload = $this->upload->do_upload('foto');
             if($ubah=="Ubah"){
                 //ubah data siswa
-                $this->db->where('nis', $id);
-                $this->db->update('siswa', $data_siswa);
-                // $this->upload->do_upload('foto');
+                if($upload){
+                    $this->db->where('nis', $id);
+                    $this->db->update('siswa', $data_siswa);
+                    $this->db->where('nis', $id);
+                    $this->db->update('siswa', $data_foto_siswa);
+                }else{
+                    $this->db->where('nis', $id);
+                    $this->db->update('siswa', $data_siswa);
+                }
+                
                 //ambil tgl_edit terbaru dan no_ktp wali siswa yang baru diubah berdasarkan tgl_edit terbaru
                 $tgl_edit = $this->m_siswa->ambil_data_siswa_tgl_edit_terbaru();
                 $no_ktp_terbaru = $this->m_siswa->ambil_data_siswa_no_ktp_terbaru($tgl_edit);
@@ -1412,7 +1428,11 @@ public function tambah_data_ruang() {
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
-
+            $data['hari'] = $this->m_admin->tampil_data_hari();
+            $data['jam'] = $this->m_admin->tampil_data_jam();
+            $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+            $data['ruang'] = $this->m_admin->tampil_data_ruang();
+            $data['guru'] = $this->m_admin->tampil_data_guru();
 
             $tampilkan = $this->input->post('tampilkan');
             

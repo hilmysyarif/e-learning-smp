@@ -27,11 +27,90 @@ class P_user extends Base {
     $kata_kunci = $this->input->get('kata_kunci');
     if(!empty($kata_kunci)) {
       $data['berita']=$this->m_user->cari_berita($kata_kunci, $limit, $offset);
-      // $data['berita']=$this->m_user->tampil_data_berita($config['per_page'], $this->uri->segment(3));
       $this->load->view('base/header', $data);
       $this->body_user('user/berita', $data);
       $this->load->view('base/footer');
     }
   }
+
+  public function tampil_data_jadwal() {
+        $data['title']  = 'Jadwal Pelajaran';
+        $kelas          = $this->input->post('kelas');
+        $semester       = $this->input->post('semester');
+        $tahun_ajaran   = $this->input->post('tahun_ajaran');
+        
+        $data['kelas'] = $this->m_admin->tampil_data_kelas();
+        $data['semester'] = $this->m_admin->tampil_data_semester();
+        $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
+        $data['hari'] = $this->m_admin->tampil_data_hari();
+        $data['jam'] = $this->m_admin->tampil_data_jam();
+        $data['pelajaran'] = $this->m_admin->tampil_data_pelajaran();
+        $data['ruang'] = $this->m_admin->tampil_data_ruang();
+        $data['guru'] = $this->m_admin->tampil_data_guru();
+
+        $tampilkan = $this->input->post('tampilkan');
+        
+        if($tampilkan == 'Tampilkan') {
+        	if($this->session->userdata('login_siswa')){
+	            $id_siswa = $this->session->userdata['login_siswa']['nis'];
+	            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+
+	            // $data['id_jadwal'] = $this->m_admin->tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            
+	            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+	            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+	            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+
+	            $data['slides']=$this->m_admin->tampil_data_slides();
+	            $this->load->view('base/header', $data);
+	            $this->body_user('user/jadwal-pelajaran', $data);
+	            $this->load->view('base/footer');
+	        }elseif($this->session->userdata('login_wali')){
+	            $no_ktp = $this->session->userdata['login_wali']['no_ktp'];
+	            $id_siswa = $this->m_wali->tampil_data_nis_by_no_ktp($no_ktp);
+	            $data['siswa']=$this->m_siswa->tampil_data_siswa_by_session($id_siswa);
+
+	            // $data['id_jadwal'] = $this->m_admin->tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            
+	            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+	            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+	            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+
+	            $data['slides']=$this->m_admin->tampil_data_slides();
+	            $this->load->view('base/header', $data);
+	            $this->body_user('user/jadwal-pelajaran', $data);
+	            $this->load->view('base/footer');
+	        }elseif($this->session->userdata('login_guru')){
+	            $id_guru = $this->session->userdata['login_guru']['nik'];
+	            $data['guru']=$this->m_guru->tampil_data_guru_by_session($id_guru);
+
+	            // $data['id_jadwal'] = $this->m_admin->tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            
+	            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+	            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+	            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+
+	            $data['slides']=$this->m_admin->tampil_data_slides();
+	            $this->load->view('base/header', $data);
+	            $this->body_user('user/jadwal-pelajaran', $data);
+	            $this->load->view('base/footer');
+	        }else{
+	            // $data['id_jadwal'] = $this->m_admin->tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
+	            
+	            $data['nama_kelas'] = $this->m_admin->tampil_data_kelas_by_id($kelas);
+	            $data['nama_semester'] = $this->m_admin->tampil_data_semester_by_id($semester);
+	            $data['nama_tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran_by_id($tahun_ajaran);
+
+	            $data['slides']=$this->m_admin->tampil_data_slides();
+	            $this->load->view('base/header', $data);
+	            $this->body_user('user/jadwal-pelajaran', $data);
+	            $this->load->view('base/footer');
+	        }
+        }
+    }
 
 }//end-class

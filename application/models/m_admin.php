@@ -240,6 +240,7 @@ function tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran){
     }
 }
 function tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran) {
+    $this->db->order_by("jadwal.id_hari", "asc"); 
     $this->db->order_by("detail_jadwal.id_detail_jadwal", "asc"); 
     $this->db->where('jadwal.id_kelas',$kelas);
     $this->db->where('jadwal.id_semester',$semester);

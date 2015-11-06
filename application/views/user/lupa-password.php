@@ -1,6 +1,6 @@
 <h3 class="header-isi">Lupa Password</h3>
 <div class="postingan">
-	<div class="form-pengaturan">
+	<!-- <div class="form-pengaturan">
 		<div style="border-top: none; margin-top: 15px;">
 			<label>Masukkan Email</label>
 			<input name="gambar" type="text" placeholder="Masukkan Email">
@@ -9,5 +9,7 @@
 			<label></label>
 			<input name="simpan" type="submit" value="Simpan">
 		</div>
-	</div>
+	</div> -->
+	<p><strong>Anda Lupa Password ?</strong></p>
+	<p>Mohon untuk menghubungi bagian tatausaha SMP Negeri 15 Mukomuko.</p>
 </div>

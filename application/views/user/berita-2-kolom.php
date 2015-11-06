@@ -14,9 +14,11 @@
 				<span class="date"><i class="glyphicon glyphicon-time"></i> <?php echo $row['tgl_upload']; ?></span> 
 				<?php $judul = $row['judul']; $judul = substr($judul, 0, 300);  ?>
 				<a href="<?php echo site_url('user/detail_berita/'.$row['id']); ?>"><h2><?php echo $judul; ?></h2></a>
-				<?php $isi = $row['isi']; ?>
-				<?php echo $isi; ?>
-				<span class="more-2-kolom"><a href="<?php echo site_url('user/detail_berita/'.$row['id']); ?>">Selengkapnya...</a></span>
+				<?php $isi = $row['isi']; $isi = character_limiter($isi, 100); ?>
+				<div class="wrapper-post-single-2-kolom">
+					<?php echo $isi; ?>
+					<span class="more-2-kolom"><a href="<?php echo site_url('user/detail_berita/'.$row['id']); ?>">Selengkapnya...</a></span>
+				</div>
 			</div>
 		</li>
 		<?php } ?>

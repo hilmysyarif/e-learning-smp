@@ -18,6 +18,14 @@
 		<?php echo form_open('p_siswa/ubah_data_siswa'); ?>
 		<h3>Ubah Data Biodata</h3>
 		<div>
+			<label>No Induk</label>
+			<input name="nis" type="text" value="<?php echo $detail_siswa['nis']; ?>" readonly="readonly">
+		</div>
+		<div>
+			<label>Password</label>
+			<input name="password" type="text" value="<?php echo $detail_siswa['password']; ?>">
+		</div>
+		<div>
 			<label>Nama</label>
 			<input name="nama" type="text" value="<?php echo $detail_siswa['nama']; ?>">
 		</div>
