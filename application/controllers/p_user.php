@@ -22,17 +22,6 @@ class P_user extends Base {
     parent::__construct();
   }
 
-  public function pencarian() {
-    $data['title']='Hasil Pencarian';
-    $kata_kunci = $this->input->get('kata_kunci');
-    if(!empty($kata_kunci)) {
-      $data['berita']=$this->m_user->cari_berita($kata_kunci, $limit, $offset);
-      $this->load->view('base/header', $data);
-      $this->body_user('user/berita', $data);
-      $this->load->view('base/footer');
-    }
-  }
-
   public function tampil_data_jadwal() {
         $data['title']  = 'Jadwal Pelajaran';
         $kelas          = $this->input->post('kelas');
@@ -98,8 +87,10 @@ class P_user extends Base {
 	            $this->body_user('user/jadwal-pelajaran', $data);
 	            $this->load->view('base/footer');
 	        }else{
-	        	$id_admin = $this->session->userdata['login_admin']['email'];
-	            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+	        	if ($this->session->userdata('login_admin')) {
+	                $id_admin= $this->session->userdata['login_admin']['email'];
+	                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+	            }
 	            // $data['id_jadwal'] = $this->m_admin->tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran);
 	            $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
 	            

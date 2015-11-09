@@ -87,8 +87,10 @@ class User extends Base {
             $this->body_user('user/berita-2-kolom', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['berita']=$this->m_user->tampil_data_berita($config['per_page'], $this->uri->segment(3), $data['kata_kunci']);
@@ -133,8 +135,10 @@ class User extends Base {
             $this->body_user('user/detail-berita', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['berita']=$this->m_user->tampil_data_berita_by_id($id);
@@ -179,8 +183,10 @@ class User extends Base {
             $this->body_user('user/detail-info-penting', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_informasi']=$this->m_user->tampil_data_informasi_by_id($id);
@@ -191,8 +197,10 @@ class User extends Base {
     }
 
     public function lupa_password() {
-        $id_admin = $this->session->userdata['login_admin']['email'];
-        $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+        if ($this->session->userdata('login_admin')) {
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+        }
         $data['title']='Lupa Password.';
         
         $data['slides']=$this->m_admin->tampil_data_slides();
@@ -233,8 +241,10 @@ class User extends Base {
             $this->body_user('user/psb', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
@@ -311,8 +321,10 @@ class User extends Base {
             $this->body_user('user/guru', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['semua_guru']=$this->m_guru->tampil_data_guru($config['per_page'], $this->uri->segment(3), $data['kata_kunci']);
             $data['slides']=$this->m_admin->tampil_data_slides();
@@ -399,8 +411,10 @@ class User extends Base {
             $this->body_user('user/e-learning', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['elearning']=$this->m_guru->tampil_data_elearning($config['per_page'], $this->uri->segment(3), $data['kata_kunci']);
@@ -483,8 +497,10 @@ class User extends Base {
             $this->body_user('user/informasi', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['informasi']=$this->m_user->tampil_data_informasi($config['per_page'], $this->uri->segment(3), $data['kata_kunci']);
@@ -539,8 +555,10 @@ class User extends Base {
             $this->login_guru('user/detail-data', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['get_nik'] = $this->input->get('gk');
             $data['nik']=$this->m_guru->tampil_nik_guru_by_id($guru);
@@ -590,8 +608,10 @@ class User extends Base {
             $this->body_user('user/visi-misi', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
             
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['visi_misi']= $this->m_admin->tampil_data_halaman_statis($id);
@@ -637,8 +657,10 @@ class User extends Base {
             $this->body_user('user/sejarah', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['sejarah']= $this->m_admin->tampil_data_halaman_statis($id);
@@ -684,8 +706,10 @@ class User extends Base {
             $this->body_user('user/kontak', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['kontak']= $this->m_admin->tampil_data_halaman_statis($id);
@@ -730,8 +754,10 @@ class User extends Base {
             $this->body_user('user/tentang-kami', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['tentang_kami']= $this->m_admin->tampil_data_halaman_statis($id);
@@ -783,8 +809,10 @@ class User extends Base {
             $this->body_user('user/jadwal-pelajaran', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
 
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
             $data['semester'] = $this->m_admin->tampil_data_semester();

@@ -68,8 +68,10 @@ class Guru extends Base {
             $this->login_guru('guru/detail-guru', $data);
             $this->load->view('base/footer');
         }else{
-            $id_admin = $this->session->userdata['login_admin']['email'];
-            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
+            if ($this->session->userdata('login_admin')) {
+                $id_admin= $this->session->userdata['login_admin']['email'];
+                $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+            }
             
             $data['slides']=$this->m_admin->tampil_data_slides();
             $data['detail_guru']=$this->m_guru->tampil_data_guru_by_id($id);

@@ -8,6 +8,10 @@ class Custom_404 extends Base {
 		parent::__construct();
 	}
 	public function index(){
+		if ($this->session->userdata('login_admin')) {
+			$id_admin= $this->session->userdata['login_admin']['email'];
+	        $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+		}
 		$data['title']= '404';
 		$data['slides']=$this->m_admin->tampil_data_slides();
 		$this->load->view('base/header', $data);
