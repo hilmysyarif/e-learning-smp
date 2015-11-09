@@ -37,9 +37,9 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+$route['sitemap\.xml'] = "sitemap";//tambahan
 $route['default_controller'] = "user";
-$route['404_override'] = '';
+$route['404_override'] = 'custom_404';
 
 
 /* End of file routes.php */
