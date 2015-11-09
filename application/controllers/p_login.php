@@ -108,4 +108,50 @@ class P_login extends Base {
         return FALSE;
       }
     }
+
+
+    public function masuk_admin() {
+    $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_cek_data_admin');
+    $run = $this->form_validation->run();
+    if ($run == FALSE) {
+      echo '<script>';
+      echo "alert('No Identitas dan password tidak sesuai');";
+      echo "window.location='" . $this->agent->referrer() . "'";
+      echo '</script>';
+    } else {
+      echo '<script>';
+      echo "alert('Login Berhasil');";
+      echo "window.location='" . site_url('admin/data_halaman') . "'";
+      echo '</script>';
+    }
+  }
+
+  //dipanggil melalui form_validation password (callback_cek_data)
+    public function cek_data_admin($password) {
+      //validasi field terhadap database
+      $id_admin = $this->input->post('id_admin');
+      //query ke database
+      $masuk_admin  = $this->m_admin->masuk_admin($id_admin, $password);
+
+      if ($masuk_admin) {
+        $sess_array = array();
+        foreach ($masuk_admin as $row) {
+          $sess_array = array(
+              'email' => $row->email,
+              'nama' => $row->nama
+              );
+          $this->session->set_userdata('login_admin', $sess_array);
+        }
+        //session kc_finder
+        $sess_kcfinder = array(
+         'disabled' => FALSE,
+         'uploadURL' => "../content_upload"
+         );
+        $this->session->set_userdata('sess_kcfinder', $sess_kcfinder);
+        return TRUE;
+      } else {
+        $this->form_validation->set_message('cek_data', 'Nomer identitas dan password tidak sesuai');
+        return FALSE;
+      }
+    }
 }//end-class

@@ -20,7 +20,7 @@
 			<option id="siswa" value="siswa">Siswa</option>
 			<option id="guru" value="guru">Guru</option>
 			<option id="wali" value="wali">Wali Murid</option>
-			<option id="admin" value="admin">Admin</option>
+			<!-- <option id="admin" value="admin">Admin</option> -->
 		</select>
 	</div>
 	<div class="form-group">

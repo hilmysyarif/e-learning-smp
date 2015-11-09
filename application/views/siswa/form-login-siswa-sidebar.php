@@ -11,7 +11,7 @@
 
 		<span><a href="<?php echo site_url('siswa'); ?>"><i class="glyphicon glyphicon-user"></i> Biodata</a></span>
 		<span><a href="<?php echo site_url('siswa/jadwal'); ?>"><i class="glyphicon glyphicon-list"></i> Jadwal Pelajaran</a></span>
-		<span><a href="<?php echo site_url('siswa/nilai_ujian'); ?>"><i class="glyphicon glyphicon-list-alt"></i> Nilai Ujian</a></span>
+		<span><a href="<?php echo site_url('siswa/nilai_ujian'); ?>"><i class="glyphicon glyphicon-list-alt"></i> Nilai Raport</a></span>
 		<?php if($this->session->userdata('login_siswa')){ ?>
 		<span><a href="<?php echo site_url('p_siswa/keluar_siswa'); ?>"><i class="glyphicon glyphicon-log-out"></i> Keluar</a></span>
 		<?php }else{ ?>

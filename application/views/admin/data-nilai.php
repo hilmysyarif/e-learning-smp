@@ -133,7 +133,7 @@
 		<div class="isi-postingan">
 			<?php echo form_open('p_admin/tambah_data_nilai_siswa'); ?>
 			<h2 style="float:left;padding-top:15px;margin-top:0;text-align: left; width:100%;">Kelas<span><input name="kelas" value="<?php echo $nama_kelas['id_kelas']; ?>" type="text" style="display: none;"> <?php echo $nama_kelas['kelas']; ?></span> | Semester<span><input name="semester" value="<?php echo $nama_semester['id_semester']; ?>" type="text" style="display: none;"> <?php echo $nama_semester['semester']; ?></span> | Tahun Ajaran<span><input name="tahun_ajaran" value="<?php echo $nama_tahun_ajaran['id_tahun_ajaran']; ?>" type="text" style="display: none;"> <?php echo $nama_tahun_ajaran['tahun_ajaran']; ?></span>
-				<select name="pelajaran" style="float:right; text-align:right; margin-top:-5px;">
+				<select name="pelajaran" style="float:right; margin-top:-5px;">
 					<?php if(!empty($pelajaran)) { ?>
 					<?php foreach ($pelajaran as $row) { ?>
 					<option value="<?php echo $row['id_pelajaran']; ?>"><?php echo $row['pelajaran']; ?></option>

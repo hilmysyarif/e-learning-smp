@@ -777,6 +777,13 @@ class User extends Base {
         $this->body_user('user/download', $data);
         $this->load->view('base/footer');
     }
+    
+    public function login_admin() {
+        $data['title']= 'Login Admin.';
+        $this->load->view('base/header', $data);
+        $this->load->view('user/login-admin', $data);
+        $this->load->view('base/footer');
+    }
 
     public function hasil_pencarian() {
         $data['title']= 'Hasil Pencarian.';

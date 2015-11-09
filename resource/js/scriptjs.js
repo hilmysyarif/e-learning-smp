@@ -29,3 +29,10 @@ $(document).ready(function(){
 	    }
 	});
 });
+
+// $(document).ready(function(){
+// 	$('.nav-long ul').hover(function(){
+// 		$('.nav-long a').attr('style', 'color:#fff');
+// 		$('.nav-long a').attr('style', 'color:#ccc');
+// 	});
+// });
