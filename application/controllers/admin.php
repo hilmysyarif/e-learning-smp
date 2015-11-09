@@ -40,11 +40,13 @@ class Admin extends Base {
 
     public function data_halaman() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
             $id_tentang_kami = 1;
             $id_kontak = 2;
             $id_sejarah = 3;
             $id_visi_misi = 4;
             $data['title']='Selamat Datang.';
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['tentang_kami']= $this->m_admin->tampil_data_tentang_kami($id_tentang_kami);
             $data['visi_misi']= $this->m_admin->tampil_data_visi_misi($id_visi_misi);
             $data['sejarah']= $this->m_admin->tampil_data_sejarah($id_sejarah);
@@ -61,6 +63,7 @@ class Admin extends Base {
 
     public function data_guru() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
             //untuk pagination
             $config['base_url'] = site_url('admin/data_guru');
             $config['total_rows'] = $this->db->get('guru')->num_rows();
@@ -95,6 +98,7 @@ class Admin extends Base {
                 $data['kata_kunci'] = $this->input->post('kata_kunci');
             }
             $data['title']='Guru.';
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['guru']=$this->m_guru->tampil_data_guru($config['per_page'], $this->uri->segment(3), $data['kata_kunci']);
             $data['slides']=$this->m_admin->tampil_data_slides();
             $this->load->view('base/header', $data);
@@ -107,6 +111,7 @@ class Admin extends Base {
 
     public function data_siswa() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
             //untuk pagination
             $config['base_url'] = site_url('admin/data_siswa');
             $config['total_rows'] = $this->db->get('siswa')->num_rows();
@@ -141,6 +146,7 @@ class Admin extends Base {
                 $data['kata_kunci'] = $this->input->post('kata_kunci');
             }
             $data['title']='Siswa.';
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
@@ -156,7 +162,9 @@ class Admin extends Base {
 
     public function data_jadwal() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
             $data['title']='Jadwal.';
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
@@ -178,7 +186,9 @@ class Admin extends Base {
 
     public function data_nilai() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
             $data['title']='Nilai.';
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
@@ -196,8 +206,10 @@ class Admin extends Base {
 
     public function data_sistem() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
             $data['title']='Data Sistem.';
-            
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
+
             $data['tahun_ajaran'] = $this->m_admin->tampil_data_tahun_ajaran();
             $data['semester'] = $this->m_admin->tampil_data_semester();
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
@@ -217,6 +229,8 @@ class Admin extends Base {
 
     public function detail_siswa() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['title']='Guru.';
             $id = $this->uri->segment(3);
             $data['kelas'] = $this->m_admin->tampil_data_kelas();
@@ -234,6 +248,8 @@ class Admin extends Base {
     
     public function detail_guru() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['title']='Guru.';
             $id = $this->uri->segment(3);
             $data['guru']=$this->m_guru->tampil_data_guru_by_id($id);
@@ -249,6 +265,8 @@ class Admin extends Base {
 
     public function ubah_berita() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['title']='Selamat Datang.';
             $id=$this->uri->segment(3);
             $data['berita']=$this->m_user->tampil_data_berita_by_id($id);
@@ -263,6 +281,8 @@ class Admin extends Base {
     
     public function ubah_informasi() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['title']='Selamat Datang.';
             $id=$this->uri->segment(3);
             $data['informasi']=$this->m_user->tampil_data_informasi_by_id($id);
@@ -534,6 +554,8 @@ class Admin extends Base {
 
     public function ubah_tahun_ajaran() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             // $id_tahun_ajaran = $_GET('id');
             $data['title']='Ubah Tahun Ajaran.';
             // $data['tahun_ajaran']=$this->m_admin->tampil_data_tahun_ajaran_by_id($id_tahun_ajaran);
@@ -549,6 +571,8 @@ class Admin extends Base {
 
     public function ubah_semester() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             // $id_tahun_ajaran = $_GET('id');
             $data['title']='Ubah Semester.';
 
@@ -564,6 +588,8 @@ class Admin extends Base {
 
     public function ubah_kelas() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             // $id_tahun_ajaran = $_GET('id');
             $data['title']='Ubah Kelas.';
 
@@ -579,6 +605,8 @@ class Admin extends Base {
 
     public function ubah_hari() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             // $id_tahun_ajaran = $_GET('id');
             $data['title']='Ubah Hari.';
 
@@ -594,6 +622,8 @@ class Admin extends Base {
 
     public function ubah_jam() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             // $id_tahun_ajaran = $_GET('id');
             $data['title']='Ubah Jam.';
 
@@ -610,6 +640,8 @@ class Admin extends Base {
 
     public function ubah_pelajaran() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             // $id_tahun_ajaran = $_GET('id');
             $data['title']='Ubah Pelajaran.';
 
@@ -626,6 +658,8 @@ class Admin extends Base {
 
     public function ubah_ruang() {
         if($this->session->userdata('login_admin')){
+            $id_admin= $this->session->userdata['login_admin']['email'];
+            $data['admin']= $this->m_admin->tampil_data_admin_by_session($id_admin);
             // $id_tahun_ajaran = $_GET('id');
             $data['title']='Ubah Ruang.';
 
@@ -641,6 +675,7 @@ class Admin extends Base {
 
     public function pengaturan() {
         if($this->session->userdata('login_admin')){
+            
             $id_admin = $this->session->userdata['login_admin']['email'];
             $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
 

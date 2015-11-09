@@ -98,6 +98,8 @@ class P_user extends Base {
 	            $this->body_user('user/jadwal-pelajaran', $data);
 	            $this->load->view('base/footer');
 	        }else{
+	        	$id_admin = $this->session->userdata['login_admin']['email'];
+	            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
 	            // $data['id_jadwal'] = $this->m_admin->tampil_data_id_jadwal_by_id($kelas,$semester,$tahun_ajaran);
 	            $data['jadwal'] = $this->m_admin->tampil_data_detail_jadwal_by_id($kelas,$semester,$tahun_ajaran);
 	            

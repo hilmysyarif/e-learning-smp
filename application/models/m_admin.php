@@ -65,7 +65,7 @@ Class M_admin extends CI_Model {
     }
     function tampil_data_admin_by_session($id_admin) {
         $this->db->where('email', $id_admin);
-        $this->db->select('admin.email AS "email", admin.nama AS "nama", admin.password AS "password"');
+        $this->db->select('admin.email AS "email", admin.nama AS "nama", admin.password AS "password", admin.foto AS "foto"');
         $this->db->from('admin');
 
         $query = $this->db->get();

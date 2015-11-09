@@ -1231,7 +1231,7 @@ public function tambah_data_ruang() {
                 $this->db->update('admin', $data);
                 echo '<script>';
                 echo "alert('Email Berhasil Diubah.');";
-                echo "window.location='" . $this->agent->referrer() . "';";
+                echo "window.location='" . site_url('p_admin/keluar_admin') . "';";
                 echo '</script>';
             }else{
                 echo '<script>';
@@ -1276,6 +1276,45 @@ public function tambah_data_ruang() {
             }
         }else{
             redirect('user');
+        }
+    }
+
+    public function ubah_foto_admin() {
+        if($this->session->userdata('login_admin')){
+          $id = $this->input->get('id');
+          
+          $simpan = $this->input->post('simpan');
+          $foto = $_FILES['foto'];
+          $nama_foto = str_replace(' ', '_', $foto['name']);
+
+        //validasi gambar
+          $config['upload_path'] = './resource/img/photo/';
+          $config['allowed_types'] = 'gif|jpg|png|jpeg';
+          // $config['max_size'] = '5024';
+          // $config['max_width']  = '1024';
+          // $config['max_height']  = '768';
+          $config['overwrite'] = true;
+          $this->load->library('upload');
+          $this->upload->initialize($config);
+
+          $data= array('foto' => $nama_foto);
+          if($simpan=="Simpan"){
+                  //ubah data siswa
+                  $this->db->where('email', $id);
+                  $this->db->update('admin', $data);
+                  $this->upload->do_upload('foto');
+                  echo '<script>';
+                  echo "alert('Foto Berhasil Diubah.');";
+                  echo "window.location='" . $this->agent->referrer() . "';";
+                  echo '</script>';
+              }else{
+                  echo '<script>';
+                  echo "alert('Foto Gagal Diubah.');";
+                  echo "window.location='" . $this->agent->referrer() . "';";
+                  echo '</script>';
+          }
+        }else{
+          redirect('user'); 
         }
     }
 
@@ -1431,6 +1470,8 @@ public function tambah_data_ruang() {
 
     public function tampil_data_jadwal() {
         if($this->session->userdata('login_admin')) {
+            $id_admin = $this->session->userdata['login_admin']['email'];
+            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['title']  = 'Jadwal Pelajaran';
             $kelas          = $this->input->post('kelas');
             $semester       = $this->input->post('semester');
@@ -1469,6 +1510,8 @@ public function tambah_data_ruang() {
 
     public function tampil_data_siswa() {
         if($this->session->userdata('login_admin')) {
+            $id_admin = $this->session->userdata['login_admin']['email'];
+            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['title']  = 'Jadwal Pelajaran';
             $kelas          = $this->input->post('kelas');
             $semester       = $this->input->post('semester');
@@ -1503,6 +1546,8 @@ public function tambah_data_ruang() {
 
     public function tampil_data_nilai_siswa() {
         if($this->session->userdata('login_admin')) {
+            $id_admin = $this->session->userdata['login_admin']['email'];
+            $data['admin']=$this->m_admin->tampil_data_admin_by_session($id_admin);
             $data['title']  = 'Nilai Siswa';
             $pelajaran      = $this->input->post('pelajaran');
             $kelas          = $this->input->post('kelas');
