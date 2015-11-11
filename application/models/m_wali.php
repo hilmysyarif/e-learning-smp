@@ -52,7 +52,7 @@ Class M_wali extends CI_Model {
         $this->db->from('wali');
         $this->db->where('no_ktp', $id);
         // $this->db->where('password', MD5($password));
-        $this->db->where('password', $password);
+        $this->db->where('password', md5($password));
 
         $query = $this->db->get();
 

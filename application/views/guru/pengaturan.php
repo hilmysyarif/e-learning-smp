@@ -69,15 +69,15 @@
 		<h3>Ubah Password</h3>
 		<div>
 			<label>Password Lama</label>
-			<input name="password_lama" type="text" placeholder="Password Lama">
+			<input name="password_lama" type="password" placeholder="Password Lama">
 		</div>
 		<div>
 			<label>Password Baru</label>
-			<input name="password_baru" type="text" placeholder="Password Baru">
+			<input name="password_baru" type="password" placeholder="Password Baru">
 		</div>
 		<div>
 			<label>Ulangi Password Baru</label>
-			<input name="password_konfirmasi" type="text" placeholder="Ulangi Password Baru">
+			<input name="password_konfirmasi" type="password" placeholder="Ulangi Password Baru">
 		</div>
 		<div>
 			<label></label>

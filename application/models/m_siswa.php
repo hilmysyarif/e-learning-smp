@@ -132,8 +132,7 @@ Class M_siswa extends CI_Model {
         $this->db->select('*');
         $this->db->from('siswa');
         $this->db->where('nis', $id);
-        // $this->db->where('password', MD5($password));
-        $this->db->where('password', $password);
+        $this->db->where('password', md5($password));
 
         $query = $this->db->get();
 

@@ -127,7 +127,7 @@ class P_admin extends Base {
                 'email' => $email,
                 'tlp' => $telepon,
                 'hp' => $handphone,
-                'password' => $nik,
+                'password' => md5($nik),
                 'foto' => $nama_foto,
                 'tgl_upload' => $now
                 );
@@ -174,7 +174,7 @@ class P_admin extends Base {
          // }
 
          $nis = date('y'.'.'.'m'.'.'.'d'.'h'.'.'.'i'.'s');
-         $password = $pass;
+         // $password = $pass;
          $foto = $_FILES['foto'];
          $nama_foto = str_replace(' ', '_', $foto['name']);//merename spasi gambar menjadi underscores
          $data['kelas'] = $this->m_admin->tampil_data_kelas();
@@ -184,8 +184,7 @@ class P_admin extends Base {
          $data = array(
             'no_ktp'    => $this->input->post('no_ktp'),
             // 'password'  => md5($password),
-            // 'password'  => $password,
-            'password'  => $this->input->post('no_ktp'),
+            'password'  => md5($this->input->post('no_ktp')),
             'nama'      => $this->input->post('nama_wali'),
             'pekerjaan' => $this->input->post('pekerjaan'),
             'email'     => $this->input->post('email'),
@@ -214,7 +213,7 @@ class P_admin extends Base {
                 'nis'             => $nis,
                 // 'password'        => md5($password),
                 // 'password'        => $password,
-                'password'        => $nis,
+                'password'        => md5($nis),
                 'nama'            => $this->input->post('nama'),
                 'jenis_kelamin'   => $this->input->post('jenis_kelamin'),
                 'tempat_lahir'    => $this->input->post('tempat_lahir'),
@@ -1247,7 +1246,7 @@ public function tambah_data_ruang() {
     public function ubah_password_admin() {
         if($this->session->userdata('login_admin')) {
             $id=$this->input->get('id');
-            $password_lama = $this->input->post('password_lama');
+            $password_lama = md5($this->input->post('password_lama'));
             $password_baru = $this->input->post('password_baru');
 
             $this->form_validation->set_rules('password_lama', 'Password', 'trim|required|xss_clean');
@@ -1256,7 +1255,7 @@ public function tambah_data_ruang() {
             $run = $this->form_validation->run();
             $true = $run == TRUE;
 
-            $data = array('password' => $password_baru);
+            $data = array('password' => md5($password_baru));
             //ambil data password guru
             $password = $this->m_admin->cek_password_admin_by_id($id);
             

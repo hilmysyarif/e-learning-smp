@@ -449,7 +449,7 @@ class P_guru extends Base {
   public function ubah_password_guru() {
     if($this->session->userdata('login_guru')){
       $id=$this->input->get('id');
-      $password_lama = $this->input->post('password_lama');
+      $password_lama = md5($this->input->post('password_lama'));
       $password_baru = $this->input->post('password_baru');
 
       $this->form_validation->set_rules('password_lama', 'Password', 'trim|required|xss_clean');
@@ -458,7 +458,7 @@ class P_guru extends Base {
       $run = $this->form_validation->run();
       $true = $run == TRUE;
 
-      $data = array('password' => $password_baru);
+      $data = array('password' => md5($password_baru));
       //ambil data password guru
       $password = $this->m_guru->cek_password_guru_by_id($id);
       

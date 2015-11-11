@@ -133,7 +133,7 @@ class P_siswa extends Base {
       $sukses = "Data Berhasil Diubah.";
       $gagal = "Data Gagal Diubah.";
       $data = array(
-          'password' => $password_wali,
+          'password' => md5($password_wali),
           'nama' => $nama_wali,
           'pekerjaan' => $pekerjaan,
           'email' => $email,
@@ -163,7 +163,7 @@ class P_siswa extends Base {
     if($this->session->userdata('login_siswa')){
       $id_siswa = $this->session->userdata['login_siswa']['nis'];
       $now = date('y-m-d h:i:s');
-      $password        = $this->input->post('password');
+      $password        = $this->input->post('password_siswa');
       $nama        = $this->input->post('nama');
       $tempat_lahir        = $this->input->post('tempat_lahir');
       $tgl_lahir        = $this->input->post('tgl_lahir');
@@ -179,7 +179,7 @@ class P_siswa extends Base {
       $sukses = "Data Berhasil Diubah.";
       $gagal = "Data Gagal Diubah.";
       $data_siswa = array(
-          'password'=> $password,
+          'password'        => md5($password),
           'nama'=> $nama,
           'tempat_lahir' => $tempat_lahir,
           'tgl_lahir' => $tgl_lahir,
