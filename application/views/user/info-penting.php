@@ -40,6 +40,7 @@
 <div class="fb-page">
 	<div class="fb-page" data-href="https://www.facebook.com/smpn15mukomuko" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/smpn15mukomuko"><a href="https://www.facebook.com/smpn15mukomuko">SMP Negeri 15 Mukomuko</a></blockquote></div></div>
 </div>
+<!-- calender -->
 <div class="calender">
 	<iframe src="https://calendar.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;height=300&amp;wkst=1&amp;hl=id&amp;bgcolor=%23FFFFFF&amp;ctz=Asia%2FJakarta" style="border-width:0" width="295" height="300" frameborder="0" scrolling="no"></iframe>
 </div>
